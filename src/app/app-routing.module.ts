@@ -29,6 +29,50 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/landing/landing.module').then((m) => m.LandingPageModule),
   },
+  {
+    path: 'videos',
+    loadChildren: () => import('./pages/videos/videos.module').then( m => m.VideosPageModule)
+  },
+  {
+    path: 'devices',
+    loadChildren: () => import('./pages/devices/devices.module').then( m => m.DevicesPageModule)
+  },
+  {
+    path: 'playlist',
+    loadChildren: () => import('./pages/playlist/playlist.module').then( m => m.PlaylistPageModule)
+  },
+  {
+    path: 'category',
+    loadChildren: () => import('./pages/category/category.module').then( m => m.CategoryPageModule)
+  },
+  {
+    path: 'locations',
+    loadChildren: () => import('./pages/locations/locations.module').then( m => m.LocationsPageModule)
+  },
+  {
+    path: 'campaign',
+    loadChildren: () => import('./pages/campaign/campaign.module').then( m => m.CampaignPageModule)
+  },
+  {
+    path: 'inventory',
+    loadChildren: () => import('./pages/inventory/inventory.module').then( m => m.InventoryPageModule)
+  },
+  {
+    path: 'invoice',
+    loadChildren: () => import('./pages/invoice/invoice.module').then( m => m.InvoicePageModule)
+  },
+  {
+    path: 'certificates',
+    loadChildren: () => import('./pages/certificates/certificates.module').then( m => m.CertificatesPageModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./pages/users/users.module').then( m => m.UsersPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
 ];
 
 @NgModule({
