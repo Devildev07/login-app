@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class AuthService {
   constructor(private ngFireAuth: AngularFireAuth) {}
-
+ isUserLogin: boolean = false
   async registerUser(email: string, password: string) {
     return await this.ngFireAuth.createUserWithEmailAndPassword(
       email,
@@ -26,8 +26,12 @@ export class AuthService {
   async signOut() {
     return await this.ngFireAuth.signOut();
   }
-  
+
   async getProfile() {
     return await this.ngFireAuth.currentUser;
   }
+
+  // async isUserLogin(){
+  //   const user = await this.getProfile()
+  // }
 }

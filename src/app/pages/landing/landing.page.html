@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Getting Started with Us</ion-title>
+    <ion-title>My Wan</ion-title>
+  <ion-buttons slot="start">
+    <ion-menu-button menu="main-menu"></ion-menu-button>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,9 +14,4 @@
     <ion-button (click)="logOut()">Log Out</ion-button>
   </div>
 
-  <!-- <ion-fab vertical="bottom" horizontal="end" style="margin: 0 2rem 2rem 0">
-    <ion-fab-button [routerLink]="['/login']">
-      <ion-icon name="chevron-forward"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
 </ion-content>
