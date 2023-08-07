@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-title> Welcome </ion-title>
+    <p>Sign up to create your account</p>
+    <form [formGroup]="regForm" novalidate>
+      <div class="ion-padding flex-gap-0-5">
+        <ion-item>
+          <ion-input
+            type="email"
+            formControlName="email"
+            label="Email"
+            labelPlacement="floating"
+          ></ion-input>
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-item>
+        <div *ngIf="this.regForm.controls?.['email'].touched ">
+          <ion-text *ngIf="errorControl.email.error?.required">
+            Email required
+          </ion-text>
+          <ion-text *ngIf="errorControl.email.error?.pattern">
+            Invalid Email
+          </ion-text>
+        </div>
+        <!--  -->
+        <ion-item>
+          <ion-input
+            type="password"
+            formControlName="password"
+            label="Password"
+            labelPlacement="floating"
+          ></ion-input>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+        </ion-item>
+        <div *ngIf="this.regForm.controls?.['password'].touched ">
+          <ion-text *ngIf="errorControl.password.error?.required">
+            Password required
+          </ion-text>
+          <ion-text *ngIf="errorControl.password.error?.pattern">
+            Password must have: One Charactor One Capital Letter One Number
+            Contain 8 character or digits
+          </ion-text>
+        </div>
+        <!--  -->
+        <div class="links signUp">
+          Already have an Account ?
+          <a [routerLink]="['/login']"> Sign In Now</a>
+        </div>
+        <!--  -->
+        <ion-button (click)="signUp()" shape="round"
+          >Create Account
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

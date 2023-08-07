@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Log In</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-title> Welcome Back </ion-title>
+    <p>Sign in to access your account</p>
+    <form [formGroup]="loginForm" novalidate>
+      <div class="ion-padding flex-gap-0-5">
+        <ion-item>
+          <ion-input
+            type="email"
+            label="Email"
+            formControlName="email"
+            labelPlacement="floating"
+          ></ion-input>
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-item>
+
+        <div *ngIf="this.loginForm.controls?.['email'].touched ">
+          <ion-text *ngIf="errorControl.email.error?.required">
+            Email required
+          </ion-text>
+          <ion-text *ngIf="errorControl.email.error?.pattern">
+            Invalid Email
+          </ion-text>
+        </div>
+
+        <!--  -->
+        <ion-item>
+          <ion-input
+            type="password"
+            label="Password"
+            formControlName="password"
+            labelPlacement="floating"
+          ></ion-input>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+        </ion-item>
+
+        <div *ngIf="this.loginForm.controls?.['password'].touched ">
+          <ion-text *ngIf="errorControl.password.error?.required">
+            Password required
+          </ion-text>
+          <ion-text *ngIf="errorControl.password.error?.pattern">
+            Password must have: One Charactor One Capital Letter One Number
+            Contain 8 character or digits
+          </ion-text>
+        </div>
+
+        <div class="links">
+          <div>
+            <a [routerLink]="['/resetpassword']">Forgot Password ?</a>
+          </div>
+          <div class="signUp">
+            Create New Account
+            <a [routerLink]="['/signup']"> Sign up Now</a>
+          </div>
+        </div>
+        <ion-button shape="round" (click)="logIn()">Submit</ion-button>
+      </div>
+    </form>
+  </div>
+  <!-- <ion-fab vertical="bottom" horizontal="start" style="margin: 0 0 2rem 2rem">
+    <ion-fab-button [routerLink]="['/landing']">
+      <ion-icon name="chevron-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+</ion-content>
