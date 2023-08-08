@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
@@ -9,10 +9,24 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./resetpassword.page.scss'],
 })
 export class ResetpasswordPage implements OnInit {
+  resetForm: FormGroup | any;
   email: string | any;
-  constructor(public authService: AuthService, public route: Router) {}
+  constructor(public authService: AuthService, public route: Router,
+    public formBuilder: FormBuilder,) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.resetForm = this.formBuilder.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+        ],
+      ],
+   
+    });
+  }
 
   async resetPass() {
     this.authService

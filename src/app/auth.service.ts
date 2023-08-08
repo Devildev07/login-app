@@ -31,7 +31,7 @@ export class AuthService {
     return await this.ngFireAuth.currentUser;
   }
 
-  // async isUserLogin(){
-  //   const user = await this.getProfile()
-  // }
+   async userLogin(){
+    const user = await this.getProfile()
+   }
 }

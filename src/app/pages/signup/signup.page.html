@@ -11,49 +11,34 @@
     <form [formGroup]="regForm" novalidate>
       <div class="ion-padding flex-gap-0-5">
         <ion-item>
-          <ion-input
-            type="email"
-            formControlName="email"
-            label="Email"
-            labelPlacement="floating"
-          ></ion-input>
+          <ion-input type="email" formControlName="email" label="Email" labelPlacement="floating"></ion-input>
           <ion-icon name="person-outline"></ion-icon>
         </ion-item>
-        <div *ngIf="this.regForm.controls?.['email'].touched ">
-          <ion-text *ngIf="errorControl.email.error?.required">
-            Email required
-          </ion-text>
-          <ion-text *ngIf="errorControl.email.error?.pattern">
-            Invalid Email
-          </ion-text>
+        <div *ngIf="regForm.get('email').touched">
+          <ion-text color="danger" *ngIf="regForm.get('email').hasError('required')">Email is required</ion-text>
+          <ion-text color="danger" *ngIf="regForm.get('email').hasError('pattern')">Invalid email format</ion-text>
         </div>
+
         <!--  -->
         <ion-item>
-          <ion-input
-            type="password"
-            formControlName="password"
-            label="Password"
-            labelPlacement="floating"
-          ></ion-input>
+          <ion-input type="password" formControlName="password" label="Password" labelPlacement="floating"></ion-input>
           <ion-icon name="lock-closed-outline"></ion-icon>
         </ion-item>
-        <div *ngIf="this.regForm.controls?.['password'].touched ">
-          <ion-text *ngIf="errorControl.password.error?.required">
-            Password required
-          </ion-text>
-          <ion-text *ngIf="errorControl.password.error?.pattern">
-            Password must have: One Charactor One Capital Letter One Number
-            Contain 8 character or digits
-          </ion-text>
+        <div *ngIf="regForm.get('password').touched">
+          <ion-text color="danger" *ngIf="regForm.get('password').hasError('required')">Password is
+            required</ion-text>
+          <ion-text color="danger" *ngIf="regForm.get('password').hasError('pattern')">Password must have: One
+            Charactor One Capital Letter One Number
+            Contain 8 character or digits</ion-text>
         </div>
+
         <!--  -->
         <div class="links signUp">
           Already have an Account ?
           <a [routerLink]="['/login']"> Sign In Now</a>
         </div>
         <!--  -->
-        <ion-button (click)="signUp()" shape="round"
-          >Create Account
+        <ion-button (click)="signUp()" shape="round">Create Account
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
       </div>

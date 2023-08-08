@@ -21,7 +21,7 @@ export class SignupPage implements OnInit {
   ngOnInit() {
     this.regForm = this.formBuilder.group({
       email: [
-        ' ',
+        '',
         [
           Validators.required,
           Validators.email,
@@ -29,7 +29,7 @@ export class SignupPage implements OnInit {
         ],
       ],
       password: [
-        ' ',
+        '',
         [
           Validators.required,
           Validators.pattern(
