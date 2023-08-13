@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     public authService: AuthService,
     public router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -33,7 +33,9 @@ export class LoginPage implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,30})'),
+          Validators.pattern(
+            '^(?!.*(.)\\1{1})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}$'
+          ),
         ],
       ],
     });
@@ -52,14 +54,14 @@ export class LoginPage implements OnInit {
           console.log(error);
           loading.dismiss();
         });
-      console.log("user", user);
+      console.log('user', user);
 
       if (user) {
-        this.authService.isUserLogin = true;
+        // this.authService.isUserLogin = true;
         loading.dismiss();
         this.router.navigate(['/landing']);
       } else {
-        this.authService.isUserLogin = true;
+        // this.authService.isUserLogin = true;
         console.log('provide correct value');
       }
     }
