@@ -57,11 +57,11 @@ export class LoginPage implements OnInit {
       console.log('user', user);
 
       if (user) {
-        // this.authService.isUserLogin = true;
+        this.authService.isUserLogin = true;
         loading.dismiss();
         this.router.navigate(['/landing']);
       } else {
-        // this.authService.isUserLogin = true;
+        this.authService.isUserLogin = true;
         console.log('provide correct value');
       }
     }
