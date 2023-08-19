@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth.service';
+import { CommonServiceService } from 'src/app/common-service.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginPage implements OnInit {
     public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
     public authService: AuthService,
+    public commonn: CommonServiceService,
     public router: Router
   ) {}
 
@@ -57,6 +59,8 @@ export class LoginPage implements OnInit {
       console.log('user', user);
 
       if (user) {
+        const data = { isUserLogin: true };
+        this.commonn.setItem('userData', data);
         this.authService.isUserLogin = true;
         loading.dismiss();
         this.router.navigate(['/landing']);
