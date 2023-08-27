@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
     public authService: AuthService,
     public commonn: CommonServiceService,
     public router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
