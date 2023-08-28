@@ -12,13 +12,14 @@ export class AppComponent {
   constructor(
     public authService: AuthService,
     public route: Router,
-    public menus: CommonServiceService
-  ) {}
+    public commonService: CommonServiceService
+  ) { }
 
   async logOut() {
     this.authService.signOut().then(() => {
       this.authService.isUserLogin = false;
       this.route.navigate(['/login']);
+      this.commonService.removeItem('userData')
     });
   }
 }

@@ -3,11 +3,11 @@
     <ion-content>
       <ion-header>
         <ion-toolbar>
-          <ion-title>My Wan</ion-title>
+          <ion-title>My Wan {{authService.userEmail}}</ion-title>
         </ion-toolbar>
       </ion-header>
       <div class="my-list">
-        <ion-list *ngFor="let item of menus.menuItem()">
+        <ion-list *ngFor="let item of commonService.menuItem()">
           <ion-item routerLink="{{ item.url }}">
             <ion-icon name="{{item.icon}}" slot="start"></ion-icon>
             <ion-label> {{ item.heading }} </ion-label>
@@ -22,9 +22,5 @@
     <ion-router-outlet id="main" class="ion-page"></ion-router-outlet>
   </ion-split-pane>
 
-  <ion-router-outlet
-    id="main"
-    class="ion-page"
-    *ngIf="!authService.isUserLogin"
-  ></ion-router-outlet>
+  <ion-router-outlet id="main" class="ion-page" *ngIf="!authService.isUserLogin"></ion-router-outlet>
 </ion-app>

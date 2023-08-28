@@ -6,8 +6,19 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private ngFireAuth: AngularFireAuth) {}
- isUserLogin: boolean = false
+  isUserLogin: boolean = false
+  userEmail: any = '';
+  constructor(private ngFireAuth: AngularFireAuth) {
+    const item = localStorage.getItem('userData');
+    if (item != undefined && item != '') {
+      let data = JSON.parse(item);
+      if (data.isUserLogin) {
+        console.log("data === ", data);
+        this.isUserLogin = true;
+        this.userEmail = data.user.user.email;
+      }
+    }
+  }
   async registerUser(email: string, password: string) {
     return await this.ngFireAuth.createUserWithEmailAndPassword(
       email,
@@ -31,7 +42,7 @@ export class AuthService {
     return await this.ngFireAuth.currentUser;
   }
 
-   async userLogin(){
+  async userLogin() {
     const user = await this.getProfile()
-   }
+  }
 }
