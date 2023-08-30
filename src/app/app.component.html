@@ -3,13 +3,22 @@
     <ion-content>
       <ion-header>
         <ion-toolbar>
-          <ion-title>My Wan {{authService.userEmail}}</ion-title>
+          <div class="menu-head">
+            <h3>My Wan {{ authService.userEmail }}</h3>
+            <div class="theme-tgl">
+              <ion-icon name="moon-outline"></ion-icon>
+              <ion-toggle
+                slot="end"
+                (ionChange)="toggleChange($event)"
+              ></ion-toggle>
+            </div>
+          </div>
         </ion-toolbar>
       </ion-header>
       <div class="my-list">
         <ion-list *ngFor="let item of commonService.menuItem()">
           <ion-item routerLink="{{ item.url }}">
-            <ion-icon name="{{item.icon}}" slot="start"></ion-icon>
+            <ion-icon name="{{ item.icon }}" slot="start"></ion-icon>
             <ion-label> {{ item.heading }} </ion-label>
           </ion-item>
         </ion-list>
@@ -22,5 +31,9 @@
     <ion-router-outlet id="main" class="ion-page"></ion-router-outlet>
   </ion-split-pane>
 
-  <ion-router-outlet id="main" class="ion-page" *ngIf="!authService.isUserLogin"></ion-router-outlet>
+  <ion-router-outlet
+    id="main"
+    class="ion-page"
+    *ngIf="!authService.isUserLogin"
+  ></ion-router-outlet>
 </ion-app>

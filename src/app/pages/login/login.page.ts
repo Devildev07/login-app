@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
         this.commonn.setItem('userData', data);
         this.authService.isUserLogin = true;
         loading.dismiss();
-        this.router.navigate(['/landing']);
+        this.router.navigate(['/profile']);
       } else {
         this.authService.isUserLogin = true;
         console.log('provide correct value');

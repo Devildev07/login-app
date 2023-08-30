@@ -15,6 +15,15 @@ export class AppComponent {
     public commonService: CommonServiceService
   ) { }
 
+  toggleChange(event: any){
+    console.log("event", event);
+    if (event.detail.checked) {
+  document.body.setAttribute('color-theme', 'dark')      
+    }else{
+      document.body.removeAttribute('color-theme', );
+    }
+    
+  }
   async logOut() {
     this.authService.signOut().then(() => {
       this.authService.isUserLogin = false;

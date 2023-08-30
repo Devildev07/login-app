@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
-
+import { Router } from '@angular/router';
+import { CommonServiceService } from 'src/app/common-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,20 +10,25 @@ import { AuthService } from '../../auth.service';
 })
 export class ProfilePage implements OnInit {
   searchTxt: any = '';
-  constructor(public authService: AuthService) { }
-
-  ngOnInit() {
+  constructor(
+    public authService: AuthService,
+    public route: Router,
+    public common: CommonServiceService
+  ) {
+    var localdata = this.common.getItem('userData');
+    console.log('localdata ', localdata);
   }
 
-  // public data = [this.authService.userEmail, 'mohit', 'test']
-  // public results: any = [];
+  ngOnInit() {}
 
-  // handleInput(event: any) {
-  //   const query = event.target.value.toLowerCase();
-  //   this.results = this.data.filter((item: any) => item.toLowerCase().indexOf(query) > -1);
-  // }
+  async logOut() {
+    this.authService.signOut().then(() => {
+      this.common.removeItem('userData');
+      this.route.navigate(['/login']);
+      this.authService.isUserLogin = false;
+    });
+  }
 
-  // onClear() {
-  //   this.results = [];
-  // }
+  public data = this.authService.userEmail
+
 }

@@ -68,6 +68,10 @@ ion-content {
   }
 }
 
+ion-header ion-toolbar:first-of-type {
+  padding: 0.2rem 0;
+}
+
 @media only screen and (max-width: 576px) {
   form {
     width: 90% !important;
