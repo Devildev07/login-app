@@ -9,26 +9,34 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   menuItems: any;
+  isMenuClosed = false;
+
   constructor(
     public authService: AuthService,
     public route: Router,
     public commonService: CommonServiceService
-  ) { }
+  ) {}
 
-  toggleChange(event: any){
-    console.log("event", event);
+  toggleChange(event: any) {
+    console.log('event', event);
     if (event.detail.checked) {
-  document.body.setAttribute('color-theme', 'dark')      
-    }else{
-      document.body.removeAttribute('color-theme', );
+      document.body.setAttribute('color-theme', 'dark');
+    } else {
+      document.body.removeAttribute('color-theme');
     }
-    
+  }
+
+  closeMenu(): void {
+    console.log(this.isMenuClosed);
+    this.isMenuClosed = true;
+    console.log(this.isMenuClosed);
+
   }
   async logOut() {
     this.authService.signOut().then(() => {
       this.authService.isUserLogin = false;
       this.route.navigate(['/login']);
-      this.commonService.removeItem('userData')
+      this.commonService.removeItem('userData');
     });
   }
 }
