@@ -17,21 +17,15 @@ export class AppComponent {
     public commonService: CommonServiceService
   ) { }
 
-  // toggleChange(event: any) {
-  //   console.log('event', event);
-  //   if (event.detail.checked) {
-  //     document.body.setAttribute('color-theme', 'dark');
-  //   } else {
-  //     document.body.removeAttribute('color-theme');
-  //   }
-  // }
+  toggleChange(event: any) {
+    console.log('event', event);
+    if (event.detail.checked) {
+      document.body.setAttribute('color-theme', 'dark');
+    } else {
+      document.body.removeAttribute('color-theme');
+    }
+  }
 
-  // closeMenu(): void {
-  //   console.log(this.isMenuClosed);
-  //   this.isMenuClosed = true;
-  //   console.log(this.isMenuClosed);
-
-  // }
   async logOut() {
     this.authService.signOut().then(() => {
       this.authService.isUserLogin = false;
@@ -43,32 +37,27 @@ export class AppComponent {
 
 
   public appPages = [
-    { heading: 'Videos', url: '/videos', icon: 'videocam-outline' },
-    { heading: 'Devices', url: '/devices', icon: 'phone-portrait-outline' },
-    { heading: 'Playlist', url: '/playlist', icon: 'play-outline' },
-    { heading: 'Category', url: '/category', icon: 'apps-outline' },
-    { heading: 'Locations', url: '/locations', icon: 'location-outline' },
-    { heading: 'Campaign', url: '/campaign', icon: 'barcode-outline' },
+    { heading: 'Videos', url: '/videos', icon: 'videocam' },
+    { heading: 'Devices', url: '/devices', icon: 'phone-portrait' },
+    { heading: 'Playlist', url: '/playlist', icon: 'play' },
+    { heading: 'Category', url: '/category', icon: 'apps' },
+    { heading: 'Locations', url: '/locations', icon: 'location' },
+    { heading: 'Campaign', url: '/campaign', icon: 'barcode' },
     {
       heading: 'Inventory',
       url: '/inventory',
-      icon: 'file-tray-stacked-outline',
+      icon: 'file-tray-stacked',
     },
-    { heading: 'Invoice', url: '/invoice', icon: 'newspaper-outline' },
+    { heading: 'Invoice', url: '/invoice', icon: 'newspaper' },
     {
       heading: 'Playout Certificate',
       url: '/certificates',
-      icon: 'ribbon-outline',
+      icon: 'ribbon',
     },
-    { heading: 'Users', url: '/users', icon: 'people-outline' },
-    { heading: 'Profile', url: '/profile', icon: 'person-outline' },
+    { heading: 'Users', url: '/users', icon: 'people' },
+    { heading: 'Profile', url: '/profile', icon: 'person' },
 
-    // { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    // { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    // { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    // { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    // { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    // { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+
   ];
 
 }

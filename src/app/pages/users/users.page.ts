@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import UserList from '../../../json/ClientData/clientData.json';
+import UserList from '../../../json/allcategoryList.json';
 
 @Component({
   selector: 'app-users',

@@ -15,12 +15,12 @@ export class AuthService {
       if (data.isUserLogin) {
         console.log("data === ", data);
         this.isUserLogin = true;
-        // this.userEmail = data.user.user.email;
+        this.userEmail = data.user.user.email;
       }
     }
   }
 
-  
+
   async registerUser(email: string, password: string) {
     return await this.ngFireAuth.createUserWithEmailAndPassword(
       email,
