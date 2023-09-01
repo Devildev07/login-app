@@ -10,6 +10,7 @@ import { CommonServiceService } from 'src/app/common-service.service';
 })
 export class ProfilePage implements OnInit {
   searchTxt: any = '';
+
   constructor(
     public authService: AuthService,
     public route: Router,
@@ -21,6 +22,8 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {}
 
+  public data = this.authService.userEmail;
+
   async logOut() {
     this.authService.signOut().then(() => {
       this.common.removeItem('userData');
@@ -28,7 +31,4 @@ export class ProfilePage implements OnInit {
       this.authService.isUserLogin = false;
     });
   }
-
-  public data = this.authService.userEmail
-
 }

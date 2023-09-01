@@ -3,46 +3,64 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Users</ion-title>
+    <ion-item>
+      <ion-title>
+        <ion-label>Users</ion-label>
+      </ion-title>
+      <ion-badge slot="end">{{userList.length}}</ion-badge>
+    </ion-item>
+    <!--  -->
+    <ion-searchbar
+      slot="end"
+      [debounce]="1000"
+      (ionInput)="handleInput($event)"
+      (ionClear)="onClear()"
+    ></ion-searchbar>
   </ion-toolbar>
-  <!-- <ion-toolbar>
+  <!--  -->
+  <ion-toolbar>
+    <!--  -->
     <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home">
-          <ion-icon name="play-circle"></ion-icon>
-          Listen Now
+      <ion-tab-bar slot="top">
+        <ion-tab-button tab="clients">
+          <ion-icon name="people-outline"></ion-icon>
+          Clients
         </ion-tab-button>
-        <ion-tab-button tab="radio">
+        <ion-tab-button tab="advertiser">
           <ion-icon name="radio"></ion-icon>
-          Radio
+          Advertiser
         </ion-tab-button>
-        <ion-tab-button tab="library">
-          <ion-icon name="library"></ion-icon>
-          Library
+        <ion-tab-button tab="agency">
+          <ion-icon name="business-outline"></ion-icon>
+          Agency
         </ion-tab-button>
-        <ion-tab-button tab="search">
-          <ion-icon name="search"></ion-icon>
-          Search
+        <ion-tab-button tab="manager">
+          <ion-icon name="school-outline"></ion-icon>
+          Manager
+        </ion-tab-button>
+        <ion-tab-button tab="admin">
+          <ion-icon name="person-outline"></ion-icon>
+          Admin
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
-  </ion-toolbar> -->
+  </ion-toolbar>
+  <!--  -->
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Users</ion-title>
+      <ion-title size="large"> Users </ion-title>
     </ion-toolbar>
   </ion-header>
   <!--  -->
-  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" (ionClear)="onClear()"></ion-searchbar>
-
   <ion-list>
     <ion-item *ngFor="let result of results">
-      <ion-label>Parent_ID:{{ result.Parent_ID }} itemName:{{ result.itemName }} sort_index:{{ result.sort_index }}
-        videoCount:{{ result.videoCount
-        }}</ion-label>
+      <ion-label>
+        Parent_ID:{{ result.Parent_ID }} itemName:{{ result.itemName }}
+        sort_index:{{ result.sort_index }} videoCount:{{ result.videoCount }}
+        Location:{{result.locationCount}}
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

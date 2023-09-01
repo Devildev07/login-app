@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import UserList from '../../../json/allcategoryList.json';
+import UserList from '../../../../../json/allcategoryList.json';
+
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.page.html',
-  styleUrls: ['./users.page.scss'],
+  selector: 'app-clients',
+  templateUrl: './clients.page.html',
+  styleUrls: ['./clients.page.scss'],
 })
-export class UsersPage implements OnInit {
+export class ClientsPage implements OnInit {
   public userList: any;
   public results: any;
   constructor() {}

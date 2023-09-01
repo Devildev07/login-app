@@ -1,0 +1,35 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>clients</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<!-- <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">clients</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="example-content">Clients content</div>
+  </ion-content>
+</ion-content> -->
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Clients</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- <div class="example-content">Clients content</div> -->
+  <!--  -->
+  <ion-list>
+    <ion-item *ngFor="let result of results">
+      <ion-label>
+        Parent_ID:{{ result.Parent_ID }} itemName:{{ result.itemName }}
+        sort_index:{{ result.sort_index }} videoCount:{{ result.videoCount }}
+        Location:{{result.locationCount}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
