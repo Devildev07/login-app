@@ -13,63 +13,77 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../users/userTabs/admin/admin.module').then(m => m.AdminPageModule),
-          }
-        ]
+            loadChildren: () =>
+              import('../users/userTabs/admin/admin.module').then(
+                (m) => m.AdminPageModule
+              ),
+          },
+        ],
       },
       {
         path: 'advertiser',
         children: [
           {
             path: '',
-            loadChildren: () => import('../users/userTabs/advertiser/advertiser.module').then(m => m.AdvertiserPageModule),
-          }
-        ]
+            loadChildren: () =>
+              import('../users/userTabs/advertiser/advertiser.module').then(
+                (m) => m.AdvertiserPageModule
+              ),
+          },
+        ],
       },
       {
         path: 'agency',
         children: [
           {
             path: '',
-            loadChildren: () => import('../users/userTabs/agency/agency.module').then(m => m.AgencyPageModule),
-          }
-        ]
+            loadChildren: () =>
+              import('../users/userTabs/agency/agency.module').then(
+                (m) => m.AgencyPageModule
+              ),
+          },
+        ],
       },
       {
         path: 'clients',
         children: [
           {
             path: '',
-            loadChildren: () => import('../users/userTabs/clients/clients.module').then(m => m.ClientsPageModule),
-          }
-        ]
+            loadChildren: () =>
+              import('../users/userTabs/clients/clients.module').then(
+                (m) => m.ClientsPageModule
+              ),
+          },
+        ],
       },
       {
         path: 'manager',
         children: [
           {
             path: '',
-            loadChildren: () => import('../users/userTabs/manager/manager.module').then(m => m.ManagerPageModule),
-          }
-        ]
+            loadChildren: () =>
+              import('../users/userTabs/manager/manager.module').then(
+                (m) => m.ManagerPageModule
+              ),
+          },
+        ],
       },
       {
         path: '',
         redirectTo: 'users/userTabs/clients',
         pathMatch: 'full',
-      }
-    ]
+      },
+    ],
   },
   {
     path: '',
     redirectTo: 'users/userTabs/clients',
     pathMatch: 'full',
-  }
-
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UsersPageRoutingModule { }
+export class UsersPageRoutingModule {}

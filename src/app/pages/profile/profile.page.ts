@@ -10,18 +10,17 @@ import { CommonServiceService } from 'src/app/common-service.service';
 })
 export class ProfilePage implements OnInit {
   searchTxt: any = '';
-
   constructor(
     public authService: AuthService,
     public route: Router,
     public common: CommonServiceService
   ) {
     var localdata = this.common.getItem('userData');
-    console.log('localdata ', localdata);
+    console.log('localdata== ', localdata);
   }
 
   ngOnInit() {}
-
+ 
   public data = this.authService.userEmail;
 
   async logOut() {

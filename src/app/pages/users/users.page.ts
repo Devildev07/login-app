@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import UserList from '../../../json/allcategoryList.json';
+import ClientList from '../../../json/ClientData/clientData.json';
+import { CommonServiceService } from 'src/app/common-service.service';
 
 @Component({
   selector: 'app-users',
@@ -9,13 +11,25 @@ import UserList from '../../../json/allcategoryList.json';
 export class UsersPage implements OnInit {
   public userList: any;
   public results: any;
-  constructor() {}
+
+  public clientList: any;
+  // public Results: any;
+  constructor(
+    public common: CommonServiceService
+  ) {}
 
   ngOnInit() {
     this.userList = UserList.data;
     this.results = this.userList;
     console.log('userList === ', this.userList);
+
+    this.clientList = ClientList.data;
+    // this.Results = this.clientList;
+    console.log('clientList === ', this.clientList);
   }
+
+ public admin = this.common.getItem('userData');
+
 
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();

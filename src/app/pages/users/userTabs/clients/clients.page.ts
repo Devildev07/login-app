@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import UserList from '../../../../../json/allcategoryList.json';
-
+import ClientList from '../../../../../json/ClientData/clientData.json';
 
 @Component({
   selector: 'app-clients',
@@ -8,20 +7,20 @@ import UserList from '../../../../../json/allcategoryList.json';
   styleUrls: ['./clients.page.scss'],
 })
 export class ClientsPage implements OnInit {
-  public userList: any;
+  public clientList: any;
   public results: any;
   constructor() {}
 
   ngOnInit() {
-    this.userList = UserList.data;
-    this.results = this.userList;
-    console.log('userList === ', this.userList);
+    this.clientList = ClientList.data;
+    this.results = this.clientList;
+    console.log('clientList === ', this.clientList);
   }
 
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
     let foundObjects: any = [];
-    for (const user of this.userList) {
+    for (const user of this.clientList) {
       console.log('user === ', user);
       for (const key of Object.keys(user)) {
         console.log('key === ', key);
