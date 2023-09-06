@@ -6,28 +6,70 @@ import { UsersPage } from './users.page';
 const routes: Routes = [
   {
     path: '',
-    component: UsersPage
+    component: UsersPage,
+    children: [
+      {
+        path: 'admin',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../users/userTabs/admin/admin.module').then(m => m.AdminPageModule),
+          }
+        ]
+      },
+      {
+        path: 'advertiser',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../users/userTabs/advertiser/advertiser.module').then(m => m.AdvertiserPageModule),
+          }
+        ]
+      },
+      {
+        path: 'agency',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../users/userTabs/agency/agency.module').then(m => m.AgencyPageModule),
+          }
+        ]
+      },
+      {
+        path: 'clients',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../users/userTabs/clients/clients.module').then(m => m.ClientsPageModule),
+          }
+        ]
+      },
+      {
+        path: 'manager',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../users/userTabs/manager/manager.module').then(m => m.ManagerPageModule),
+          }
+        ]
+      },
+      {
+        path: '',
+        redirectTo: 'users/userTabs/clients',
+        pathMatch: 'full',
+      }
+    ]
   },
   {
-    path: 'admin',
-    loadChildren: () => import('./userTabs/admin/admin.module').then( m => m.AdminPageModule)
-  },
-  {
-    path: 'clients',
-    loadChildren: () => import('./userTabs/clients/clients.module').then( m => m.ClientsPageModule)
-  },
-  {
-    path: 'advertiser',
-    loadChildren: () => import('./userTabs/advertiser/advertiser.module').then( m => m.AdvertiserPageModule)
-  },
-  {
-    path: 'agency',
-    loadChildren: () => import('./userTabs/agency/agency.module').then( m => m.AgencyPageModule)
+    path: '',
+    redirectTo: 'users/userTabs/clients',
+    pathMatch: 'full',
   }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UsersPageRoutingModule {}
+export class UsersPageRoutingModule { }

@@ -56,12 +56,14 @@ export class LoginPage implements OnInit {
           console.log(error);
           loading.dismiss();
         });
-      console.log('user', user);
+      // console.log('useruuuu', user);
 
       if (user) {
         const data = { isUserLogin: true, user: user };
+        console.log("data === ", data);
         this.commonn.setItem('userData', data);
         this.authService.isUserLogin = true;
+        this.authService.userEmail = data.user.user?.email;
         loading.dismiss();
         this.router.navigate(['/profile']);
       } else {

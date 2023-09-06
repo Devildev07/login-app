@@ -10,12 +10,7 @@
       <ion-badge slot="end">{{userList.length}}</ion-badge>
     </ion-item>
     <!--  -->
-    <ion-searchbar
-      slot="end"
-      [debounce]="1000"
-      (ionInput)="handleInput($event)"
-      (ionClear)="onClear()"
-    ></ion-searchbar>
+    <ion-searchbar slot="end" [debounce]="1000" (ionInput)="handleInput($event)" (ionClear)="onClear()"></ion-searchbar>
   </ion-toolbar>
   <!--  -->
   <ion-toolbar>
@@ -48,6 +43,7 @@
   <!--  -->
 </ion-header>
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large"> Users </ion-title>
