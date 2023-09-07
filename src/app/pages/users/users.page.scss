@@ -6,8 +6,10 @@
 ion-tab-bar {
   justify-content: space-between;
 }
+
 ion-item {
   max-width: fit-content;
+
   .item-inner {
     border-style: none !important;
   }
@@ -23,6 +25,7 @@ ion-item {
   font-size: large;
   width: fit-content;
 }
+
 .badge .badge-num {
   position: absolute;
   top: 0.8rem;
@@ -33,9 +36,11 @@ ion-item {
   padding: 0.1rem 0.3rem;
   border-radius: 15px;
 }
+
 ion-tab-button {
   position: relative;
 }
+
 .badge-sm {
   padding: 0.2rem 0.8rem;
   display: flex;
@@ -46,6 +51,7 @@ ion-tab-button {
   width: -moz-fit-content;
   width: fit-content;
 }
+
 .badge-sm .badge-num {
   position: absolute;
   top: 0;
@@ -61,12 +67,18 @@ ion-tab-button {
   .sc-ion-searchbar-md-h {
     width: 50%;
   }
+
   .badge-sm {
     padding-left: 0;
     padding-right: 0;
   }
+
   .badge-sm .badge-num {
     font-size: 0.5rem;
     left: 70%;
   }
+}
+
+.pt-9 {
+  padding-top: 5.5rem !important;
 }
