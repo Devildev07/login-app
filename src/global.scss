@@ -76,6 +76,7 @@ ion-content {
 
 ion-header ion-toolbar:first-of-type {
   padding: 0.2rem 0;
+  --min-height: 30px;
 }
 
 ion-item .item-inner {

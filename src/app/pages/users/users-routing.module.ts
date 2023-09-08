@@ -14,11 +14,6 @@ const routes: Routes = [
           import('../users/userTabs/admin/admin.module').then(
             (m) => m.AdminPageModule
           ),
-        // children: [
-        //   {
-        //     path: '',
-        //   },
-        // ],
       },
       {
         path: 'advertiser',
@@ -26,11 +21,6 @@ const routes: Routes = [
           import('../users/userTabs/advertiser/advertiser.module').then(
             (m) => m.AdvertiserPageModule
           ),
-        // children: [
-        //   {
-        //     path: '',
-        //   },
-        // ],
       },
       {
         path: 'agency',
@@ -38,35 +28,27 @@ const routes: Routes = [
           import('../users/userTabs/agency/agency.module').then(
             (m) => m.AgencyPageModule
           ),
-        // children: [
-        //   {
-        //     path: '',
-        //   },
-        // ],
       },
       {
         path: 'clients',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../users/userTabs/clients/clients.module').then(
-                (m) => m.ClientsPageModule
-              ),
-          },
-        ],
+        loadChildren: () =>
+          import('../users/userTabs/clients/clients.module').then(
+            (m) => m.ClientsPageModule
+          ),
       },
       {
         path: 'manager',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../users/userTabs/manager/manager.module').then(
-                (m) => m.ManagerPageModule
-              ),
-          },
-        ],
+        loadChildren: () =>
+          import('../users/userTabs/manager/manager.module').then(
+            (m) => m.ManagerPageModule
+          ),
+      },
+      {
+        path: 'add-client',
+        loadChildren: () =>
+          import('../users/userTabs/clients/add-client/add-client.module').then(
+            (m) => m.AddClientPageModule
+          ),
       },
       {
         path: '',
@@ -86,4 +68,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UsersPageRoutingModule { }
+export class UsersPageRoutingModule {}
