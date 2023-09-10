@@ -26,7 +26,6 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 ion-content {
-
   // position: relative;
   // padding: 0 2rem 2rem 2rem !important;
   .container {
@@ -76,7 +75,6 @@ ion-content {
 
 ion-header ion-toolbar:first-of-type {
   padding: 0.2rem 0;
-  --min-height: 30px;
 }
 
 ion-item .item-inner {
@@ -93,6 +91,38 @@ ion-item .item-inner {
   justify-content: center;
   height: 100%;
 }
+.icon-set {
+  position: relative;
+  top: 0.4rem;
+  font-size: 1.75rem;
+}
+
+.img-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  margin-bottom: 0.2rem;
+
+  ion-avatar {
+    flex-basis: 4rem;
+    flex-grow: 1;
+    max-width: 4rem;
+    height: auto;
+    line-height: 0;
+  }
+  ion-label {
+    flex-basis: 10rem;
+    flex-grow: 1;
+  }
+}
+
+.edit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1rem;
+}
 
 @media only screen and (max-width: 576px) {
   form {
@@ -102,4 +132,5 @@ ion-item .item-inner {
       bottom: 1rem !important;
     }
   }
+
 }

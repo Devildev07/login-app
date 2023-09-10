@@ -72,7 +72,27 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },  {
+    path: 'add-admin',
+    loadChildren: () => import('./pages/addData/add-admin/add-admin.module').then( m => m.AddAdminPageModule)
   },
+  {
+    path: 'add-advertiser',
+    loadChildren: () => import('./pages/addData/add-advertiser/add-advertiser.module').then( m => m.AddAdvertiserPageModule)
+  },
+  {
+    path: 'add-agency',
+    loadChildren: () => import('./pages/addData/add-agency/add-agency.module').then( m => m.AddAgencyPageModule)
+  },
+  {
+    path: 'add-clients',
+    loadChildren: () => import('./pages/addData/add-clients/add-clients.module').then( m => m.AddClientsPageModule)
+  },
+  {
+    path: 'add-manager',
+    loadChildren: () => import('./pages/addData/add-manager/add-manager.module').then( m => m.AddManagerPageModule)
+  },
+
 ];
 
 @NgModule({

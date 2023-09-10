@@ -1,0 +1,84 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <ion-icon
+        name="arrow-back-circle-outline"
+        [routerLink]="['/users/admin']"
+        class="icon-set"
+      ></ion-icon>
+      Add New Admin</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add New Admin</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!--  -->
+  <form #adminForm="ngForm" class="admin-form" (ngSubmit)="addAdmin(adminForm)">
+    <ion-input
+      name="uname"
+      label="Name"
+      labelPlacement="floating"
+      placeholder="Name"
+      ngModel
+    ></ion-input>
+    <ion-input
+      name="email"
+      label="Email"
+      labelPlacement="floating"
+      placeholder="Email"
+      ngModel
+    ></ion-input>
+    <ion-input
+      name="address"
+      label="Address"
+      labelPlacement="floating"
+      placeholder="Address"
+      ngModel
+    ></ion-input>
+    <ion-input
+      name="mobile"
+      label="Mobile"
+      labelPlacement="floating"
+      placeholder="Mobile"
+      ngModel
+    ></ion-input>
+    <ion-input
+      name="region"
+      label="Region"
+      labelPlacement="floating"
+      placeholder="Region"
+      ngModel
+    ></ion-input>
+    <ion-button type="submit" id="open-toast" expand="block">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-button>
+    <ion-toast
+      trigger="open-toast"
+      message="Data Sumbit"
+      [duration]="5000"
+      class="toast"
+    ></ion-toast>
+    <!--  -->
+
+    <ion-button type="reset" id="open-toast-2" expand="block">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+    <ion-toast
+      trigger="open-toast-2"
+      message="Form Reset"
+      [duration]="5000"
+      class="toast"
+    ></ion-toast>
+    <!--  -->
+  </form>
+
+  <!-- <ul *ngFor="let data of adminData | async">
+    <li>{{data.uname}}</li>
+  </ul> -->
+</ion-content>

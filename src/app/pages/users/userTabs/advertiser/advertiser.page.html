@@ -5,4 +5,15 @@
 </ion-header>
 <ion-content>
   <div class="example-content">Advertiser content</div>
+   <!-- fab-btn -->
+   <ion-fab
+   slot="fixed"
+   vertical="bottom"
+   horizontal="end"
+   style="margin: 0 2rem 2rem 0"
+ >
+   <ion-fab-button [routerLink]="['/add-advertiser']">
+     <ion-icon name="person-add-outline"></ion-icon>
+   </ion-fab-button>
+ </ion-fab>
 </ion-content>

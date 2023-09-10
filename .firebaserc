@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ionic-app-auth-52569": {
+      "hosting": {
+        "app": [
+          "ionic-app-auth-52569"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ionic-app-auth-52569"
+  }
+}

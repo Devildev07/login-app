@@ -1,25 +1,6 @@
-.img-box {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.3rem 0.5rem;
-  margin-bottom: 0.2rem;
-
-  ion-avatar {
-    flex: 1;
-  }
-  ion-label {
-    flex: 4;
-  }
+ion-header ion-toolbar:first-of-type {
+  --min-height: 30px;
 }
-
-.edit-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 1rem;
-}
-
 
 // responsive-screen
 @media only screen and (max-width: 576px) {

@@ -8,10 +8,7 @@ const routes: Routes = [
     path: '',
     component: AdvertiserPage
   },
-  {
-    path: 'add-advertiser',
-    loadChildren: () => import('./add-advertiser/add-advertiser.module').then( m => m.AddAdvertiserPageModule)
-  }
+
 ];
 
 @NgModule({

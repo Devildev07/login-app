@@ -8,10 +8,7 @@ const routes: Routes = [
     path: '',
     component: ManagerPage
   },
-  {
-    path: 'add-manager',
-    loadChildren: () => import('./add-manager/add-manager.module').then( m => m.AddManagerPageModule)
-  }
+
 ];
 
 @NgModule({

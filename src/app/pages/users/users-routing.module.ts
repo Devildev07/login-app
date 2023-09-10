@@ -43,13 +43,13 @@ const routes: Routes = [
             (m) => m.ManagerPageModule
           ),
       },
-      {
-        path: 'add-client',
-        loadChildren: () =>
-          import('../users/userTabs/clients/add-client/add-client.module').then(
-            (m) => m.AddClientPageModule
-          ),
-      },
+      // {
+      //   path: 'add-client',
+      //   loadChildren: () =>
+      //     import('../users/userTabs/clients/add-client/add-client.module').then(
+      //       (m) => m.AddClientPageModule
+      //     ),
+      // },
       {
         path: '',
         redirectTo: 'users/userTabs/clients',

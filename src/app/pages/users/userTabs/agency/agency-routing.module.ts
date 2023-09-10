@@ -8,10 +8,7 @@ const routes: Routes = [
     path: '',
     component: AgencyPage
   },
-  {
-    path: 'add-agency',
-    loadChildren: () => import('./add-agency/add-agency.module').then( m => m.AddAgencyPageModule)
-  }
+
 ];
 
 @NgModule({

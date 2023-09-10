@@ -8,10 +8,7 @@ const routes: Routes = [
     path: '',
     component: AdminPage
   },
-  {
-    path: 'add-admin',
-    loadChildren: () => import('./add-admin/add-admin.module').then( m => m.AddAdminPageModule)
-  }
+ 
 ];
 
 @NgModule({
