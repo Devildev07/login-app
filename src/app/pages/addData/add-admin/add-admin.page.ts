@@ -7,7 +7,6 @@ import {
   DocumentData,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { AdminServiceService } from 'src/app/otherServices/admin-service.service';
 
 @Component({
   selector: 'app-add-admin',
@@ -15,18 +14,11 @@ import { AdminServiceService } from 'src/app/otherServices/admin-service.service
   styleUrls: ['./add-admin.page.scss'],
 })
 export class AddAdminPage implements OnInit {
-  getAdminData!: Observable<any[] | DocumentData[]>;
+  getAdminData$!: Observable<any[] | DocumentData[]>;
   adminData: any[] = [];
-  constructor(
-    private firestore: Firestore,
-    private adminDataService: AdminServiceService
-  ) {}
+  constructor(private firestore: Firestore) {}
 
-  ngOnInit() {
-    this.getAdmin();
-    this.adminDataService.setAdminService(this.adminData);
-    
-  }
+  ngOnInit() {}
 
   addAdmin(adminForm: any) {
     console.log('Add Admin', adminForm.value);
@@ -39,27 +31,5 @@ export class AddAdminPage implements OnInit {
       .catch((error) => {
         alert(error);
       });
-  }
-
-  getAdmin() {
-    const collectionInstance = collection(this.firestore, 'admins');
-    this.getAdminData = collectionData(collectionInstance);
-
-    collectionData(collectionInstance).subscribe((val) => {
-      console.log('val', val);
-
-      this.adminData = val;
-      console.log('data', this.adminData);
-    });
-    // this.adminData = this.adminDataService.adminData
-    // console.log("AD", this.adminData);
-
-    // this.getAdminData.subscribe((val: any[]) => {
-    //   console.log('val', val);
-    //   this.adminDataService.adminData = val; // Assign the data to your service
-    // });
-
-    this.getAdminData = collectionData(collectionInstance);
-    console.log('getAdminData', this.getAdminData);
   }
 }

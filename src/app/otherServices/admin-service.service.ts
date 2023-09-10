@@ -10,6 +10,8 @@ export class AdminServiceService {
 
   setAdminService(setAdminData: any[]) {
     this.adminData = setAdminData;
+    console.log(this.adminData);
+    
   }
   getAdminService() {
     return this.adminData;

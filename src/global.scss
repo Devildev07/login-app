@@ -117,12 +117,14 @@ ion-item .item-inner {
   }
 }
 
-.edit-btn {
+.action-btns {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-right: 1rem;
+
 }
+
 
 @media only screen and (max-width: 576px) {
   form {
@@ -132,5 +134,4 @@ ion-item .item-inner {
       bottom: 1rem !important;
     }
   }
-
 }

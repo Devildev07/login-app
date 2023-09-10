@@ -17,7 +17,13 @@
     max-width: -webkit-fill-available;
     flex-basis: 25rem;
     flex-grow: 1;
+
+
   }
+}
+
+.input-label-placement-floating.sc-ion-input-md-h input.sc-ion-input-md{
+  margin-top: 8px;
 }
 
 .toast{

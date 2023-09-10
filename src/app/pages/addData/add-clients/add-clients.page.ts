@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  addDoc,
+  collectionData,
+  DocumentData,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-clients',
@@ -7,6 +14,8 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
   styleUrls: ['./add-clients.page.scss'],
 })
 export class AddClientsPage implements OnInit {
+  getClientData!: Observable<any[] | DocumentData[]>;
+  clientData: any[] = [];
   constructor(private firestore: Firestore) {}
 
   ngOnInit() {}

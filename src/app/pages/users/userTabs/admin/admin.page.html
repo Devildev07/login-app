@@ -31,11 +31,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <!-- <div class="example-content">Admin content</div> -->
-  <ion-list class="ion-padding-horizontal data-list">
+  <!--  -->
+  <ion-list
+    class="ion-padding-horizontal data-list"
+    *ngFor="let adminData of getAdminData$ | async"
+  >
     <ion-row class="ion-padding-top ion-align-items-center">
-      <!-- *ngFor="let result of results" -->
-
       <ion-col size="3">
         <div class="img-box">
           <ion-avatar>
@@ -45,24 +46,25 @@
             />
           </ion-avatar>
           <ion-label>
-            <ion-card-title>Name : {{adminData.length}}</ion-card-title>
-            <ion-card-subtitle>Email</ion-card-subtitle>
+            <ion-card-title>Name : {{adminData.uname}}</ion-card-title>
+            <ion-card-subtitle>Email: {{adminData.email}}</ion-card-subtitle>
           </ion-label>
         </div>
       </ion-col>
-      <ion-col size="3" class="ion-text-center">
+      <ion-col size="3" class="ion-text-left">
         <!-- <ion-icon name="phone-portrait-outline"></ion-icon><br /> -->
         <ion-label>
-          <ion-card-title>Address</ion-card-title>
-          <ion-card-subtitle>Region</ion-card-subtitle>
+          <ion-card-title>Address: {{adminData.address}}</ion-card-title>
+          <ion-card-subtitle>Region: {{adminData.region}}</ion-card-subtitle>
         </ion-label>
       </ion-col>
-      <ion-col size="3" class="ion-text-center">
+      <ion-col size="3" class="ion-text-left">
         <!-- <ion-icon name="location-outline"></ion-icon><br /> -->
-        <ion-label>mobile</ion-label>
+        <ion-label>mobile: {{adminData.mobile}}</ion-label>
       </ion-col>
-      <ion-col size="3" class="edit-btn">
-        <ion-button shape="round">Edit</ion-button>
+      <ion-col size="3" class="action-btns">
+        <ion-button shape="round" (click)="updateAdmin(adminData.id)">Edit</ion-button>
+        <ion-button shape="round" color="danger" (click)="deleteAdmin(adminData.id)">Delete</ion-button>
       </ion-col>
     </ion-row>
   </ion-list>
@@ -78,6 +80,4 @@
       <ion-icon name="person-add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-
 </ion-content>

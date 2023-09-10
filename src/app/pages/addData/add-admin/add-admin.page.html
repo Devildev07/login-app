@@ -20,6 +20,8 @@
 
   <!--  -->
   <form #adminForm="ngForm" class="admin-form" (ngSubmit)="addAdmin(adminForm)">
+    <!-- <ion-input label="Upload Profile"  labelPlacement="floating"
+    placeholder="Upload Profile " type="file" (change)="uploadDP($event)"></ion-input> -->
     <ion-input
       name="uname"
       label="Name"
@@ -78,7 +80,4 @@
     <!--  -->
   </form>
 
-  <!-- <ul *ngFor="let data of adminData | async">
-    <li>{{data.uname}}</li>
-  </ul> -->
 </ion-content>

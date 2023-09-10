@@ -18,7 +18,7 @@
   <!--  -->
   <form #clientsForm="ngForm" class="clients-form" (ngSubmit)="addClient(clientsForm)">
     <ion-input
-      name="uname"
+      name="clientname"
       label="Name"
       labelPlacement="floating"
       placeholder="Name"
@@ -32,10 +32,10 @@
       ngModel
     ></ion-input>
     <ion-input
-      name="address"
-      label="Address"
+      name="location_count"
+      label="Location Count"
       labelPlacement="floating"
-      placeholder="Address"
+      placeholder="Location Count"
       ngModel
     ></ion-input>
     <ion-input
@@ -46,10 +46,10 @@
       ngModel
     ></ion-input>
     <ion-input
-      name="region"
-      label="Region"
+      name="devices"
+      label="On Device"
       labelPlacement="floating"
-      placeholder="Region"
+      placeholder="On Device"
       ngModel
     ></ion-input>
     <ion-button type="submit" id="open-toast" expand="block">
