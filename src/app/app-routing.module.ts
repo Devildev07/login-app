@@ -92,6 +92,10 @@ const routes: Routes = [
     path: 'add-manager',
     loadChildren: () => import('./pages/addData/add-manager/add-manager.module').then( m => m.AddManagerPageModule)
   },
+  {
+    path: 'modal',
+    loadChildren: () => import('./pages/modal/modal.module').then( m => m.ModalPageModule)
+  },
 
 ];
 

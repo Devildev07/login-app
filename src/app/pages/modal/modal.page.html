@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <!-- <ion-icon
+        (click)="closeModal()"
+        name="close-circle-outline"
+        class="icon-set"
+      ></ion-icon> -->
+      Modal
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!--  -->
+  <div class="input-box ion-padding">
+    <ion-input
+      name="uname"
+      label="Name"
+      labelPlacement="floating"
+      placeholder="Name"
+      [(ngModel)]="adminDetails.uname"
+    ></ion-input>
+    <ion-input
+      name="email"
+      label="Email"
+      labelPlacement="floating"
+      placeholder="Email"
+      [(ngModel)]="adminDetails.email"
+    ></ion-input>
+    <ion-input
+      name="mobile"
+      label="Mobile"
+      labelPlacement="floating"
+      placeholder="Mobile"
+      [(ngModel)]="adminDetails.mobile"
+    ></ion-input>
+    <ion-input
+      name="address"
+      label="Address"
+      labelPlacement="floating"
+      placeholder="Address"
+      [(ngModel)]="adminDetails.address"
+    ></ion-input>
+    <ion-input
+      name="region"
+      label="Region"
+      labelPlacement="floating"
+      placeholder="Region"
+      [(ngModel)]="adminDetails.region"
+    ></ion-input>
+  <ion-button (click)="closeModal()" shape="round">Update</ion-button>
+
+  </div>
+  <!--  -->
+</ion-content>

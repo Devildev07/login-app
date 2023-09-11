@@ -10,6 +10,8 @@ import {
   collectionData,
   DocumentData,
 } from '@angular/fire/firestore';
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from 'src/app/pages/modal/modal.page';
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +21,10 @@ import {
 export class AdminPage implements OnInit {
   getAdminData$!: Observable<any[] | DocumentData[]>;
 
-  constructor(private firestore: Firestore) {}
+  constructor(
+    private firestore: Firestore,
+    private modalCntrl: ModalController
+  ) {}
 
   ngOnInit() {
     this.getAdmin();
@@ -44,6 +49,10 @@ export class AdminPage implements OnInit {
     const docInstance = doc(this.firestore, 'admins', id);
     const updateData = {
       uname: 'updateName',
+      email: 'updateEmail',
+      mobile: 'updateMobile',
+      address: 'updateAddress',
+      region: 'updateRegion',
     };
 
     updateDoc(docInstance, updateData)
@@ -64,6 +73,27 @@ export class AdminPage implements OnInit {
       })
       .catch((err) => {
         console.log('not deleted', err);
+      });
+  }
+
+  // openModel
+  openModel(adminData: any) {
+    this.modalCntrl
+      .create({
+        component: ModalPage,
+        componentProps: adminData,
+      })
+      .then((modalRes) => {
+        modalRes.present();
+
+        modalRes.onDidDismiss().then((res) => {
+          console.log('dismissed', res);
+
+          if (res.data != null) {
+            this.updateAdmin = res.data;
+            console.log('updateAdmin', this.updateAdmin);
+          }
+        });
       });
   }
 }
