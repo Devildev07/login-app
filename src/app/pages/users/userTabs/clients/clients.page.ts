@@ -27,7 +27,7 @@ export class ClientsPage implements OnInit {
   public clientList: any;
   public results: any;
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore) { }
 
   ngOnInit() {
     this.getClient();
@@ -37,7 +37,7 @@ export class ClientsPage implements OnInit {
     console.log('clientList === ', this.clientList);
   }
 
-  
+
   // get-query
   getClient() {
     const collectionInstance = collection(this.firestore, 'clients');
@@ -105,6 +105,13 @@ export class ClientsPage implements OnInit {
 
   onClear() {
     this.results = [];
+  }
+
+
+  // model start
+  openModel(clientData: any) {
+    console.log(clientData);
+
   }
 
 
