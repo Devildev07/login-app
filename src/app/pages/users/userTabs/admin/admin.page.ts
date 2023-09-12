@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminServiceService } from 'src/app/otherServices/admin-service.service';
+import { GetDataService } from 'src/app/otherServices/get-data.service';
 import { Observable } from 'rxjs';
 import {
   Firestore,
@@ -26,9 +26,13 @@ export class AdminPage implements OnInit {
   constructor(
     private firestore: Firestore,
     private modalCntrl: ModalController,
-    public adminService: AdminServiceService
+    public getDatas: GetDataService
   ) {
-
+    this.getDatas.myEventEmitter.subscribe(
+      (data) => {
+        this.getAdminData.push(data)
+        console.log('Received event with data:', data);
+      });
   }
 
   ngOnInit() {
@@ -37,7 +41,7 @@ export class AdminPage implements OnInit {
 
   // get-query
   async getAdmin() {
-    this.getAdminData = await this.adminService.getFromFirebase('admins');
+    this.getAdminData = await this.getDatas.getFromFirebase('admins');
     console.log("getAdminData === ", this.getAdminData);
   }
 
@@ -45,6 +49,7 @@ export class AdminPage implements OnInit {
   updateAdmin(data: any) {
     console.log("id === ", data);
     const docInstance = doc(this.firestore, 'admins', data.id);
+
     const updateData = {
       uname: data.uname,
       email: data.email,
@@ -52,10 +57,20 @@ export class AdminPage implements OnInit {
       address: data.address,
       region: data.region,
     };
+    let updatedIndex = -1;
+    this.getAdminData.forEach((element: any, index: any) => {
+      if (element.id == data.id) {
+        updatedIndex = index;
+      }
+    });
 
     updateDoc(docInstance, updateData)
       .then(() => {
         console.log('updated');
+        // this.getAdmin();
+        if (updatedIndex >= 0) {
+          this.getAdminData[updatedIndex] = updateData;
+        }
       })
       .catch((err) => {
         console.error(`Error updating document: ${err}`);
@@ -76,7 +91,7 @@ export class AdminPage implements OnInit {
 
   // openModel
   openModel(adminData: any) {
-    this.adminService.openModel(adminData).then((res) => {
+    this.getDatas.openModel(adminData).then((res) => {
       console.log("res === ", res);
       this.updateAdmin(res);
     }).catch((e) => {

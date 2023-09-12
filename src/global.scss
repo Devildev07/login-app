@@ -26,6 +26,7 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 ion-content {
+
   // position: relative;
   // padding: 0 2rem 2rem 2rem !important;
   .container {
@@ -91,6 +92,7 @@ ion-item .item-inner {
   justify-content: center;
   height: 100%;
 }
+
 .icon-set {
   position: relative;
   top: 0.4rem;
@@ -111,6 +113,7 @@ ion-item .item-inner {
     height: auto;
     line-height: 0;
   }
+
   ion-label {
     flex-basis: 10rem;
     flex-grow: 1;
@@ -124,15 +127,14 @@ ion-item .item-inner {
   padding-right: 1rem;
 }
 
-ion-modal {
-  width: 30%;
+// ion-modal {
+//   border-radius: 15px;
+// }
+
+ion-modal>.ion-page {
   position: relative;
-  left: 40%;
-  right: 40%;
-  top: 10%;
-  min-height: 70%;
   box-shadow: 0px 12px 220px -40px var(--ion-color-medium);
-  border-radius: 15px;
+
 }
 
 @media only screen and (max-width: 576px) {

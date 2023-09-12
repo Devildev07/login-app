@@ -14,7 +14,7 @@ import {
   collectionData,
   DocumentData,
 } from '@angular/fire/firestore';
-import { AdminServiceService } from 'src/app/otherServices/admin-service.service';
+import { GetDataService } from 'src/app/otherServices/get-data.service';
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.page.html',
@@ -27,7 +27,7 @@ export class ClientsPage implements OnInit {
   public clientList: any;
   public results: any;
 
-  constructor(private firestore: Firestore, public adminService: AdminServiceService) { }
+  constructor(private firestore: Firestore, public getDatas: GetDataService) { }
 
   ngOnInit() {
     this.getClient();
@@ -40,7 +40,7 @@ export class ClientsPage implements OnInit {
 
   // get-query
   async getClient() {
-    this.getClientData = await this.adminService.getFromFirebase('clients');
+    this.getClientData = await this.getDatas.getFromFirebase('clients');
   }
 
   // update-query

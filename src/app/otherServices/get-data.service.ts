@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   Firestore,
@@ -13,9 +13,10 @@ import { ModalController } from '@ionic/angular';
 import { ModalPage } from 'src/app/pages/modal/modal.page';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class AdminServiceService {
+export class GetDataService {
+  public myEventEmitter: EventEmitter<any> = new EventEmitter<any>();
   adminData: any[] = [];
   constructor(
     private firestore: Firestore,
@@ -68,4 +69,3 @@ export class AdminServiceService {
     });
   }
 }
-
