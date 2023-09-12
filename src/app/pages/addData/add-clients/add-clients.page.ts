@@ -3,10 +3,10 @@ import {
   Firestore,
   collection,
   addDoc,
-  collectionData,
   DocumentData,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { GetDataService } from 'src/app/otherServices/get-data.service';
 
 @Component({
   selector: 'app-add-clients',
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class AddClientsPage implements OnInit {
   getClientData!: Observable<any[] | DocumentData[]>;
   clientData: any[] = [];
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, public getData: GetDataService) {}
 
   ngOnInit() {}
 
@@ -27,6 +27,7 @@ export class AddClientsPage implements OnInit {
     addDoc(collectionInstance, clientsForm.value)
       .then(() => {
         alert('Data Sent Secessfully');
+        this.getData.myEventEmitter.emit(clientsForm.value);
       })
       .catch((error) => {
         alert(error);

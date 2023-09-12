@@ -14,10 +14,10 @@ export class ModalPage implements OnInit {
     private navParams: NavParams
   ) {
     this.dataDetails = this.navParams.data;
-    console.log(`details ${this.dataDetails}`);
+    console.log("details",this.dataDetails);
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   closeModal() {
     this.modalCntrl.dismiss(this.dataDetails);

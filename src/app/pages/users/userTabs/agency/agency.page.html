@@ -1,10 +1,77 @@
 <ion-header  [translucent]="true">
   <ion-toolbar>
-    <ion-title>Agency</ion-title>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col class="ion-text-left" size="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Name</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Mobile</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal">
+            Type</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-end">Edit</ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="example-content">Agency content</div>
+   <!-- <div class="example-content">Advertiser content</div> -->
+   <ion-list
+   class="ion-padding-horizontal data-list"
+   *ngFor="let agencyData of getAgencyData "
+ >
+   <ion-row class="ion-padding-top ion-align-items-center">
+     <ion-col size="3">
+       <div class="img-box">
+         <ion-avatar>
+           <img
+             alt="person-icon"
+             src="https://ionicframework.com/docs/img/demos/avatar.svg"
+           />
+         </ion-avatar>
+         <ion-label>
+           <ion-card-title>Name : {{agencyData.uname}}</ion-card-title>
+           <ion-card-subtitle
+             >Email: {{agencyData.email}}</ion-card-subtitle
+           >
+         </ion-label>
+       </div>
+     </ion-col>
+     <ion-col size="3" class="ion-text-center">
+       <ion-label> {{agencyData.mobile}} </ion-label>
+     </ion-col>
+     <ion-col size="3" class="ion-text-center">
+       <ion-label> {{agencyData.type}}</ion-label>
+     </ion-col>
+     <ion-col size="3" class="action-btns">
+       <ion-button shape="round" (click)="openModel(agencyData)"
+         >Edit</ion-button
+       >
+       <ion-button
+         shape="round"
+         color="danger"
+         (click)="deleteAgency(agencyData.id)"
+         >Delete</ion-button
+       >
+     </ion-col>
+   </ion-row>
+ </ion-list>
   <!-- fab-btn -->
   <ion-fab
     slot="fixed"

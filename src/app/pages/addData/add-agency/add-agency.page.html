@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      <ion-icon name="arrow-back-circle-outline" [routerLink]="['/users/agency']" class="icon-set"></ion-icon>
-      Add New Agency</ion-title>
+      <ion-icon
+        name="arrow-back-circle-outline"
+        [routerLink]="['/users/agency']"
+        class="icon-set"
+      ></ion-icon>
+      Add New Agency</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -12,9 +17,13 @@
       <ion-title size="large">Add New Agency</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+
   <!--  -->
-  <form #agencyForm="ngForm" class="agency-form" (ngSubmit)="addAgency(agencyForm)">
+  <form
+    #agencyForm="ngForm"
+    class="agency-form"
+    (ngSubmit)="addAgency(agencyForm)"
+  >
     <ion-input
       name="uname"
       label="Name"
@@ -50,6 +59,18 @@
       placeholder="Region"
       ngModel
     ></ion-input>
+    <ion-input>
+      <ion-select
+        name="type"
+        ngModel
+        label="Type"
+        label-placement="floating"
+        placeholder="Type"
+      >
+        <ion-select-option value="apple">Agency</ion-select-option>
+        <ion-select-option value="banana">Partner</ion-select-option>
+      </ion-select>
+    </ion-input>
     <ion-button type="submit" id="open-toast" expand="block">
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-button>

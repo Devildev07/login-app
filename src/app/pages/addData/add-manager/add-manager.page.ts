@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  addDoc,
+  DocumentData,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { GetDataService } from 'src/app/otherServices/get-data.service';
 
 @Component({
   selector: 'app-add-manager',
@@ -7,7 +14,10 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
   styleUrls: ['./add-manager.page.scss'],
 })
 export class AddManagerPage implements OnInit {
-  constructor(private firestore: Firestore) {}
+  getManagerData$!: Observable<any[] | DocumentData[]>;
+  agencyData: any[] = [];
+
+  constructor(private firestore: Firestore, public getData: GetDataService) {}
 
   ngOnInit() {}
 
@@ -18,6 +28,8 @@ export class AddManagerPage implements OnInit {
     addDoc(collectionInstance, managerForm.value)
       .then(() => {
         alert('Data Sent Secessfully');
+        this.getData.myEventEmitter.emit(managerForm.value);
+
       })
       .catch((error) => {
         alert(error);

@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
-import { Observable } from 'rxjs';
-import {
-  Firestore,
-  collection,
-  doc,
-  updateDoc,
-  deleteDoc,
-  collectionData,
-  DocumentData,
-} from '@angular/fire/firestore';
+import { Firestore, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
-import { ModalPage } from 'src/app/pages/modal/modal.page';
-import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-admin',
@@ -20,7 +9,6 @@ import { async } from '@angular/core/testing';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  // getAdminData$!: Observable<any[] | DocumentData[]>;
   getAdminData: any;
 
   constructor(
@@ -28,11 +16,10 @@ export class AdminPage implements OnInit {
     private modalCntrl: ModalController,
     public getDatas: GetDataService
   ) {
-    this.getDatas.myEventEmitter.subscribe(
-      (data) => {
-        this.getAdminData.push(data)
-        console.log('Received event with data:', data);
-      });
+    this.getDatas.myEventEmitter.subscribe((data) => {
+      this.getAdminData.push(data);
+      console.log('Received event with data:', data);
+    });
   }
 
   ngOnInit() {
@@ -42,12 +29,12 @@ export class AdminPage implements OnInit {
   // get-query
   async getAdmin() {
     this.getAdminData = await this.getDatas.getFromFirebase('admins');
-    console.log("getAdminData === ", this.getAdminData);
+    console.log('getAdminData === ', this.getAdminData);
   }
 
   // update-query
   updateAdmin(data: any) {
-    console.log("id === ", data);
+    console.log('id === ', data);
     const docInstance = doc(this.firestore, 'admins', data.id);
 
     const updateData = {
@@ -83,7 +70,7 @@ export class AdminPage implements OnInit {
     deleteDoc(docInstance)
       .then(() => {
         console.log('deleted');
-        this.getAdmin()
+        this.getAdmin();
       })
       .catch((err) => {
         console.log('not deleted', err);
@@ -92,28 +79,14 @@ export class AdminPage implements OnInit {
 
   // openModel
   openModel(adminData: any) {
-    this.getDatas.openModel(adminData).then((res) => {
-      console.log("res === ", res);
-      this.updateAdmin(res);
-    }).catch((e) => {
-      console.log("error---", e)
-    })
-    // this.modalCntrl
-    //   .create({
-    //     component: ModalPage,
-    //     componentProps: adminData,
-    //   })
-    //   .then((modalRes) => {
-    //     modalRes.present();
-
-    //     modalRes.onDidDismiss().then((res) => {
-    //       console.log('dismissed', res);
-
-    //       if (res.data != null) {
-    //         this.updateAdmin(res.data);
-    //         console.log('updateAdmin', this.updateAdmin);
-    //       }
-    //     });
-    //   });
+    this.getDatas
+      .openModel(adminData)
+      .then((res) => {
+        console.log('res === ', res);
+        this.updateAdmin(res);
+      })
+      .catch((e) => {
+        console.log('error---', e);
+      });
   }
 }

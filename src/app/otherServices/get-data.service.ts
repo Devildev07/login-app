@@ -1,13 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import {
   Firestore,
   collection,
-  doc,
-  updateDoc,
-  deleteDoc,
   collectionData,
-  DocumentData,
 } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
 import { ModalPage } from 'src/app/pages/modal/modal.page';

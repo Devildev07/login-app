@@ -15,6 +15,7 @@ import {
   DocumentData,
 } from '@angular/fire/firestore';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
+
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.page.html',
@@ -23,11 +24,15 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
 export class ClientsPage implements OnInit {
   getClientData: any;
 
-
   public clientList: any;
   public results: any;
 
-  constructor(private firestore: Firestore, public getDatas: GetDataService) { }
+  constructor(private firestore: Firestore, public getDatas: GetDataService) {
+    this.getDatas.myEventEmitter.subscribe((data) => {
+      this.getClientData.push(data);
+      console.log('Received event with data:', data);
+    });
+  }
 
   ngOnInit() {
     this.getClient();
@@ -37,22 +42,36 @@ export class ClientsPage implements OnInit {
     console.log('clientList === ', this.clientList);
   }
 
-
   // get-query
   async getClient() {
     this.getClientData = await this.getDatas.getFromFirebase('clients');
   }
 
   // update-query
-  updateClient(id: string) {
-    const docInstance = doc(this.firestore, 'clients', id);
+  updateClient(data: any) {
+    console.log('id === ', data);
+    const docInstance = doc(this.firestore, 'clients', data.id);
+
     const updateData = {
-      uname: 'updateName',
+      uname: data.uname,
+      email: data.email,
+      mobile: data.mobile,
+      address: data.address,
+      region: data.region,
     };
+    let updatedIndex = -1;
+    this.getClientData.forEach((element: any, index: any) => {
+      if (element.id == data.id) {
+        updatedIndex = index;
+      }
+    });
 
     updateDoc(docInstance, updateData)
       .then(() => {
         console.log('updated');
+        if (updatedIndex >= 0) {
+          this.getClientData[updatedIndex] = updateData;
+        }
       })
       .catch((err) => {
         console.error(`Error updating document: ${err}`);
@@ -65,13 +84,12 @@ export class ClientsPage implements OnInit {
     deleteDoc(docInstance)
       .then(() => {
         console.log('deleted');
+        this.getClient();
       })
       .catch((err) => {
         console.log('not deleted', err);
       });
   }
-
-
 
   // search action
   handleInput(event: any) {
@@ -98,38 +116,18 @@ export class ClientsPage implements OnInit {
     this.results = [];
   }
 
-
   // model start
   openModel(clientData: any) {
-    console.log(clientData);
+    this.getDatas
+      .openModel(clientData)
+      .then((res) => {
+        console.log('res === ', res);
+        this.updateClient(res);
+      })
+      .catch((e) => {
+        console.log('error---', e);
+      });
 
+    // console.log(clientData);
   }
-
-
-  // model start
-  // @ViewChild(IonModal)
-  // modal!: IonModal;
-
-  // message =
-  //   'This modal example uses triggers to automatically open a modal when the button is clicked.';
-  // name: string | undefined;
-
-  // cancel() {
-  //   this.modal.dismiss(null, 'cancel');
-  // }
-
-  // confirm() {
-  //   this.modal.dismiss(this.name, 'confirm');
-  // }
-
-  // onWillDismiss(event: Event) {
-  //   const ev = event as CustomEvent<OverlayEventDetail<string>>;
-  //   if (ev.detail.role === 'confirm') {
-  //     this.message = `Hello, ${ev.detail.data}!`;
-  //   }
-  // }
-
-  // model end
-
-
 }

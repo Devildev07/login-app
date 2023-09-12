@@ -1,19 +1,87 @@
-<ion-header  [translucent]="true">
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Advertiser</ion-title>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col class="ion-text-left" size="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Name</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Mobile</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal">
+            Campaign Count</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-end">Edit</ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="example-content">Advertiser content</div>
-   <!-- fab-btn -->
-   <ion-fab
-   slot="fixed"
-   vertical="bottom"
-   horizontal="end"
-   style="margin: 0 2rem 2rem 0"
- >
-   <ion-fab-button [routerLink]="['/add-advertiser']">
-     <ion-icon name="person-add-outline"></ion-icon>
-   </ion-fab-button>
- </ion-fab>
+  <!-- <div class="example-content">Advertiser content</div> -->
+  <ion-list
+    class="ion-padding-horizontal data-list"
+    *ngFor="let advertiserData of getAdvertiserData "
+  >
+    <ion-row class="ion-padding-top ion-align-items-center">
+      <ion-col size="3">
+        <div class="img-box">
+          <ion-avatar>
+            <img
+              alt="person-icon"
+              src="https://ionicframework.com/docs/img/demos/avatar.svg"
+            />
+          </ion-avatar>
+          <ion-label>
+            <ion-card-title>Name : {{advertiserData.uname}}</ion-card-title>
+            <ion-card-subtitle
+              >Email: {{advertiserData.email}}</ion-card-subtitle
+            >
+          </ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-label> {{advertiserData.mobile}} </ion-label>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-label> {{advertiserData.campaign_count}}</ion-label>
+      </ion-col>
+      <ion-col size="3" class="action-btns">
+        <ion-button shape="round" (click)="openModel(advertiserData)"
+          >Edit</ion-button
+        >
+        <ion-button
+          shape="round"
+          color="danger"
+          (click)="deleteAdvertiser(advertiserData.id)"
+          >Delete</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <!-- fab-btn -->
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    style="margin: 0 2rem 2rem 0"
+  >
+    <ion-fab-button [routerLink]="['/add-advertiser']">
+      <ion-icon name="person-add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
