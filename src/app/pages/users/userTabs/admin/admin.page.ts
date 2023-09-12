@@ -83,6 +83,7 @@ export class AdminPage implements OnInit {
     deleteDoc(docInstance)
       .then(() => {
         console.log('deleted');
+        this.getAdmin()
       })
       .catch((err) => {
         console.log('not deleted', err);
