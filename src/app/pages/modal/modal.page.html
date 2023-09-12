@@ -14,42 +14,17 @@
 <ion-content [fullscreen]="true">
   <!--  -->
   <div class="input-box ion-padding">
-    <ion-input
-      name="uname"
-      label="Name"
-      labelPlacement="floating"
-      placeholder="Name"
-      [(ngModel)]="adminDetails.uname"
-    ></ion-input>
-    <ion-input
-      name="email"
-      label="Email"
-      labelPlacement="floating"
-      placeholder="Email"
-      [(ngModel)]="adminDetails.email"
-    ></ion-input>
-    <ion-input
-      name="mobile"
-      label="Mobile"
-      labelPlacement="floating"
-      placeholder="Mobile"
-      [(ngModel)]="adminDetails.mobile"
-    ></ion-input>
-    <ion-input
-      name="address"
-      label="Address"
-      labelPlacement="floating"
-      placeholder="Address"
-      [(ngModel)]="adminDetails.address"
-    ></ion-input>
-    <ion-input
-      name="region"
-      label="Region"
-      labelPlacement="floating"
-      placeholder="Region"
-      [(ngModel)]="adminDetails.region"
-    ></ion-input>
-  <ion-button (click)="closeModal()" shape="round">Update</ion-button>
+    <ion-input name="uname" label="Name" labelPlacement="floating" placeholder="Name"
+      [(ngModel)]="dataDetails.uname"></ion-input>
+    <ion-input name="email" label="Email" labelPlacement="floating" placeholder="Email"
+      [(ngModel)]="dataDetails.email"></ion-input>
+    <ion-input name="mobile" label="Mobile" labelPlacement="floating" placeholder="Mobile"
+      [(ngModel)]="dataDetails.mobile"></ion-input>
+    <ion-input name="address" label="Address" labelPlacement="floating" placeholder="Address"
+      [(ngModel)]="dataDetails.address"></ion-input>
+    <ion-input name="region" label="Region" labelPlacement="floating" placeholder="Region"
+      [(ngModel)]="dataDetails.region"></ion-input>
+    <ion-button (click)="closeModal()" shape="round">Update</ion-button>
 
   </div>
   <!--  -->

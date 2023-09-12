@@ -7,19 +7,19 @@ import { ModalController, NavParams } from '@ionic/angular';
   styleUrls: ['./modal.page.scss'],
 })
 export class ModalPage implements OnInit {
-  adminDetails: any = {};
+  dataDetails: any = {};
 
   constructor(
     private modalCntrl: ModalController,
     private navParams: NavParams
   ) {
-    this.adminDetails = this.navParams.data;
-    console.log(`details ${this.adminDetails}`);
+    this.dataDetails = this.navParams.data;
+    console.log(`details ${this.dataDetails}`);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   closeModal() {
-    this.modalCntrl.dismiss(this.adminDetails);
+    this.modalCntrl.dismiss(this.dataDetails);
   }
 }

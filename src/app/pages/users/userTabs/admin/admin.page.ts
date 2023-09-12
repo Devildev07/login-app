@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { AdminServiceService } from 'src/app/otherServices/admin-service.service';
+import { AdminServiceService } from 'src/app/otherServices/admin-service.service';
 import { Observable } from 'rxjs';
 import {
   Firestore,
@@ -12,6 +12,7 @@ import {
 } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
 import { ModalPage } from 'src/app/pages/modal/modal.page';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-admin',
@@ -19,40 +20,37 @@ import { ModalPage } from 'src/app/pages/modal/modal.page';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  getAdminData$!: Observable<any[] | DocumentData[]>;
+  // getAdminData$!: Observable<any[] | DocumentData[]>;
+  getAdminData: any;
 
   constructor(
     private firestore: Firestore,
-    private modalCntrl: ModalController
-  ) {}
+    private modalCntrl: ModalController,
+    public adminService: AdminServiceService
+  ) {
+
+  }
 
   ngOnInit() {
     this.getAdmin();
   }
 
   // get-query
-  getAdmin() {
-    const collectionInstance = collection(this.firestore, 'admins');
-    this.getAdminData$ = collectionData(collectionInstance, { idField: 'id' });
-
-    this.getAdminData$.subscribe((val) => {
-      console.log('val', val);
-
-      // this.adminData = val
-      // console.log("adminData",this.adminData )
-    });
-    this.getAdminData$ = collectionData(collectionInstance, { idField: 'id' });
+  async getAdmin() {
+    this.getAdminData = await this.adminService.getFromFirebase('admins');
+    console.log("getAdminData === ", this.getAdminData);
   }
 
   // update-query
-  updateAdmin(id: string) {
-    const docInstance = doc(this.firestore, 'admins', id);
+  updateAdmin(data: any) {
+    console.log("id === ", data);
+    const docInstance = doc(this.firestore, 'admins', data.id);
     const updateData = {
-      uname: 'updateName',
-      email: 'updateEmail',
-      mobile: 'updateMobile',
-      address: 'updateAddress',
-      region: 'updateRegion',
+      uname: data.uname,
+      email: data.email,
+      mobile: data.mobile,
+      address: data.address,
+      region: data.region,
     };
 
     updateDoc(docInstance, updateData)
@@ -78,22 +76,28 @@ export class AdminPage implements OnInit {
 
   // openModel
   openModel(adminData: any) {
-    this.modalCntrl
-      .create({
-        component: ModalPage,
-        componentProps: adminData,
-      })
-      .then((modalRes) => {
-        modalRes.present();
+    this.adminService.openModel(adminData).then((res) => {
+      console.log("res === ", res);
+      this.updateAdmin(res);
+    }).catch((e) => {
+      console.log("error---", e)
+    })
+    // this.modalCntrl
+    //   .create({
+    //     component: ModalPage,
+    //     componentProps: adminData,
+    //   })
+    //   .then((modalRes) => {
+    //     modalRes.present();
 
-        modalRes.onDidDismiss().then((res) => {
-          console.log('dismissed', res);
+    //     modalRes.onDidDismiss().then((res) => {
+    //       console.log('dismissed', res);
 
-          if (res.data != null) {
-            this.updateAdmin = res.data;
-            console.log('updateAdmin', this.updateAdmin);
-          }
-        });
-      });
+    //       if (res.data != null) {
+    //         this.updateAdmin(res.data);
+    //         console.log('updateAdmin', this.updateAdmin);
+    //       }
+    //     });
+    //   });
   }
 }

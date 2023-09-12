@@ -14,20 +14,20 @@ import {
   collectionData,
   DocumentData,
 } from '@angular/fire/firestore';
-
+import { AdminServiceService } from 'src/app/otherServices/admin-service.service';
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.page.html',
   styleUrls: ['./clients.page.scss'],
 })
 export class ClientsPage implements OnInit {
-  getClientData$!: Observable<any[] | DocumentData[]>;
+  getClientData: any;
 
 
   public clientList: any;
   public results: any;
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, public adminService: AdminServiceService) { }
 
   ngOnInit() {
     this.getClient();
@@ -39,17 +39,8 @@ export class ClientsPage implements OnInit {
 
 
   // get-query
-  getClient() {
-    const collectionInstance = collection(this.firestore, 'clients');
-    this.getClientData$ = collectionData(collectionInstance, { idField: 'id' });
-
-    this.getClientData$.subscribe((val) => {
-      console.log('val', val);
-
-      // this.adminData = val
-      // console.log("adminData",this.adminData )
-    });
-    this.getClientData$ = collectionData(collectionInstance, { idField: 'id' });
+  async getClient() {
+    this.getClientData = await this.adminService.getFromFirebase('clients');
   }
 
   // update-query
