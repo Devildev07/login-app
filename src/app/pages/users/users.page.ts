@@ -3,6 +3,9 @@ import UserList from '../../../json/allcategoryList.json';
 import ClientList from '../../../json/ClientData/clientData.json';
 import { CommonServiceService } from 'src/app/common-service.service';
 
+import { GetDataService } from 'src/app/otherServices/get-data.service';
+
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.page.html',
@@ -12,13 +15,23 @@ export class UsersPage implements OnInit {
   public userList: any;
   public results: any;
 
-  public clientList: any;
+  public clientList: any = [];
+  public getAdminData: any = [];
+  public getAdvertiserData: any = [];
+  public getAgencyData: any = [];
+  public getClientData: any = [];
+  public getManagerData: any = [];
   // public Results: any;
   constructor(
-    public common: CommonServiceService
-  ) {}
+    public common: CommonServiceService, public getDatas: GetDataService
+  ) { }
 
   ngOnInit() {
+    this.getAdmin();
+    this.getAdvertiser();
+    this.getAgency();
+    this.getClient();
+    this.getManager();
     this.userList = UserList.data;
     this.results = this.userList;
     console.log('userList === ', this.userList);
@@ -28,7 +41,7 @@ export class UsersPage implements OnInit {
     console.log('clientList === ', this.clientList);
   }
 
- public admin = this.common.getItem('userData');
+  public admin = this.common.getItem('userData');
 
 
   handleInput(event: any) {
@@ -52,5 +65,28 @@ export class UsersPage implements OnInit {
   }
   onClear() {
     this.results = [];
+  }
+
+
+  async getAdmin() {
+    this.getAdminData = await this.getDatas.getFromFirebase('admins');
+    console.log('getAdminData === ', this.getAdminData);
+  }
+  async getAdvertiser() {
+    this.getAdvertiserData = await this.getDatas.getFromFirebase('advertiser');
+    console.log('getAdvertiserData === ', this.getAdvertiserData);
+  }
+  async getAgency() {
+    this.getAgencyData = await this.getDatas.getFromFirebase('agency');
+    console.log('getAgencyData === ', this.getAgencyData);
+  }
+  async getClient() {
+    this.getClientData = await this.getDatas.getFromFirebase('clients');
+    console.log('getClientData === ', this.getClientData);
+
+  }
+  async getManager() {
+    this.getManagerData = await this.getDatas.getFromFirebase('manager');
+    console.log('getManagerData === ', this.getManagerData);
   }
 }

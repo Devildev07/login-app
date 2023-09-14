@@ -1,6 +1,4 @@
-<ion-header [translucent]="true">
-
-</ion-header>
+<ion-header [translucent]="true"> </ion-header>
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -17,7 +15,12 @@
       <div class="badge-num">{{userList.length}}</div>
     </div>
     <!--  -->
-    <ion-searchbar slot="end" [debounce]="1000" (ionInput)="handleInput($event)" (ionClear)="onClear()"></ion-searchbar>
+    <ion-searchbar
+      slot="end"
+      [debounce]="1000"
+      (ionInput)="handleInput($event)"
+      (ionClear)="onClear()"
+    ></ion-searchbar>
   </ion-toolbar>
   <!--  -->
   <ion-tabs class="pt-9">
@@ -26,35 +29,35 @@
         <ion-icon aria-hidden="true" name="people-outline"></ion-icon>
         <div class="badge-sm">
           Clients
-          <div class="badge-num">{{clientList.length}}</div>
+          <div class="badge-num">{{getClientData.length}}</div>
         </div>
       </ion-tab-button>
       <ion-tab-button tab="advertiser">
         <ion-icon aria-hidden="true" name="radio"></ion-icon>
         <div class="badge-sm">
           Advertiser
-          <div class="badge-num">{{userList.length}}</div>
+          <div class="badge-num">{{getAdvertiserData.length}}</div>
         </div>
       </ion-tab-button>
       <ion-tab-button tab="agency">
         <ion-icon aria-hidden="true" name="business-outline"></ion-icon>
         <div class="badge-sm">
           Agency
-          <div class="badge-num">{{userList.length}}</div>
+          <div class="badge-num">{{getAgencyData.length}}</div>
         </div>
       </ion-tab-button>
       <ion-tab-button tab="manager">
         <ion-icon aria-hidden="true" name="school-outline"></ion-icon>
         <div class="badge-sm">
           Manager
-          <div class="badge-num">{{userList.length}}</div>
+          <div class="badge-num">{{getManagerData .length}}</div>
         </div>
       </ion-tab-button>
       <ion-tab-button tab="admin">
         <ion-icon aria-hidden="true" name="person-outline"></ion-icon>
         <div class="badge-sm">
           Admin
-          <div class="badge-num">{{admin.user.user.providerData.length}}</div>
+          <div class="badge-num">{{getAdminData.length}}</div>
         </div>
       </ion-tab-button>
     </ion-tab-bar>
