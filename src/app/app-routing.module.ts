@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ClientsPage } from './pages/users/userTabs/clients/clients.page';
 
 const routes: Routes = [
   {
@@ -31,72 +32,123 @@ const routes: Routes = [
   },
   {
     path: 'videos',
-    loadChildren: () => import('./pages/videos/videos.module').then( m => m.VideosPageModule)
+    loadChildren: () =>
+      import('./pages/videos/videos.module').then((m) => m.VideosPageModule),
   },
   {
     path: 'devices',
-    loadChildren: () => import('./pages/devices/devices.module').then( m => m.DevicesPageModule)
+    loadChildren: () =>
+      import('./pages/devices/devices.module').then((m) => m.DevicesPageModule),
   },
   {
     path: 'playlist',
-    loadChildren: () => import('./pages/playlist/playlist.module').then( m => m.PlaylistPageModule)
+    loadChildren: () =>
+      import('./pages/playlist/playlist.module').then(
+        (m) => m.PlaylistPageModule
+      ),
   },
   {
     path: 'category',
-    loadChildren: () => import('./pages/category/category.module').then( m => m.CategoryPageModule)
+    loadChildren: () =>
+      import('./pages/category/category.module').then(
+        (m) => m.CategoryPageModule
+      ),
   },
   {
     path: 'locations',
-    loadChildren: () => import('./pages/locations/locations.module').then( m => m.LocationsPageModule)
+    loadChildren: () =>
+      import('./pages/locations/locations.module').then(
+        (m) => m.LocationsPageModule
+      ),
   },
   {
     path: 'campaign',
-    loadChildren: () => import('./pages/campaign/campaign.module').then( m => m.CampaignPageModule)
+    loadChildren: () =>
+      import('./pages/campaign/campaign.module').then(
+        (m) => m.CampaignPageModule
+      ),
   },
   {
     path: 'inventory',
-    loadChildren: () => import('./pages/inventory/inventory.module').then( m => m.InventoryPageModule)
+    loadChildren: () =>
+      import('./pages/inventory/inventory.module').then(
+        (m) => m.InventoryPageModule
+      ),
   },
   {
     path: 'invoice',
-    loadChildren: () => import('./pages/invoice/invoice.module').then( m => m.InvoicePageModule)
+    loadChildren: () =>
+      import('./pages/invoice/invoice.module').then((m) => m.InvoicePageModule),
   },
   {
     path: 'certificates',
-    loadChildren: () => import('./pages/certificates/certificates.module').then( m => m.CertificatesPageModule)
+    loadChildren: () =>
+      import('./pages/certificates/certificates.module').then(
+        (m) => m.CertificatesPageModule
+      ),
   },
   {
     path: 'users',
     loadChildren: () => import('./pages/users/users.module').then( m => m.UsersPageModule)
   },
+  // {
+  //   path: 'users',
+  //   component: ClientsPage,
+  //   children: [
+  //     {
+  //       path: 'clients',
+  //       loadChildren: () =>
+  //         import('./pages/users/userTabs/clients/clients.module').then(
+  //           (m) => m.ClientsPageModule
+  //         ),
+  //     },
+  //   ],
+  // },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
-  },  {
+    loadChildren: () =>
+      import('./pages/profile/profile.module').then((m) => m.ProfilePageModule),
+  },
+  {
     path: 'add-admin',
-    loadChildren: () => import('./pages/addData/add-admin/add-admin.module').then( m => m.AddAdminPageModule)
+    loadChildren: () =>
+      import('./pages/addData/add-admin/add-admin.module').then(
+        (m) => m.AddAdminPageModule
+      ),
   },
   {
     path: 'add-advertiser',
-    loadChildren: () => import('./pages/addData/add-advertiser/add-advertiser.module').then( m => m.AddAdvertiserPageModule)
+    loadChildren: () =>
+      import('./pages/addData/add-advertiser/add-advertiser.module').then(
+        (m) => m.AddAdvertiserPageModule
+      ),
   },
   {
     path: 'add-agency',
-    loadChildren: () => import('./pages/addData/add-agency/add-agency.module').then( m => m.AddAgencyPageModule)
+    loadChildren: () =>
+      import('./pages/addData/add-agency/add-agency.module').then(
+        (m) => m.AddAgencyPageModule
+      ),
   },
   {
     path: 'add-clients',
-    loadChildren: () => import('./pages/addData/add-clients/add-clients.module').then( m => m.AddClientsPageModule)
+    loadChildren: () =>
+      import('./pages/addData/add-clients/add-clients.module').then(
+        (m) => m.AddClientsPageModule
+      ),
   },
   {
     path: 'add-manager',
-    loadChildren: () => import('./pages/addData/add-manager/add-manager.module').then( m => m.AddManagerPageModule)
+    loadChildren: () =>
+      import('./pages/addData/add-manager/add-manager.module').then(
+        (m) => m.AddManagerPageModule
+      ),
   },
   {
     path: 'modal',
-    loadChildren: () => import('./pages/modal/modal.module').then( m => m.ModalPageModule)
+    loadChildren: () =>
+      import('./pages/modal/modal.module').then((m) => m.ModalPageModule),
   },
-
 ];
 
 @NgModule({

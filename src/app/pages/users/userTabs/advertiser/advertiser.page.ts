@@ -41,8 +41,10 @@ export class AdvertiserPage implements OnInit {
       uname: data.uname,
       email: data.email,
       mobile: data.mobile,
+      address: data.address,
       campaign_count: data.campaign_count,
-      // region: data.region,
+      region: data.region,
+      type: data.type,
     };
     let updatedIndex = -1;
     this.getAdvertiserData.forEach((element: any, index: any) => {

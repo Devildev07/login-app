@@ -24,4 +24,15 @@
       width: 15%;
       margin: auto;
   }
+
+  @media only screen and (max-width: 576px) {
+    .clients-form {
+      margin: 1.8rem auto;
+    }
+  
+    .toast{
+      width: fit-content;
+      margin: auto;
+  }
+  }
   

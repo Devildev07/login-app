@@ -43,6 +43,7 @@ export class AgencyPage implements OnInit {
       mobile: data.mobile,
       address: data.address,
       region: data.region,
+      type: data.type,
     };
     let updatedIndex = -1;
     this.getAgencyData.forEach((element: any, index: any) => {

@@ -25,8 +25,14 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-ion-content {
+ion-app {
+  margin: 4rem;
+  border-radius: 15px;
+  box-shadow: 0px 32px 74px -64px var(--ion-color-dark);
+  // background-color: var(--ion-color-dark);
+}
 
+ion-content {
   // position: relative;
   // padding: 0 2rem 2rem 2rem !important;
   .container {
@@ -127,22 +133,48 @@ ion-item .item-inner {
   padding-right: 1rem;
 }
 
-// ion-modal {
-//   border-radius: 15px;
-// }
-
-ion-modal>.ion-page {
+ion-modal > .ion-page {
   position: relative;
   box-shadow: 0px 12px 220px -40px var(--ion-color-medium);
-
+  // --width: 450px;
+  // --height: 430px;
 }
 
 @media only screen and (max-width: 576px) {
+  ion-app {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    // background-color: var(--ion-color-dark);
+  }
   form {
     width: 90% !important;
 
     .signUp {
       bottom: 1rem !important;
+    }
+  }
+
+  .sm-header-none {
+    display: none;
+  }
+
+  // ion-row {
+  //   overflow: auto;
+  //   flex-wrap: nowrap;
+
+  //   ion-col {
+  //     width: 100% !important;
+  //     max-width: 100% !important;
+  //   }
+  // }
+
+  .action-btns {
+    // flex-direction: column;
+    flex-wrap: wrap;
+
+    ion-button {
+      width: 100%;
     }
   }
 }

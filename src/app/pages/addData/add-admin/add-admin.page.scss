@@ -1,6 +1,5 @@
 .admin-form {
   margin: 1.8rem 3rem;
-  margin: 1.8rem 3rem;
   box-shadow: 0px 14px 100px -18px grey;
   border-radius: 10px;
   overflow: hidden;
@@ -29,4 +28,15 @@
 .toast{
     width: 15%;
     margin: auto;
+}
+
+@media only screen and (max-width: 576px) {
+  .admin-form {
+    margin: 1.8rem auto;
+  }
+
+  .toast{
+    width: fit-content;
+    margin: auto;
+}
 }

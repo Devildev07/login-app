@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      <ion-icon name="arrow-back-circle-outline" [routerLink]="['/users/advertiser']" class="icon-set"></ion-icon>
-      Add New Advertiser</ion-title>
+      <ion-icon
+        name="arrow-back-circle-outline"
+        [routerLink]="['/users/advertiser']"
+        class="icon-set"
+      ></ion-icon>
+      Add New Advertiser</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -12,9 +17,13 @@
       <ion-title size="large">Add New Advertiser</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+
   <!--  -->
-  <form #advertiserForm="ngForm" class="advertiser-form" (ngSubmit)="addAdvertiser(advertiserForm)">
+  <form
+    #advertiserForm="ngForm"
+    class="advertiser-form"
+    (ngSubmit)="addAdvertiser(advertiserForm)"
+  >
     <ion-input
       name="uname"
       label="Name"
@@ -27,6 +36,13 @@
       label="Email"
       labelPlacement="floating"
       placeholder="Email"
+      ngModel
+    ></ion-input>
+    <ion-input
+      name="address"
+      label="Address"
+      labelPlacement="floating"
+      placeholder="Address"
       ngModel
     ></ion-input>
     <ion-input
@@ -50,6 +66,18 @@
       placeholder="Region"
       ngModel
     ></ion-input>
+    <ion-input class="fb-auto">
+      <ion-select
+        name="type"
+        ngModel
+        label="Agency"
+        label-placement="floating"
+        placeholder="Agency"
+      >
+        <ion-select-option value="apple">Agency1</ion-select-option>
+        <ion-select-option value="banana">Agency2</ion-select-option>
+      </ion-select>
+    </ion-input>
     <ion-button type="submit" id="open-toast" expand="block">
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-button>

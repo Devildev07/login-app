@@ -1,18 +1,11 @@
-<ion-header [translucent]="true"> </ion-header>
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large"> Users </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <!--  -->
+<ion-header [translucent]="true" class="box-shadow">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <div class="badge">
       <p>Users</p>
-      <div class="badge-num">{{userList.length}}</div>
+      <div class="badge-num">{{totalDataLength}}</div>
     </div>
     <!--  -->
     <ion-searchbar
@@ -22,6 +15,15 @@
       (ionClear)="onClear()"
     ></ion-searchbar>
   </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> Users </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!--  -->
+
   <!--  -->
   <ion-tabs class="pt-9">
     <ion-tab-bar slot="top">
@@ -62,5 +64,10 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+
+  <!-- <div *ngFor="let item of allData">
+    <p>{{ item.uname }}</p>
+    <p>{{ item.email }}</p>
+  </div> -->
   <!--  -->
 </ion-content>
