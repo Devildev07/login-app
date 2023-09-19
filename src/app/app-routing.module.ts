@@ -89,21 +89,9 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    loadChildren: () => import('./pages/users/users.module').then( m => m.UsersPageModule)
+    loadChildren: () =>
+      import('./pages/users/users.module').then((m) => m.UsersPageModule),
   },
-  // {
-  //   path: 'users',
-  //   component: ClientsPage,
-  //   children: [
-  //     {
-  //       path: 'clients',
-  //       loadChildren: () =>
-  //         import('./pages/users/userTabs/clients/clients.module').then(
-  //           (m) => m.ClientsPageModule
-  //         ),
-  //     },
-  //   ],
-  // },
   {
     path: 'profile',
     loadChildren: () =>

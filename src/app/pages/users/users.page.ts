@@ -38,18 +38,18 @@ export class UsersPage implements OnInit {
       this.getManager(),
     ]).then(() => {
       this.calculateTotalDataLength();
-      this.allData = [
-        ...this.getAdminData,
-        ...this.getAdvertiserData,
-        ...this.getAgencyData,
-        ...this.getClientData,
-        ...this.getManagerData,
-      ];
-      console.log('allData', this.allData);
+      // this.allData = [
+      //   ...this.getAdminData,
+      //   ...this.getAdvertiserData,
+      //   ...this.getAgencyData,
+      //   ...this.getClientData,
+      //   ...this.getManagerData,
+      // ];
+      // console.log('allData', this.allData);
 
-      this.allUsersData = this.allData;
-      this.results = this.allUsersData;
-      console.log('allUsersData === ', this.allUsersData);
+      // this.allUsersData = this.allData;
+      // this.results = this.allUsersData;
+      // console.log('allUsersData === ', this.allUsersData);
     });
 
     // this.allUsersData = this.allData;

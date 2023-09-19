@@ -22,9 +22,10 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SearchPipe],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

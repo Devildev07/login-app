@@ -19,7 +19,11 @@ export class LoginPage implements OnInit {
     public authService: AuthService,
     public commonn: CommonServiceService,
     public router: Router
-  ) { }
+  ) {
+    if (this.authService.isUserLogin == true) {
+      this.router.navigate(['/profile']);
+    }
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -60,7 +64,7 @@ export class LoginPage implements OnInit {
 
       if (user) {
         const data = { isUserLogin: true, user: user };
-        console.log("data === ", data);
+        console.log('data === ', data);
         this.commonn.setItem('userData', data);
         this.authService.isUserLogin = true;
         this.authService.userEmail = data.user.user?.email;

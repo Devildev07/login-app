@@ -15,7 +15,7 @@ export class AppComponent {
     public authService: AuthService,
     public route: Router,
     public commonService: CommonServiceService
-  ) { }
+  ) {}
 
   toggleChange(event: any) {
     console.log('event', event);
@@ -33,8 +33,6 @@ export class AppComponent {
       this.commonService.removeItem('userData');
     });
   }
-
-
 
   public appPages = [
     { heading: 'Videos', url: '/videos', icon: 'videocam' },
@@ -54,10 +52,7 @@ export class AppComponent {
       url: '/certificates',
       icon: 'ribbon',
     },
-    { heading: 'Users', url: '/users', icon: 'people' },
+    { heading: 'Users', url: '/users/clients', icon: 'people' },
     { heading: 'Profile', url: '/profile', icon: 'person' },
-
-
   ];
-
 }
