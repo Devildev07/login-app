@@ -8,12 +8,15 @@ import { AgencyPageRoutingModule } from './agency-routing.module';
 
 import { AgencyPage } from './agency.page';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../../../../shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     AgencyPageRoutingModule,
     RouterModule.forChild([{ path: '', component: AgencyPage }])
 
@@ -21,4 +24,4 @@ import { RouterModule } from '@angular/router';
   declarations: [AgencyPage],
   exports: [AgencyPage],
 })
-export class AgencyPageModule {}
+export class AgencyPageModule { }

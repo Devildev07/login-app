@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CommonServiceService {
+  searchText: any = '';
   constructor() { }
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));

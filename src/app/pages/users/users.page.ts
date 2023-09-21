@@ -27,7 +27,7 @@ export class UsersPage implements OnInit {
   constructor(
     public common: CommonServiceService,
     public getDatas: GetDataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     Promise.all([
@@ -99,22 +99,23 @@ export class UsersPage implements OnInit {
 
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
-    let foundObjects: any = [];
-    for (const user of this.allUsersData) {
-      console.log('user === ', user);
-      for (const key of Object.keys(user)) {
-        console.log('key === ', key);
-        console.log('user[key] === ', user[key]);
-        if (
-          user[key] != null &&
-          user[key].toString().toLowerCase().includes(query)
-        ) {
-          foundObjects.push(user);
-          break;
-        }
-      }
-    }
-    this.results = foundObjects;
+    this.common.searchText = query;
+    // let foundObjects: any = [];
+    // for (const user of this.allUsersData) {
+    //   console.log('user === ', user);
+    //   for (const key of Object.keys(user)) {
+    //     console.log('key === ', key);
+    //     console.log('user[key] === ', user[key]);
+    //     if (
+    //       user[key] != null &&
+    //       user[key].toString().toLowerCase().includes(query)
+    //     ) {
+    //       foundObjects.push(user);
+    //       break;
+    //     }
+    //   }
+    // }
+    // this.results = foundObjects;
   }
   onClear() {
     this.results = [];

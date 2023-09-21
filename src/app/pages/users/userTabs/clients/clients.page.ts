@@ -15,6 +15,7 @@ import {
   DocumentData,
 } from '@angular/fire/firestore';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
+import { CommonServiceService } from 'src/app/common-service.service';
 
 @Component({
   selector: 'app-clients',
@@ -27,7 +28,8 @@ export class ClientsPage implements OnInit {
   public clientList: any;
   public results: any;
 
-  constructor(private firestore: Firestore, public getDatas: GetDataService) {
+  constructor(private firestore: Firestore, public getDatas: GetDataService, public commonService: CommonServiceService) {
+    this.commonService.searchText = '';
     this.getDatas.myEventEmitter.subscribe((data) => {
       this.getClientData.push(data);
       console.log('Received event with data:', data);
@@ -36,7 +38,7 @@ export class ClientsPage implements OnInit {
 
   ngOnInit() {
     this.getClient();
-
+    this.commonService.searchText = '';
     this.clientList = ClientList.data;
     this.results = this.clientList;
     console.log('clientList === ', this.clientList);

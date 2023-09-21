@@ -16,7 +16,7 @@ export class SignupPage implements OnInit {
     public loadingCtrl: LoadingController,
     public authService: AuthService,
     public router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.regForm = this.formBuilder.group({

@@ -3,16 +3,12 @@
     <ion-row class="ion-padding-horizontal">
       <ion-col class="ion-text-left" sizeMd="4">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal"
-            >Name</ion-card-subtitle
-          >
+          <ion-card-subtitle class="ion-padding-horizontal">Name</ion-card-subtitle>
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="4">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal"
-            >Mobile</ion-card-subtitle
-          >
+          <ion-card-subtitle class="ion-padding-horizontal">Mobile</ion-card-subtitle>
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="4">
@@ -25,18 +21,13 @@
 </ion-header>
 <ion-content>
   <!-- <div class="example-content">Advertiser content</div> -->
-  <ion-list
-    class="ion-padding-horizontal data-list"
-    *ngFor="let managerData of getManagerData "
-  >
+  <ion-list class="ion-padding-horizontal data-list"
+    *ngFor="let managerData of getManagerData | search: commonService.searchText">
     <ion-row class="ion-padding-top ion-align-items-center">
       <ion-col sizeMd="4">
         <div class="img-box">
           <ion-avatar>
-            <img
-              alt="person-icon"
-              src="https://ionicframework.com/docs/img/demos/avatar.svg"
-            />
+            <img alt="person-icon" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
           </ion-avatar>
           <ion-label>
             <ion-card-title>Name : {{managerData.uname}}</ion-card-title>
@@ -48,27 +39,16 @@
         <ion-label> {{managerData.mobile}} </ion-label>
       </ion-col>
       <ion-col sizeMd="4" class="action-btns">
-        <ion-button shape="round" (click)="openModel(managerData)"
-          >          <ion-icon name="create-outline"></ion-icon>
-          </ion-button
-        >
-        <ion-button
-          shape="round"
-          color="danger"
-          (click)="deleteManager(managerData.id)"
-          >          <ion-icon name="trash-outline"></ion-icon>
-          </ion-button
-        >
+        <ion-button shape="round" (click)="openModel(managerData)"> <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button shape="round" color="danger" (click)="deleteManager(managerData.id)"> <ion-icon
+            name="trash-outline"></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-list>
   <!-- fab-btn -->
-  <ion-fab
-    slot="fixed"
-    vertical="bottom"
-    horizontal="end"
-    style="margin: 0 2rem 2rem 0"
-  >
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" style="margin: 0 2rem 2rem 0">
     <ion-fab-button [routerLink]="['/add-manager']">
       <ion-icon name="person-add-outline"></ion-icon>
     </ion-fab-button>

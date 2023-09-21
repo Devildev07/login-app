@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 import { Firestore, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
+import { CommonServiceService } from 'src/app/common-service.service';
 
 @Component({
   selector: 'app-manager',
@@ -15,8 +16,9 @@ export class ManagerPage implements OnInit {
   constructor(
     private firestore: Firestore,
     private modalCntrl: ModalController,
-    public getDatas: GetDataService
+    public getDatas: GetDataService, public commonService: CommonServiceService
   ) {
+    this.commonService.searchText = ""
     this.getDatas.myEventEmitter.subscribe((data) => {
       this.getManagerData.push(data);
       console.log('Received event with data:', data);
@@ -25,6 +27,8 @@ export class ManagerPage implements OnInit {
 
   ngOnInit() {
     this.getManager();
+    this.commonService.searchText = ""
+
   }
 
   // get-query

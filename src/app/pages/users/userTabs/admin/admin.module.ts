@@ -8,16 +8,19 @@ import { AdminPageRoutingModule } from './admin-routing.module';
 
 import { AdminPage } from './admin.page';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../../../../shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     AdminPageRoutingModule,
     RouterModule.forChild([{ path: '', component: AdminPage }]),
   ],
   declarations: [AdminPage],
-  exports: [AdminPage ],
+  exports: [AdminPage],
 })
-export class AdminPageModule {}
+export class AdminPageModule { }

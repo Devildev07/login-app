@@ -8,12 +8,15 @@ import { AdvertiserPageRoutingModule } from './advertiser-routing.module';
 
 import { AdvertiserPage } from './advertiser.page';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../../../../shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     AdvertiserPageRoutingModule,
     RouterModule.forChild([{ path: '', component: AdvertiserPage }])
 
@@ -22,4 +25,4 @@ import { RouterModule } from '@angular/router';
   exports: [AdvertiserPage],
 
 })
-export class AdvertiserPageModule {}
+export class AdvertiserPageModule { }
