@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import UserList from '../../../json/allcategoryList.json';
-// import ClientList from '../../../json/ClientData/clientData.json';
 import { CommonServiceService } from 'src/app/common-service.service';
-
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 
 @Component({
@@ -13,21 +10,18 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
 export class UsersPage implements OnInit {
   public allUsersData: any;
   public results: any;
-
-
   public getAdminData: any = [];
   public getAdvertiserData: any = [];
   public getAgencyData: any = [];
   public getClientData: any = [];
   public getManagerData: any = [];
-
   public totalDataLength: number = 0;
   public allData: any[] = [];
 
   constructor(
     public common: CommonServiceService,
     public getDatas: GetDataService
-  ) { }
+  ) {}
 
   ngOnInit() {
     Promise.all([
@@ -38,25 +32,7 @@ export class UsersPage implements OnInit {
       this.getManager(),
     ]).then(() => {
       this.calculateTotalDataLength();
-      // this.allData = [
-      //   ...this.getAdminData,
-      //   ...this.getAdvertiserData,
-      //   ...this.getAgencyData,
-      //   ...this.getClientData,
-      //   ...this.getManagerData,
-      // ];
-      // console.log('allData', this.allData);
-
-      // this.allUsersData = this.allData;
-      // this.results = this.allUsersData;
-      // console.log('allUsersData === ', this.allUsersData);
     });
-
-    // this.allUsersData = this.allData;
-    // this.results = this.allUsersData;
-    // console.log('allUsersData === ', this.allUsersData);
-
-
   }
 
   calculateTotalDataLength() {
@@ -66,57 +42,71 @@ export class UsersPage implements OnInit {
       this.getAgencyData.length +
       this.getClientData.length +
       this.getManagerData.length;
-    console.log('totalLenghth', this.totalDataLength);
+    console.log('totalLength', this.totalDataLength);
   }
 
   async getAdmin() {
-    this.getAdminData = await this.getDatas.getFromFirebase('admins');
-    console.log('getAdminData === ', this.getAdminData);
-    return this.getAdminData;
-  }
-  async getAdvertiser() {
-    this.getAdvertiserData = await this.getDatas.getFromFirebase('advertiser');
-    console.log('getAdvertiserData === ', this.getAdvertiserData);
-    return this.getAdvertiserData;
-  }
-  async getAgency() {
-    this.getAgencyData = await this.getDatas.getFromFirebase('agency');
-    console.log('getAgencyData === ', this.getAgencyData);
-    return this.getAgencyData;
-  }
-  async getClient() {
-    this.getClientData = await this.getDatas.getFromFirebase('clients');
-    console.log('getClientData === ', this.getClientData);
-    return this.getClientData;
-  }
-  async getManager() {
-    this.getManagerData = await this.getDatas.getFromFirebase('manager');
-    console.log('getManagerData === ', this.getManagerData);
-    return this.getManagerData;
+    try {
+      this.getAdminData = await this.getDatas.getFromFirebase('admins');
+      console.log('getAdminData === ', this.getAdminData);
+      return this.getAdminData;
+    } catch (error) {
+      console.error('Error retrieving admin data:', error);
+      return [];
+    }
   }
 
-  // public admin = this.common.getItem('userData');
+  async getAdvertiser() {
+    try {
+      this.getAdvertiserData = await this.getDatas.getFromFirebase(
+        'advertiser'
+      );
+      console.log('getAdvertiserData === ', this.getAdvertiserData);
+      return this.getAdvertiserData;
+    } catch (error) {
+      console.error('Error retrieving advertiser data:', error);
+      return [];
+    }
+  }
+
+  async getAgency() {
+    try {
+      this.getAgencyData = await this.getDatas.getFromFirebase('agency');
+      console.log('getAgencyData === ', this.getAgencyData);
+      return this.getAgencyData;
+    } catch (error) {
+      console.error('Error retrieving agency data:', error);
+      return [];
+    }
+  }
+
+  async getClient() {
+    try {
+      this.getClientData = await this.getDatas.getFromFirebase('clients');
+      console.log('getClientData === ', this.getClientData);
+      return this.getClientData;
+    } catch (error) {
+      console.error('Error retrieving client data:', error);
+      return [];
+    }
+  }
+
+  async getManager() {
+    try {
+      this.getManagerData = await this.getDatas.getFromFirebase('manager');
+      console.log('getManagerData === ', this.getManagerData);
+      return this.getManagerData;
+    } catch (error) {
+      console.error('Error retrieving manager data:', error);
+      return [];
+    }
+  }
 
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
     this.common.searchText = query;
-    // let foundObjects: any = [];
-    // for (const user of this.allUsersData) {
-    //   console.log('user === ', user);
-    //   for (const key of Object.keys(user)) {
-    //     console.log('key === ', key);
-    //     console.log('user[key] === ', user[key]);
-    //     if (
-    //       user[key] != null &&
-    //       user[key].toString().toLowerCase().includes(query)
-    //     ) {
-    //       foundObjects.push(user);
-    //       break;
-    //     }
-    //   }
-    // }
-    // this.results = foundObjects;
   }
+
   onClear() {
     this.results = [];
   }
