@@ -25,15 +25,66 @@
         </ion-avatar>
       </ion-col>
     </ion-row>
+    <!--  -->
     <ion-row>
       <ion-col>
-        <ion-label> {{authService.userEmail}} </ion-label>
+        <ion-item>
+          <ion-label>
+            <p>Email</p>
+            <h1 *ngIf="loggedUser.length>0">{{loggedUser[0].email}}</h1>
+          </ion-label>
+        </ion-item>
       </ion-col>
+      <!--  -->
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <p>Name</p>
+            <h1 *ngIf="loggedUser.length>0">{{loggedUser[0].uname}}</h1>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <!--  -->
     </ion-row>
+    <!--  -->
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <p>Mobile</p>
+            <h1 *ngIf="loggedUser.length>0">{{loggedUser[0].mobile}}</h1>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <!--  -->
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <p>Region</p>
+            <h1 *ngIf="loggedUser.length>0">{{loggedUser[0].region}}</h1>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <!--  -->
+    </ion-row>
+    <!--  -->
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <p>Address</p>
+            <h1 *ngIf="loggedUser.length>0">{{loggedUser[0].address}}</h1>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <!--  -->
+    </ion-row>
+    <!--  -->
     <ion-row>
       <ion-col>
         <ion-button (click)="logOut()">Log Out</ion-button>
       </ion-col>
     </ion-row>
+    <!--  -->
   </ion-grid>
 </ion-content>
