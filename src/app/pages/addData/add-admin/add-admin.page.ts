@@ -28,7 +28,8 @@ export class AddAdminPage implements OnInit {
   ngOnInit() { }
 
   async addAdmin(adminForm: any) {
-    console.log('Add Admin', adminForm.value);
+    // console.log('Add Admin', adminForm.value);
+    adminForm.value.password = btoa(adminForm.value.password);
     var email = adminForm.value.email;
     var pass = adminForm.value.password;
     const collectionInstance = collection(this.firestore, 'admins');

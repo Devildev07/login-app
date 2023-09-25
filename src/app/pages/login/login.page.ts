@@ -56,6 +56,7 @@ export class LoginPage implements OnInit {
     const loading = await this.loadingCtrl.create();
     await loading.present();
     if (this.loginForm?.valid) {
+      this.loginForm.value.password = btoa(this.loginForm.value.password);
       const user = await this.authService
         .loginUser(this.loginForm.value.email, this.loginForm.value.password)
         .catch((error) => {
@@ -73,7 +74,7 @@ export class LoginPage implements OnInit {
         loading.dismiss();
         this.router.navigate(['/profile']);
       } else {
-        this.authService.isUserLogin = true;
+        this.authService.isUserLogin = false;
         console.log('provide correct value');
       }
     }

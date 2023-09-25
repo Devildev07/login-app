@@ -3,6 +3,8 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
 import { Firestore, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
+import { AuthService } from 'src/app/auth.service';
+
 
 
 @Component({
@@ -16,7 +18,8 @@ export class AdminPage implements OnInit {
   constructor(
     private firestore: Firestore,
     private modalCntrl: ModalController,
-    public getDatas: GetDataService, public CommonService: CommonServiceService
+    public getDatas: GetDataService, public CommonService: CommonServiceService,
+    public authService: AuthService
   ) {
     this.CommonService.searchText = ""
     this.getDatas.myEventEmitter.subscribe((data) => {
