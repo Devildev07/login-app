@@ -1,19 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import ClientList from '../../../../../json/ClientData/clientData.json';
-
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-
-import { Observable } from 'rxjs';
-import {
-  Firestore,
-  collection,
-  doc,
-  updateDoc,
-  deleteDoc,
-  collectionData,
-  DocumentData,
-} from '@angular/fire/firestore';
+import { Component, OnInit } from '@angular/core';
+import { Firestore, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 import { CommonServiceService } from 'src/app/common-service.service';
 
@@ -28,7 +14,11 @@ export class ClientsPage implements OnInit {
   public clientList: any;
   public results: any;
 
-  constructor(private firestore: Firestore, public getDatas: GetDataService, public commonService: CommonServiceService) {
+  constructor(
+    private firestore: Firestore,
+    public getDatas: GetDataService,
+    public commonService: CommonServiceService
+  ) {
     this.commonService.searchText = '';
     this.getDatas.myEventEmitter.subscribe((data) => {
       this.getClientData.push(data);
@@ -39,9 +29,6 @@ export class ClientsPage implements OnInit {
   ngOnInit() {
     this.getClient();
     this.commonService.searchText = '';
-    this.clientList = ClientList.data;
-    this.results = this.clientList;
-    console.log('clientList === ', this.clientList);
   }
 
   // get-query
@@ -60,6 +47,8 @@ export class ClientsPage implements OnInit {
       mobile: data.mobile,
       address: data.address,
       region: data.region,
+      location_count: data.location_count,
+      devices: data.devices,
     };
     let updatedIndex = -1;
     this.getClientData.forEach((element: any, index: any) => {
@@ -94,29 +83,6 @@ export class ClientsPage implements OnInit {
   }
 
   // search action
-  handleInput(event: any) {
-    const query = event.target.value.toLowerCase();
-    let foundObjects: any = [];
-    for (const user of this.clientList) {
-      console.log('user === ', user);
-      for (const key of Object.keys(user)) {
-        console.log('key === ', key);
-        console.log('user[key] === ', user[key]);
-        if (
-          user[key] != null &&
-          user[key].toString().toLowerCase().includes(query)
-        ) {
-          foundObjects.push(user);
-          break;
-        }
-      }
-    }
-    this.results = foundObjects;
-  }
-
-  onClear() {
-    this.results = [];
-  }
 
   // model start
   openModel(clientData: any) {

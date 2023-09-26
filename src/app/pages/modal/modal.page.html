@@ -21,6 +21,7 @@
       placeholder="Name"
       [(ngModel)]="dataDetails.uname"
     ></ion-input>
+    <!--  -->
     <ion-input
       name="email"
       label="Email"
@@ -28,6 +29,7 @@
       placeholder="Email"
       [(ngModel)]="dataDetails.email"
     ></ion-input>
+    <!--  -->
     <ion-input
       name="mobile"
       label="Mobile"
@@ -35,6 +37,7 @@
       placeholder="Mobile"
       [(ngModel)]="dataDetails.mobile"
     ></ion-input>
+    <!--  -->
     <ion-input
       name="address"
       label="Address"
@@ -42,6 +45,7 @@
       placeholder="Address"
       [(ngModel)]="dataDetails.address"
     ></ion-input>
+    <!--  -->
     <ion-input
       name="region"
       label="Region"
@@ -49,6 +53,45 @@
       placeholder="Region"
       [(ngModel)]="dataDetails.region"
     ></ion-input>
+    <!--  -->
+    <ion-input
+      name="devices"
+      label="On Device"
+      labelPlacement="floating"
+      placeholder="On Device"
+      [(ngModel)]="dataDetails.devices"
+    ></ion-input>
+    <!--  -->
+    <ion-input
+      name="location_count"
+      label="Location Count"
+      labelPlacement="floating"
+      placeholder="Location Count"
+      [(ngModel)]="dataDetails.location_count"
+    ></ion-input>
+    <!--  -->
+    <ion-input
+      name="campaign_count"
+      label="Campaign Count"
+      labelPlacement="floating"
+      placeholder="Campaign Count"
+      [(ngModel)]="dataDetails.campaign_count"
+    ></ion-input>
+    <!--  -->
+    <ion-select
+      name="type"
+      ngModel
+      label="Agency"
+      label-placement="floating"
+      placeholder="Agency"
+      [(ngModel)]="dataDetails.type"
+    >
+      <ion-select-option value="apple">Agency1</ion-select-option>
+      <ion-select-option value="banana">Agency2</ion-select-option>
+    </ion-select>
+
+    <!--  -->
+
     <ion-button (click)="closeModal()" shape="round">Update</ion-button>
   </div>
   <!--  -->

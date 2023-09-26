@@ -1,7 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      <ion-icon name="arrow-back-circle-outline" [routerLink]="['/users/clients']"></ion-icon>
+      <ion-icon
+        name="arrow-back-circle-outline"
+        [routerLink]="['/users/clients']"
+      ></ion-icon>
       Add New Clients
     </ion-title>
   </ion-toolbar>
@@ -14,9 +17,12 @@
     </ion-toolbar>
   </ion-header>
 
-  
   <!--  -->
-  <form #clientsForm="ngForm" class="clients-form" (ngSubmit)="addClient(clientsForm)">
+  <form
+    #clientsForm="ngForm"
+    class="clients-form"
+    (ngSubmit)="addClient(clientsForm)"
+  >
     <ion-input
       name="uname"
       label="Name"
@@ -32,17 +38,24 @@
       ngModel
     ></ion-input>
     <ion-input
-      name="location_count"
-      label="Location Count"
-      labelPlacement="floating"
-      placeholder="Location Count"
-      ngModel
-    ></ion-input>
-    <ion-input
       name="mobile"
       label="Mobile"
       labelPlacement="floating"
       placeholder="Mobile"
+      ngModel
+    ></ion-input>
+    <ion-input
+      name="address"
+      label="Address"
+      labelPlacement="floating"
+      placeholder="Address"
+      ngModel
+    ></ion-input>
+    <ion-input
+      name="region"
+      label="Region"
+      labelPlacement="floating"
+      placeholder="Region"
       ngModel
     ></ion-input>
     <ion-input
@@ -52,6 +65,14 @@
       placeholder="On Device"
       ngModel
     ></ion-input>
+    <ion-input
+      name="location_count"
+      label="Location Count"
+      labelPlacement="floating"
+      placeholder="Location Count"
+      ngModel
+    ></ion-input>
+
     <ion-button type="submit" id="open-toast" expand="block">
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-button>

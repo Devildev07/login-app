@@ -18,7 +18,7 @@ export class AdvertiserPage implements OnInit {
     public getDatas: GetDataService,
     public CommonService: CommonServiceService
   ) {
-    this.CommonService.searchText = ""
+    this.CommonService.searchText = '';
     this.getDatas.myEventEmitter.subscribe((data) => {
       this.getAdvertiserData.push(data);
       console.log('Received event with data:', data);
@@ -27,8 +27,7 @@ export class AdvertiserPage implements OnInit {
 
   ngOnInit() {
     this.getAdvertiser();
-    this.CommonService.searchText = ""
-
+    this.CommonService.searchText = '';
   }
 
   // get-query
