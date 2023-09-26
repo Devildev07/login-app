@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     public authService: AuthService,
     public commonn: CommonServiceService,
+    public getpassService: CommonServiceService,
     public router: Router
   ) {
     if (this.authService.isUserLogin == true) {
@@ -57,6 +58,7 @@ export class LoginPage implements OnInit {
     await loading.present();
     if (this.loginForm?.valid) {
       this.loginForm.value.password = btoa(this.loginForm.value.password);
+      // this.loginForm.value.password =  this.getpassService.encryptPass(this.loginForm.value.password);
       const user = await this.authService
         .loginUser(this.loginForm.value.email, this.loginForm.value.password)
         .catch((error) => {

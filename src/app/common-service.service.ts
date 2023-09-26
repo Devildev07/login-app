@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class CommonServiceService {
   searchText: any = '';
-  constructor() { }
+  constructor() {}
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -41,5 +41,12 @@ export class CommonServiceService {
       { heading: 'Users', url: '/users', icon: 'people-outline' },
       { heading: 'Profile', url: '/profile', icon: 'person-outline' },
     ];
+  }
+
+  encryptPass(getPass: string) {
+    var passA = btoa(getPass);
+    var passB = btoa('devil');
+    var generatedPass = passA + '@$98#%' + passB;
+    console.log('generatedPass', generatedPass);
   }
 }
