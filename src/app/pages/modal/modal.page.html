@@ -59,6 +59,7 @@
       label="On Device"
       labelPlacement="floating"
       placeholder="On Device"
+      *ngIf="CommonService.userCurrentTab === 'clients'"
       [(ngModel)]="dataDetails.devices"
     ></ion-input>
     <!--  -->
@@ -67,6 +68,7 @@
       label="Location Count"
       labelPlacement="floating"
       placeholder="Location Count"
+      *ngIf="CommonService.userCurrentTab === 'clients'"
       [(ngModel)]="dataDetails.location_count"
     ></ion-input>
     <!--  -->
@@ -75,7 +77,7 @@
       label="Campaign Count"
       labelPlacement="floating"
       placeholder="Campaign Count"
-      *ngIf="CommonService.userCurrentTab === 'clients'"
+      *ngIf="CommonService.userCurrentTab === 'advertiser'"
       [(ngModel)]="dataDetails.campaign_count"
     ></ion-input>
     <!--  -->
@@ -85,10 +87,11 @@
       label="Agency"
       label-placement="floating"
       placeholder="Agency"
+      *ngIf="CommonService.userCurrentTab === 'agency'"
       [(ngModel)]="dataDetails.type"
     >
-      <ion-select-option value="apple">Agency1</ion-select-option>
-      <ion-select-option value="banana">Agency2</ion-select-option>
+      <ion-select-option value="Agency1">Agency1</ion-select-option>
+      <ion-select-option value="Agency2">Agency2</ion-select-option>
     </ion-select>
 
     <!--  -->

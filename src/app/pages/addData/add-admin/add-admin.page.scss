@@ -16,18 +16,19 @@
     max-width: -webkit-fill-available;
     flex-basis: 25rem;
     flex-grow: 1;
-
-
+  }
+  ion-select {
+    margin: 0 1rem 0.8rem 1rem;
   }
 }
 
-.input-label-placement-floating.sc-ion-input-md-h input.sc-ion-input-md{
+.input-label-placement-floating.sc-ion-input-md-h input.sc-ion-input-md {
   margin-top: 8px;
 }
 
-.toast{
-    width: 15%;
-    margin: auto;
+.toast {
+  width: 15%;
+  margin: auto;
 }
 
 @media only screen and (max-width: 576px) {
@@ -35,8 +36,8 @@
     margin: 1.8rem auto;
   }
 
-  .toast{
+  .toast {
     width: fit-content;
     margin: auto;
-}
+  }
 }
