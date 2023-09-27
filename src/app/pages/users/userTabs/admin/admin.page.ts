@@ -73,7 +73,7 @@ export class AdminPage implements OnInit {
 
   // delete-query
   deleteAdmin(id: string,email:string) {
-    this.authService.deleteUserByEmail(email)
+    // this.authService.deleteUserByEmail(email)
     console.log();
     
     // const docInstance = doc(this.firestore, 'admins', id);
