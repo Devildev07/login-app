@@ -75,6 +75,7 @@
       label="Campaign Count"
       labelPlacement="floating"
       placeholder="Campaign Count"
+      *ngIf="CommonService.userCurrentTab === 'clients'"
       [(ngModel)]="dataDetails.campaign_count"
     ></ion-input>
     <!--  -->

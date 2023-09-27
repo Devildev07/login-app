@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
+import { CommonServiceService } from 'src/app/common-service.service';
+
 
 @Component({
   selector: 'app-modal',
@@ -11,7 +13,8 @@ export class ModalPage implements OnInit {
 
   constructor(
     private modalCntrl: ModalController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    public CommonService: CommonServiceService
   ) {
     this.dataDetails = this.navParams.data;
     console.log("details",this.dataDetails);

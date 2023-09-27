@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IonTabs, SegmentChangeEventDetail } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 
@@ -17,6 +18,7 @@ export class UsersPage implements OnInit {
   public getManagerData: any = [];
   public totalDataLength: number = 0;
   public allData: any[] = [];
+  public current_tab: string = '';
 
   constructor(
     public common: CommonServiceService,
@@ -109,5 +111,9 @@ export class UsersPage implements OnInit {
 
   onClear() {
     this.results = [];
+  }
+  setCurrentTab(ev: any) {
+    this.common.userCurrentTab = ev.tab;
+    console.log('current_tab::', this.common.userCurrentTab);
   }
 }

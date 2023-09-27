@@ -8,7 +8,12 @@
       <div class="badge-num">{{totalDataLength}}</div>
     </div>
     <!--  -->
-    <ion-searchbar slot="end" [debounce]="1000" (ionInput)="handleInput($event)" (ionClear)="onClear()"></ion-searchbar>
+    <ion-searchbar
+      slot="end"
+      [debounce]="1000"
+      (ionInput)="handleInput($event)"
+      (ionClear)="onClear()"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -20,7 +25,7 @@
   <!--  -->
 
   <!--  -->
-  <ion-tabs class="pt-9">
+  <ion-tabs class="pt-9" (ionTabsDidChange)="setCurrentTab($event)">
     <ion-tab-bar slot="top">
       <ion-tab-button tab="clients">
         <ion-icon aria-hidden="true" name="people-outline"></ion-icon>

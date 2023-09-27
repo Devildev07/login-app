@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class CommonServiceService {
   searchText: any = '';
+  userCurrentTab = 'clients';
   constructor() {}
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
