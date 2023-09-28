@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { AdsPageRoutingModule } from './ads-routing.module';
 
 import { AdsPage } from './ads.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AdsPageRoutingModule
+    AdsPageRoutingModule,
+    RouterModule.forChild([{path:'',component:AdsPage}])
   ],
-  declarations: [AdsPage]
+  declarations: [AdsPage],
+  exports: [AdsPage]
+
 })
 export class AdsPageModule {}

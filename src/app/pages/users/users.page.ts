@@ -112,6 +112,7 @@ export class UsersPage implements OnInit {
   onClear() {
     this.results = [];
   }
+
   setCurrentTab(ev: any) {
     this.common.userCurrentTab = ev.tab;
     console.log('current_tab::', this.common.userCurrentTab);
