@@ -80,9 +80,12 @@
       <!--  -->
     </ion-row>
     <!--  -->
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="logOut()">Log Out</ion-button>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-col sizeMd="3">
+        <ion-button expand="full" (click)="logOut()"  shape="round">Log Out</ion-button>
+      </ion-col>
+      <ion-col sizeMd="3">
+        <ion-button expand="full" [routerLink]="['/resetpassword']"  shape="round">Reset Password </ion-button>
       </ion-col>
     </ion-row>
     <!--  -->

@@ -57,15 +57,15 @@
         </div>
 
         <!-- <div class="links">
-          <div>
-            <a [routerLink]="['/resetpassword']">Forgot Password ?</a>
-          </div>
           <div class="signUp">
             Create New Account
             <a [routerLink]="['/signup']"> Sign up Now</a>
           </div>
         </div> -->
         <ion-button shape="round" (click)="logIn()">Submit</ion-button>
+        <div class="ion-text-center">
+          <a [routerLink]="['/resetpassword']">Forgot Password ?</a>
+        </div>
       </div>
     </form>
   </div>
