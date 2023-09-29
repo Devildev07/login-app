@@ -8,9 +8,8 @@ import { CommonServiceService } from 'src/app/common-service.service';
 })
 export class VideosPage implements OnInit {
   public results: any;
-  constructor(public common: CommonServiceService) {}
-
-  ngOnInit() {}
+  constructor(public common: CommonServiceService) { }
+  ngOnInit() { }
 
   setCurrentTab(ev: any) {
     this.common.userCurrentTab = ev.tab;

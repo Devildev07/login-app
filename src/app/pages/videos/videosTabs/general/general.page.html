@@ -1,30 +1,24 @@
 <ion-header [translucent]="true" class="sm-header-none">
   <ion-toolbar>
     <ion-row class="ion-padding-horizontal">
-      <ion-col class="ion-text-left" sizeMd="3">
+      <ion-col class="ion-text-left" sizeMd="4">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal"
-            >Name</ion-card-subtitle
-          >
+          <ion-card-subtitle class="ion-padding-horizontal">Video Name</ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="2">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal">Duration</ion-card-subtitle>
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="3">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal"
-            >Address/Region</ion-card-subtitle
-          >
+          <ion-card-subtitle class="ion-padding-horizontal">Playlilst Count</ion-card-subtitle>
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="3">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal"
-            >Mobile</ion-card-subtitle
-          >
-        </ion-label>
-      </ion-col>
-      <ion-col class="ion-text-center" sizeMd="3">
-        <ion-label>
-          <ion-card-subtitle class="ion-padding-end">Edit</ion-card-subtitle>
+          <ion-card-subtitle class="ion-padding-end">Actions</ion-card-subtitle>
         </ion-label>
       </ion-col>
     </ion-row>
@@ -32,5 +26,38 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-title>general tab</ion-title>  
+  <ion-list>
+    <ion-row class="ion-padding-horizontal ion-align-items-center">
+      <ion-col class="" sizeMd="1">
+        <ion-icon size="large" name="play-circle-outline"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-text-left" sizeMd="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal">Video Name</ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="2">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal">Duration</ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal">Playlist Count</ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="3">
+        <ion-button shape="round" color="primary">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <!-- fab-btn -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" style="margin: 0 2rem 2rem 0">
+    <ion-fab-button [routerLink]="['/add-admin']">
+      <ion-icon name="cloud-upload-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
