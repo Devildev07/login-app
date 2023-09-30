@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from '@angular/fire/compat/storage';
 
 @Injectable({
   providedIn: 'root',
@@ -6,7 +10,7 @@ import { Injectable } from '@angular/core';
 export class CommonServiceService {
   searchText: any = '';
   userCurrentTab = 'clients';
-  constructor() {}
+  constructor(private fireStorage: AngularFireStorage) {}
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -49,5 +53,20 @@ export class CommonServiceService {
     var passB = btoa('devil');
     var generatedPass = passA + '@$98#%' + passB;
     console.log('generatedPass', generatedPass);
+  }
+
+  uploadFile(file: File, filePath: string): AngularFireUploadTask {
+    const storageRef = this.fireStorage.ref(filePath);
+    const uploadTask = storageRef.put(file);
+
+    // Return the AngularFireUploadTask
+    return uploadTask;
+  }
+
+  getDownloadURL(filePath: string): Promise<string> {
+    const storageRef = this.fireStorage.ref(filePath);
+
+    // Use getDownloadURL to retrieve the download URL
+    return storageRef.getDownloadURL().toPromise();
   }
 }

@@ -136,7 +136,11 @@ const routes: Routes = [
     path: 'modal',
     loadChildren: () =>
       import('./pages/modal/modal.module').then((m) => m.ModalPageModule),
+  },  {
+    path: 'add-videos',
+    loadChildren: () => import('./pages/addData/add-videos/add-videos.module').then( m => m.AddVideosPageModule)
   },
+
 ];
 
 @NgModule({
