@@ -2,9 +2,10 @@
   <ion-split-pane contentId="main-content" *ngIf="authService.isUserLogin">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-        <ion-list id="inbox-list">
+        <ion-list id="inbox-list" >
           <ion-list-header>
-            <ion-title class="pl-0"> My Wan </ion-title>
+            
+            <ion-title class="pl-0"> <ion-img src="../assets/icon/MyWan-Logo.png" style="width: 3rem;"></ion-img> </ion-title>
             <div class="theme-tgl">
               <ion-icon name="moon-outline"></ion-icon>
               <ion-toggle slot="end" (ionChange)="toggleChange($event)"></ion-toggle>
