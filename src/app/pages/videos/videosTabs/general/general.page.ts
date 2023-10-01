@@ -39,10 +39,10 @@ export class GeneralPage implements OnInit {
   }
 
   deleteFile(index: number, downloadURL: string) {
-    const fileToDelete = this.uploadedFiles[index];
-    if (!fileToDelete) {
-      return;
-    }
+    // const fileToDelete = this.uploadedFiles[index];
+    // if (!fileToDelete) {
+    //   return;
+    // }
 
     // Convert the downloadURL to a reference
     const storageRef = this.afStorage.refFromURL(downloadURL);
@@ -51,8 +51,8 @@ export class GeneralPage implements OnInit {
     storageRef.delete().subscribe(
       () => {
         console.log('File deleted successfully');
-        this.uploadedFiles.splice(index, 1);
-        console.log('files', this.uploadedFiles);
+        // this.uploadedFiles.splice(index, 1);
+        // console.log('files', this.uploadedFiles);
       },
       (error) => {
         // Handle any errors
