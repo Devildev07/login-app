@@ -5,13 +5,13 @@
         <ion-list id="inbox-list" >
           <ion-list-header>
             
-            <ion-title class="pl-0"> <ion-img src="../assets/icon/MyWan-Logo.png" style="width: 3rem;"></ion-img> </ion-title>
+            <ion-title class="pl-0"> <ion-img src="../assets/icon/MyWan-Logo-2.png" style="width: 3rem;"></ion-img> </ion-title>
             <div class="theme-tgl">
               <ion-icon name="moon-outline"></ion-icon>
               <ion-toggle slot="end" (ionChange)="toggleChange($event)"></ion-toggle>
             </div>
           </ion-list-header>
-          <ion-note>
+          <ion-note class="ion-padding-top">
             {{ authService.userEmail }}
           </ion-note>
 
