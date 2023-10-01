@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireUploadTask } from '@angular/fire/compat/storage';
+import { Router } from '@angular/router';
 import { CommonServiceService } from 'src/app/common-service.service';
 
 @Component({
@@ -10,11 +11,11 @@ import { CommonServiceService } from 'src/app/common-service.service';
 export class AddVideosPage implements OnInit {
   selectedFile: File | null = null;
   uploadedFilePath?: string;
-  task: AngularFireUploadTask | null = null; // Track the upload task
-  uploadProgress:number | any = 0; // Track upload progress
+  task: AngularFireUploadTask | null = null; 
+  uploadProgress:number | any = 0; 
   fileFormat: 'image' | 'video' | 'unknown' = 'unknown'; 
 
-  constructor(private commonService: CommonServiceService) {}
+  constructor(private commonService: CommonServiceService, public router: Router) {}
 
   ngOnInit() {}
 
@@ -58,6 +59,12 @@ export class AddVideosPage implements OnInit {
       console.log(`downloadURL: ${downloadURL}`);
 
       // Redirect to the page where you want to display file information
+      this.router.navigate(['/videos/general'],{
+        queryParams: {
+          downloadURL: downloadURL,
+          fileFormat: this.fileFormat
+        }
+      })
       // Pass the downloadURL to the other page or store it in a service for later retrieval.
     } else {
       alert('Please selecte a file');
