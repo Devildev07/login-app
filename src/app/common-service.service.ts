@@ -9,8 +9,12 @@ import {
 })
 export class CommonServiceService {
   searchText: any = '';
-  userCurrentTab = 'clients';
+  userCurrentTab = '';
+  doctorCount = 0;
+  generalCount = 0;
+  adsCount = 0;
   constructor(private fireStorage: AngularFireStorage) {}
+
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }

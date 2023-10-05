@@ -20,11 +20,36 @@ export class GeneralPage implements OnInit {
     public CommonService: CommonServiceService
   ) {
     this.CommonService.userCurrentTab = 'general';
-    const storageRef = afStorage.ref(
-      '/uploads/' + CommonService.userCurrentTab
+  }
+
+  ngOnInit() {
+    this.actRoute.queryParams.subscribe((params: any) => {
+      console.log('params===', params);
+      this.getAllGeneralData();
+      // if (params.downloadURL && params.fileFormat) {
+      //   this.downloadURL = params.downloadURL;
+      //   this.fileFormat = params.fileFormat;
+      //   this.uploadedFiles.push({
+      //     downloadURL: this.downloadURL,
+      //     fileFormat: this.fileFormat,
+      //     // Add other file details as needed
+      //   });
+      //   // Use downloadURL and fileFormat to display file details on the destination page
+      //   console.log(`Download URL: ${this.downloadURL}`);
+      //   console.log(`File Format: ${this.fileFormat}`);
+      // } else {
+      //   console.error('Missing parameters');
+      // }
+    });
+  }
+
+  getAllGeneralData() {
+    this.uploadedFiles = [];
+    this.CommonService.generalCount = this.uploadedFiles.length;
+    const storageRef = this.afStorage.ref(
+      '/uploads/' + this.CommonService.userCurrentTab
     );
     console.log('storageRef', storageRef);
-    console.log('storageRef', storageRef.list.length);
 
     // List all files in the 'uploads' folder
     storageRef.listAll().subscribe(
@@ -46,6 +71,7 @@ export class GeneralPage implements OnInit {
                 };
 
                 this.uploadedFiles.push(file);
+                this.CommonService.generalCount = this.uploadedFiles.length;
               })
               .catch((error) => {
                 console.error('Error getting metadata:', error);
@@ -59,26 +85,6 @@ export class GeneralPage implements OnInit {
     );
   }
 
-  ngOnInit() {
-    // this.actRoute.queryParams.subscribe((params: any) => {
-    //   console.log('params===', params);
-    //   if (params.downloadURL && params.fileFormat) {
-    //     this.downloadURL = params.downloadURL;
-    //     this.fileFormat = params.fileFormat;
-    //     this.uploadedFiles.push({
-    //       downloadURL: this.downloadURL,
-    //       fileFormat: this.fileFormat,
-    //       // Add other file details as needed
-    //     });
-    //     // Use downloadURL and fileFormat to display file details on the destination page
-    //     console.log(`Download URL: ${this.downloadURL}`);
-    //     console.log(`File Format: ${this.fileFormat}`);
-    //   } else {
-    //     console.error('Missing parameters');
-    //   }
-    // });
-  }
-
   deleteFile(downloadURL: string) {
     // Convert the downloadURL to a reference
     const storageRef = this.afStorage.refFromURL(downloadURL);
@@ -87,6 +93,7 @@ export class GeneralPage implements OnInit {
     storageRef.delete().subscribe(
       () => {
         console.log('File deleted successfully');
+        this.getAllGeneralData();
       },
       (error) => {
         // Handle any errors

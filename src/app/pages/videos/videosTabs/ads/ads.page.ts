@@ -3,7 +3,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ActivatedRoute } from '@angular/router';
 import { CommonServiceService } from 'src/app/common-service.service';
 
-
 @Component({
   selector: 'app-ads',
   templateUrl: './ads.page.html',
@@ -19,11 +18,24 @@ export class AdsPage implements OnInit {
     public afStorage: AngularFireStorage,
     public CommonService: CommonServiceService
   ) {
-    const storageRefAds = afStorage.ref(
-      '/uploads/' + CommonService.userCurrentTab
+    this.CommonService.userCurrentTab = 'ads';
+    
+  }
+
+  ngOnInit() {
+    this.actRoute.queryParams.subscribe((params: any) => {
+      console.log('params===', params);
+      this.getAllAdsData();
+    });
+  }
+
+  getAllAdsData() {
+    this.uploadedFiles = [];
+    this.CommonService.adsCount = this.uploadedFiles.length;
+    const storageRefAds = this.afStorage.ref(
+      '/uploads/' + this.CommonService.userCurrentTab
     );
     console.log('storageRefAds', storageRefAds);
-    console.log('storageRefAds', storageRefAds.list.length);
 
     // List all files in the 'uploads' folder
     storageRefAds.listAll().subscribe(
@@ -45,6 +57,7 @@ export class AdsPage implements OnInit {
                 };
 
                 this.uploadedFiles.push(file);
+                this.CommonService.adsCount =this.uploadedFiles.length
               })
               .catch((error) => {
                 console.error('Error getting metadata:', error);
@@ -58,8 +71,6 @@ export class AdsPage implements OnInit {
     );
   }
 
-  ngOnInit() {}
-
   deleteFile(downloadURL: string) {
     // Convert the downloadURL to a reference
     const storageRefAds = this.afStorage.refFromURL(downloadURL);
@@ -68,6 +79,7 @@ export class AdsPage implements OnInit {
     storageRefAds.delete().subscribe(
       () => {
         console.log('File deleted successfully');
+        this.getAllAdsData()
       },
       (error) => {
         // Handle any errors

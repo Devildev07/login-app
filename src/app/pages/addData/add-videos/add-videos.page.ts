@@ -11,11 +11,14 @@ import { CommonServiceService } from 'src/app/common-service.service';
 export class AddVideosPage implements OnInit {
   selectedFile: File | null = null;
   uploadedFilePath?: string;
-  task: AngularFireUploadTask | null = null; 
-  uploadProgress:number | any = 0; 
-  fileFormat: 'image' | 'video' | 'unknown' = 'unknown'; 
+  task: AngularFireUploadTask | null = null;
+  uploadProgress: number | any = 0;
+  fileFormat: 'image' | 'video' | 'unknown' = 'unknown';
 
-  constructor(private commonService: CommonServiceService, public router: Router) {}
+  constructor(
+    private commonService: CommonServiceService,
+    public router: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -23,21 +26,35 @@ export class AddVideosPage implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
-
   async uploadFile() {
     if (this.selectedFile) {
-      const filePath = 'uploads/' + this.commonService.userCurrentTab +"/"+this.selectedFile.name;
+      const filePath =
+        'uploads/' +
+        this.commonService.userCurrentTab +
+        '/' +
+        this.selectedFile.name;
 
-      const fileExtension = this.selectedFile.name.split('.').pop()?.toLowerCase();
+      const fileExtension = this.selectedFile.name
+        .split('.')
+        .pop()
+        ?.toLowerCase();
 
-    // Determine the file format based on its extension
-    if (fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'png') {
-      this.fileFormat = 'image';
-    } else if (fileExtension === 'mp4' || fileExtension === 'avi' || fileExtension === 'mov') {
-      this.fileFormat = 'video';
-    } else {
-      this.fileFormat = 'unknown';
-    }
+      // Determine the file format based on its extension
+      if (
+        fileExtension === 'jpg' ||
+        fileExtension === 'jpeg' ||
+        fileExtension === 'png'
+      ) {
+        this.fileFormat = 'image';
+      } else if (
+        fileExtension === 'mp4' ||
+        fileExtension === 'avi' ||
+        fileExtension === 'mov'
+      ) {
+        this.fileFormat = 'video';
+      } else {
+        this.fileFormat = 'unknown';
+      }
 
       // Start the upload task
       const uploadTask = this.commonService.uploadFile(
@@ -59,12 +76,12 @@ export class AddVideosPage implements OnInit {
       console.log(`downloadURL: ${downloadURL}`);
 
       // Redirect to the page where you want to display file information
-      this.router.navigate(['/videos/general'],{
+      this.router.navigate(['/videos/' + this.commonService.userCurrentTab], {
         queryParams: {
           downloadURL: downloadURL,
-          fileFormat: this.fileFormat
-        }
-      })
+          fileFormat: this.fileFormat,
+        },
+      });
       // Pass the downloadURL to the other page or store it in a service for later retrieval.
     } else {
       alert('Please selecte a file');

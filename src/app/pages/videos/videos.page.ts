@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-
+import { object } from '@angular/fire/database';
 
 @Component({
   selector: 'app-videos',
@@ -10,25 +10,38 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 })
 export class VideosPage implements OnInit {
   public results: any;
-  storageRefLenghtGen : any
-  storageRefLenghtDoc : any
-  storageRefLenghtAds : any
+  storageRefLenghtGen: number = 0;
+  storageRefLenghtDoc: number = 0;
+  storageRefLenghtAds: number = 0;
 
+  constructor(
+    public common: CommonServiceService,
+    public afStorage: AngularFireStorage
+  ) {}
+  ngOnInit() {
+    const storageRefGen = this.afStorage.ref('/uploads/general/');
+    storageRefGen.listAll().subscribe((result) => {
+      this.storageRefLenghtGen = result.items.length;
+      this.common.generalCount = this.storageRefLenghtGen;
+      console.log('.common.generalCount', this.common.generalCount);
+      console.log('storageRefLenghtGen', this.storageRefLenghtGen);
+    });
 
-  constructor(public common: CommonServiceService, public afStorage: AngularFireStorage) { }
-  ngOnInit() { 
-    const storageRefGen = this.afStorage.ref('/uploads/' + "general")
-    this.storageRefLenghtGen= storageRefGen.list.length
-    console.log("storageRefGenLenghtGen" , this.storageRefLenghtGen);
-    
-    const storageRefDoc = this.afStorage.ref('/uploads/' + 'doctor');
-    this.storageRefLenghtGen= storageRefDoc.list.length
-    console.log("storageRefDocLenghtGen" , this.storageRefLenghtGen);
-    
-    const storageRefAds = this.afStorage.ref('/uploads/' + "ads")
-    this.storageRefLenghtGen= storageRefAds.list.length
-    console.log("storageRefAdsLenghtGen" , this.storageRefLenghtGen);
-    
+    const storageRefDoc = this.afStorage.ref('/uploads/doctor/');
+    storageRefDoc.listAll().subscribe((result) => {
+      this.storageRefLenghtDoc = result.items.length;
+      this.common.doctorCount = this.storageRefLenghtDoc;
+      console.log('.common.doctorCount', this.common.doctorCount);
+      console.log('storageRefLenghtDoc', this.storageRefLenghtDoc);
+    });
+
+    const storageRefAds = this.afStorage.ref('/uploads/ads/');
+    storageRefAds.listAll().subscribe((result) => {
+      this.storageRefLenghtAds = result.items.length;
+      this.common.adsCount = this.storageRefLenghtAds;
+      console.log('.common.adsCount', this.common.adsCount);
+      console.log('storageRefLenghtAds', this.storageRefLenghtAds);
+    });
   }
 
   setCurrentTab(ev: any) {

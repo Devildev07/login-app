@@ -3,7 +3,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ActivatedRoute } from '@angular/router';
 import { CommonServiceService } from 'src/app/common-service.service';
 
-
 @Component({
   selector: 'app-doctor',
   templateUrl: './doctor.page.html',
@@ -19,9 +18,25 @@ export class DoctorPage implements OnInit {
     public afStorage: AngularFireStorage,
     public CommonService: CommonServiceService
   ) {
-    const storageRef = afStorage.ref('/uploads/'+ CommonService.userCurrentTab);
+    this.CommonService.userCurrentTab = 'doctor';
+    // this.getAllDocData();
+  }
+
+  ngOnInit() {
+    console.log('params===1');
+    this.actRoute.queryParams.subscribe((params: any) => {
+      console.log('params===', params);
+      this.getAllDocData();
+    });
+  }
+
+  getAllDocData() {
+    this.uploadedFiles = [];
+    this.CommonService.doctorCount = this.uploadedFiles.length;
+    const storageRef = this.afStorage.ref(
+      '/uploads/' + this.CommonService.userCurrentTab
+    );
     console.log('storageRef', storageRef);
-    console.log('storageRef', storageRef.list.length);
 
     // List all files in the 'uploads' folder
     storageRef.listAll().subscribe(
@@ -43,6 +58,7 @@ export class DoctorPage implements OnInit {
                 };
 
                 this.uploadedFiles.push(file);
+                this.CommonService.doctorCount = this.uploadedFiles.length;
               })
               .catch((error) => {
                 console.error('Error getting metadata:', error);
@@ -56,8 +72,6 @@ export class DoctorPage implements OnInit {
     );
   }
 
-  ngOnInit() {}
-
   deleteFile(downloadURL: string) {
     // Convert the downloadURL to a reference
     const storageRef = this.afStorage.refFromURL(downloadURL);
@@ -66,6 +80,7 @@ export class DoctorPage implements OnInit {
     storageRef.delete().subscribe(
       () => {
         console.log('File deleted successfully');
+        this.getAllDocData();
       },
       (error) => {
         // Handle any errors
