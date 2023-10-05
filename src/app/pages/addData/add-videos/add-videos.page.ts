@@ -26,7 +26,7 @@ export class AddVideosPage implements OnInit {
 
   async uploadFile() {
     if (this.selectedFile) {
-      const filePath = 'uploads/' + this.selectedFile.name;
+      const filePath = 'uploads/' + this.commonService.userCurrentTab +"/"+this.selectedFile.name;
 
       const fileExtension = this.selectedFile.name.split('.').pop()?.toLowerCase();
 
