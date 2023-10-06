@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { object } from '@angular/fire/database';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-videos',
@@ -13,6 +14,8 @@ export class VideosPage implements OnInit {
   storageRefLenghtGen: number = 0;
   storageRefLenghtDoc: number = 0;
   storageRefLenghtAds: number = 0;
+
+  storageRefTotalLenght: number = 0;
 
   constructor(
     public common: CommonServiceService,
@@ -41,6 +44,23 @@ export class VideosPage implements OnInit {
       this.common.adsCount = this.storageRefLenghtAds;
       console.log('.common.adsCount', this.common.adsCount);
       console.log('storageRefLenghtAds', this.storageRefLenghtAds);
+    });
+
+    // totalLenght
+    forkJoin([
+      storageRefGen.listAll(),
+      storageRefDoc.listAll(),
+      storageRefAds.listAll(),
+    ]).subscribe((results: any[]) => {
+      this.storageRefLenghtGen = results[0].items.length;
+      this.storageRefLenghtDoc = results[1].items.length;
+      this.storageRefLenghtAds = results[2].items.length;
+
+      // Calculate the total item count
+      this.storageRefTotalLenght =
+        this.storageRefLenghtGen +
+        this.storageRefLenghtDoc +
+        this.storageRefLenghtAds;
     });
   }
 
