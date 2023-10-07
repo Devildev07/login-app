@@ -3,17 +3,23 @@
     <ion-row class="ion-padding-horizontal">
       <ion-col class="ion-text-left" sizeMd="4">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal">Video Name</ion-card-subtitle>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Video Name</ion-card-subtitle
+          >
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="2">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal">Duration</ion-card-subtitle>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Duration</ion-card-subtitle
+          >
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="3">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal">Playlilst Count</ion-card-subtitle>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Playlilst Count</ion-card-subtitle
+          >
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="3">
@@ -27,21 +33,27 @@
 
 <ion-content [fullscreen]="true">
   <ion-list *ngFor=" let files of uploadedFiles">
-    
     <ion-row class="ion-padding-horizontal ion-align-items-center">
-      <ion-col class="" sizeMd="1">
-        <ion-icon size="large" name="play-circle-outline"></ion-icon>
+      <ion-col class="" sizeMd="0.5">
+        <ion-icon
+          size="large"
+          name="play-circle-outline"
+          (click)="CommonService.openVideoPopup(files.downloadURL)"
+        ></ion-icon>
       </ion-col>
-      <ion-col class="ion-text-left" sizeMd="3">
-        <ion-label>
 
+      <ion-col class="ion-text-left text-sm" sizeMd="3.5">
+        <ion-label (click)="CommonService.openVideoPopup(files.downloadURL)">
+          <ion-title>
+            <ion-card-subtitle>{{files.name}}</ion-card-subtitle>
+          </ion-title>
           <!-- <ion-card *ngIf="files.fileFormat === 'image'">
             <ion-card-content>
               <img [src]="files.downloadURL" alt="Uploaded Image" />
             </ion-card-content>
           </ion-card> -->
 
-          <ion-card *ngIf="files.fileFormat === 'video'">
+          <!-- <ion-card *ngIf="files.fileFormat === 'video'">
             <ion-card-content>
               <video
                 [src]="files.downloadURL"
@@ -49,7 +61,7 @@
                 style="width: 100%"
               ></video>
             </ion-card-content>
-          </ion-card>
+          </ion-card> -->
 
           <!-- <ion-card *ngIf="files.fileFormat === 'unknown'">
             <ion-card-content>
@@ -62,8 +74,11 @@
       <ion-col class="ion-text-center" sizeMd="2">
         <ion-label>
           <ion-card-subtitle class="ion-padding-horizontal"
-            >{{files.fileFormat}}</ion-card-subtitle
+            >{{files.duration}} sec / {{files.fileFormat}}</ion-card-subtitle
           >
+          <!-- <ion-card-subtitle class="ion-padding-horizontal"
+            >{{files.fileFormat}}</ion-card-subtitle
+          > -->
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="3">
@@ -77,7 +92,7 @@
         <ion-button shape="round" color="primary">
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
-       
+
         <ion-button
           shape="round"
           color="danger"

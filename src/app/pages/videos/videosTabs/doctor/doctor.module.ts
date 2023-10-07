@@ -8,6 +8,8 @@ import { DoctorPageRoutingModule } from './doctor-routing.module';
 
 import { DoctorPage } from './doctor.page';
 import { RouterModule } from '@angular/router';
+import { VideoPopupModule } from 'src/app/components/video-popup/video-popup.module';
+VideoPopupModule
 
 @NgModule({
   imports: [
@@ -15,10 +17,10 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     IonicModule,
     DoctorPageRoutingModule,
-    RouterModule.forChild([{path:'',component:DoctorPage}])
-
+    VideoPopupModule,
+    RouterModule.forChild([{ path: '', component: DoctorPage }]),
   ],
   declarations: [DoctorPage],
-  exports: [DoctorPage]
+  exports: [DoctorPage],
 })
 export class DoctorPageModule {}

@@ -26,20 +26,6 @@ export class GeneralPage implements OnInit {
     this.actRoute.queryParams.subscribe((params: any) => {
       console.log('params===', params);
       this.getAllGeneralData();
-      // if (params.downloadURL && params.fileFormat) {
-      //   this.downloadURL = params.downloadURL;
-      //   this.fileFormat = params.fileFormat;
-      //   this.uploadedFiles.push({
-      //     downloadURL: this.downloadURL,
-      //     fileFormat: this.fileFormat,
-      //     // Add other file details as needed
-      //   });
-      //   // Use downloadURL and fileFormat to display file details on the destination page
-      //   console.log(`Download URL: ${this.downloadURL}`);
-      //   console.log(`File Format: ${this.fileFormat}`);
-      // } else {
-      //   console.error('Missing parameters');
-      // }
     });
   }
 
@@ -59,19 +45,35 @@ export class GeneralPage implements OnInit {
             // Get the metadata for the file
             item
               .getMetadata()
-              .then((metadata) => {
+              .then( (metadata) => {
                 // Determine the file format based on the contentType
                 const format = this.getFileFormat(metadata.contentType);
 
-                // Create an object with file name, download URL, and format
-                const file = {
-                  name: item.name,
-                  downloadURL: url,
-                  fileFormat: format,
-                };
+                // Create an HTML video element to get the duration
+                const video = document.createElement('video');
+                video.src = url;
+                // console.log(`video${video.duration}`);
+                
 
-                this.uploadedFiles.push(file);
-                this.CommonService.generalCount = this.uploadedFiles.length;
+                // Add an event listener to get the duration when metadata is loaded
+                video.addEventListener('loadedmetadata', () => {
+                  // Get the duration in seconds
+                  const duration = Math.round(video.duration);
+
+                  // Create an object with file name, download URL, format, and duration
+                  const file = {
+                    name: item.name,
+                    downloadURL: url,
+                    fileFormat: format,
+                    duration: duration, // Store the duration here
+                  };
+
+                  this.uploadedFiles.push(file);
+                  this.CommonService.generalCount = this.uploadedFiles.length;
+                });
+
+                // Load the video to trigger the 'loadedmetadata' event
+                video.load();
               })
               .catch((error) => {
                 console.error('Error getting metadata:', error);
@@ -101,6 +103,7 @@ export class GeneralPage implements OnInit {
       }
     );
   }
+
   getFileFormat(contentType: any): string {
     if (contentType.startsWith('image')) {
       return 'image';
@@ -110,4 +113,6 @@ export class GeneralPage implements OnInit {
       return 'other';
     }
   }
+
+
 }

@@ -49,15 +49,27 @@ export class AdsPage implements OnInit {
                 // Determine the file format based on the contentType
                 const format = this.getFileFormat(metadata.contentType);
 
-                // Create an object with file name, download URL, and format
-                const file = {
-                  name: item.name,
-                  downloadURL: url,
-                  fileFormat: format,
-                };
+                const video = document.createElement('video');
+                video.src = url;
 
-                this.uploadedFiles.push(file);
-                this.CommonService.adsCount =this.uploadedFiles.length
+                // Add an event listener to get the duration when metadata is loaded
+                video.addEventListener('loadedmetadata', () => {
+                  // Get the duration in seconds
+                  const duration = Math.round(video.duration);
+
+                  // Create an object with file name, download URL, and format
+                  const file = {
+                    name: item.name,
+                    downloadURL: url,
+                    fileFormat: format,
+                    duration: duration,
+                  };
+
+                  this.uploadedFiles.push(file);
+                  this.CommonService.adsCount = this.uploadedFiles.length;
+                });
+                // Load the video to trigger the 'loadedmetadata' event
+                video.load();
               })
               .catch((error) => {
                 console.error('Error getting metadata:', error);

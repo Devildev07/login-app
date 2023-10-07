@@ -3,6 +3,9 @@ import {
   AngularFireStorage,
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
+import { PopoverController } from '@ionic/angular';
+import { VideoPopupComponent } from 'src/app/components/video-popup/video-popup.component';
+
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +16,10 @@ export class CommonServiceService {
   doctorCount = 0;
   generalCount = 0;
   adsCount = 0;
-  constructor(private fireStorage: AngularFireStorage) {}
+  constructor(
+    private fireStorage: AngularFireStorage,
+    public popUps: PopoverController
+  ) {}
 
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
@@ -72,5 +78,16 @@ export class CommonServiceService {
 
     // Use getDownloadURL to retrieve the download URL
     return storageRef.getDownloadURL().toPromise();
+  }
+
+  async openVideoPopup(videoUrl: string) {
+    const popover = await this.popUps.create({
+      component: VideoPopupComponent,
+      componentProps: {
+        videoUrl: videoUrl,
+      },
+      translucent: true,
+    });
+    await popover.present();
   }
 }

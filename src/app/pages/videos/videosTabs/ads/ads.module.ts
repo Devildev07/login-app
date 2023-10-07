@@ -8,6 +8,8 @@ import { AdsPageRoutingModule } from './ads-routing.module';
 
 import { AdsPage } from './ads.page';
 import { RouterModule } from '@angular/router';
+import { VideoPopupModule } from 'src/app/components/video-popup/video-popup.module';
+
 
 @NgModule({
   imports: [
@@ -15,10 +17,10 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     IonicModule,
     AdsPageRoutingModule,
-    RouterModule.forChild([{path:'',component:AdsPage}])
+    VideoPopupModule,
+    RouterModule.forChild([{ path: '', component: AdsPage }]),
   ],
   declarations: [AdsPage],
-  exports: [AdsPage]
-
+  exports: [AdsPage],
 })
 export class AdsPageModule {}

@@ -8,6 +8,7 @@ import { GeneralPageRoutingModule } from './general-routing.module';
 
 import { GeneralPage } from './general.page';
 import { RouterModule } from '@angular/router';
+import { VideoPopupModule } from 'src/app/components/video-popup/video-popup.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     IonicModule,
     GeneralPageRoutingModule,
+    VideoPopupModule,
     RouterModule.forChild([{path:'',component:GeneralPage}])
   ],
   declarations: [GeneralPage],
