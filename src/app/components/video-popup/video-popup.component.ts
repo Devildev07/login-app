@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -9,7 +10,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class VideoPopupComponent implements OnInit {
   @Input() videoUrl?: string;
 
-  constructor() {}
+  constructor(private modalCtrl: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+  closeModal() {
+    this.modalCtrl.dismiss();
+  }
 }

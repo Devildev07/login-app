@@ -73,6 +73,10 @@ ion-tabs {
   box-shadow: none;
 }
 
+.video-modal {
+  --height: auto !important;
+}
+
 @media only screen and (max-width: 576px) {
   .sc-ion-searchbar-md-h {
     width: 50%;

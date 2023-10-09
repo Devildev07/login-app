@@ -3,7 +3,7 @@ import {
   AngularFireStorage,
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { VideoPopupComponent } from 'src/app/components/video-popup/video-popup.component';
 
 
@@ -18,8 +18,9 @@ export class CommonServiceService {
   adsCount = 0;
   constructor(
     private fireStorage: AngularFireStorage,
+    private modalCtrl: ModalController,
     public popUps: PopoverController
-  ) {}
+  ) { }
 
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
@@ -80,14 +81,27 @@ export class CommonServiceService {
     return storageRef.getDownloadURL().toPromise();
   }
 
-  async openVideoPopup(videoUrl: string) {
-    const popover = await this.popUps.create({
+  async openVideoModal(videoUrl: string) {
+    const modal = await this.modalCtrl.create({
       component: VideoPopupComponent,
       componentProps: {
         videoUrl: videoUrl,
       },
-      translucent: true,
+      backdropDismiss: true, // Set to false if you don't want users to close the modal by clicking outside
+      cssClass: 'video-modal' // You can add a CSS class for custom styling
     });
-    await popover.present();
+
+    await modal.present();
   }
+
+  // async openVideoPopup(videoUrl: string) {
+  //   const popover = await this.popUps.create({
+  //     component: VideoPopupComponent,
+  //     componentProps: {
+  //       videoUrl: videoUrl,
+  //     },
+  //     translucent: true,
+  //   });
+  //   await popover.present();
+  // }
 }
