@@ -33,6 +33,7 @@ ion-app {
 }
 
 ion-content {
+
   // position: relative;
   // padding: 0 2rem 2rem 2rem !important;
   .container {
@@ -133,7 +134,7 @@ ion-item .item-inner {
   padding-right: 1rem;
 }
 
-ion-modal > .ion-page {
+ion-modal>.ion-page {
   position: relative;
   box-shadow: 0px 12px 220px -40px var(--ion-color-medium);
   // --width: 450px;
@@ -147,6 +148,7 @@ ion-modal > .ion-page {
     box-shadow: none;
     // background-color: var(--ion-color-dark);
   }
+
   form {
     width: 90% !important;
 
@@ -170,7 +172,7 @@ ion-modal > .ion-page {
   }
 }
 
-@media only screen and (min-width: 576px) and (max-width:  1023px) {
+@media only screen and (min-width: 576px) and (max-width: 1023px) {
   ion-app {
     margin: 0;
     border-radius: 0;

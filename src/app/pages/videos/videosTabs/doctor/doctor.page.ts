@@ -34,7 +34,7 @@ export class DoctorPage implements OnInit {
     this.uploadedFiles = [];
     this.CommonService.doctorCount = this.uploadedFiles.length;
     const storageRef = this.afStorage.ref(
-      '/uploads/' + this.CommonService.userCurrentTab
+      '/uploads/doctor/'
     );
     console.log('storageRef', storageRef);
 

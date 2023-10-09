@@ -19,21 +19,29 @@ export class AdsPage implements OnInit {
     public CommonService: CommonServiceService
   ) {
     this.CommonService.userCurrentTab = 'ads';
-    
+
   }
 
   ngOnInit() {
+
+    this.CommonService.userCurrentTab = 'ads';
+
     this.actRoute.queryParams.subscribe((params: any) => {
       console.log('params===', params);
       this.getAllAdsData();
     });
   }
 
+  ionViewDidEnter() {
+    console.log("ionViewDidEnter this.CommonService.userCurrentTab === ", this.CommonService.userCurrentTab);
+
+  }
   getAllAdsData() {
     this.uploadedFiles = [];
+    console.log(" this.CommonService.userCurrentTab === ", this.CommonService.userCurrentTab);
     this.CommonService.adsCount = this.uploadedFiles.length;
     const storageRefAds = this.afStorage.ref(
-      '/uploads/' + this.CommonService.userCurrentTab
+      '/uploads/ads/'
     );
     console.log('storageRefAds', storageRefAds);
 

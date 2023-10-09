@@ -33,7 +33,7 @@ export class GeneralPage implements OnInit {
     this.uploadedFiles = [];
     this.CommonService.generalCount = this.uploadedFiles.length;
     const storageRef = this.afStorage.ref(
-      '/uploads/' + this.CommonService.userCurrentTab
+      '/uploads/general/'
     );
     console.log('storageRef', storageRef);
 
@@ -45,7 +45,7 @@ export class GeneralPage implements OnInit {
             // Get the metadata for the file
             item
               .getMetadata()
-              .then( (metadata) => {
+              .then((metadata) => {
                 // Determine the file format based on the contentType
                 const format = this.getFileFormat(metadata.contentType);
 
@@ -53,7 +53,7 @@ export class GeneralPage implements OnInit {
                 const video = document.createElement('video');
                 video.src = url;
                 // console.log(`video${video.duration}`);
-                
+
 
                 // Add an event listener to get the duration when metadata is loaded
                 video.addEventListener('loadedmetadata', () => {

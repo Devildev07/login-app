@@ -20,7 +20,7 @@ export class VideosPage implements OnInit {
   constructor(
     public common: CommonServiceService,
     public afStorage: AngularFireStorage
-  ) {}
+  ) { }
   ngOnInit() {
     const storageRefGen = this.afStorage.ref('/uploads/general/');
     storageRefGen.listAll().subscribe((result) => {
@@ -66,7 +66,7 @@ export class VideosPage implements OnInit {
 
   setCurrentTab(ev: any) {
     this.common.userCurrentTab = ev.tab;
-    console.log('current_tab::', this.common.userCurrentTab);
+    console.log('11current_tab::', this.common.userCurrentTab);
   }
 
   handleInput(event: any) {
