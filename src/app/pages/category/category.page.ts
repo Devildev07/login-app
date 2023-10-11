@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit {
-
+  test: string = 'test';
   constructor() { }
 
   ngOnInit() {
