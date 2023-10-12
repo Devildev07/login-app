@@ -140,6 +140,10 @@ const routes: Routes = [
     path: 'add-videos',
     loadChildren: () => import('./pages/addData/add-videos/add-videos.module').then( m => m.AddVideosPageModule)
   },
+  {
+    path: 'add-category',
+    loadChildren: () => import('./pages/addData/add-category/add-category.module').then( m => m.AddCategoryPageModule)
+  },
 
 ];
 
