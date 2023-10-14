@@ -134,11 +134,14 @@ ion-item .item-inner {
   padding-right: 1rem;
 }
 
-ion-modal>.ion-page {
+ion-modal{
+  --width: 450px;
+  --height:400px;
+  --border-radius:15px;
+}
+ion-modal >.ion-page {
   position: relative;
-  box-shadow: 0px 12px 220px -40px var(--ion-color-medium);
-  // --width: 450px;
-  // --height: 430px;
+    justify-content: start;
 }
 
 .video-modal {

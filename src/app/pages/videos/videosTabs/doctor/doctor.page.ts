@@ -20,6 +20,7 @@ export class DoctorPage implements OnInit {
   ) {
     this.CommonService.userCurrentTab = 'doctor';
     // this.getAllDocData();
+    this.CommonService.searchText = '';
   }
 
   ngOnInit() {
@@ -33,9 +34,7 @@ export class DoctorPage implements OnInit {
   getAllDocData() {
     this.uploadedFiles = [];
     this.CommonService.doctorCount = this.uploadedFiles.length;
-    const storageRef = this.afStorage.ref(
-      '/uploads/doctor/'
-    );
+    const storageRef = this.afStorage.ref('/uploads/doctor/');
     console.log('storageRef', storageRef);
 
     // List all files in the 'uploads' folder

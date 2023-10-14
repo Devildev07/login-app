@@ -1,40 +1,70 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Add New Agency</ion-title>
+    <ion-title> Add Category</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Add Category</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <!--  -->
-  <form #categoryForm="ngForm" class="category-form" (ngSubmit)="addCategory(categoryForm)">
-    <ion-input name="category_name" label="Category Name
-    " labelPlacement="floating" placeholder="Category Name
-    " ngModel>
+  <form
+    #categoryForm="ngForm"
+    class="category-form"
+    (ngSubmit)="addCategory(categoryForm)"
+  >
+    <ion-input
+      name="category_name"
+      label="Category Name
+    "
+      labelPlacement="floating"
+      placeholder="Category Name
+    "
+      ngModel
+    >
     </ion-input>
     <!--  -->
-    <ion-input name="category_description" label="Category Description
-    " labelPlacement="floating" placeholder="Category Description
-    " ngModel></ion-input>
+    <ion-input
+      name="category_description"
+      label="Category Description
+    "
+      labelPlacement="floating"
+      placeholder="Category Description
+    "
+      ngModel
+    ></ion-input>
     <!--  -->
-    <ion-select name="type" ngModel label="Type" label-placement="floating" placeholder="Type">
+    <ion-select
+      name="type"
+      ngModel
+      label="Type"
+      label-placement="floating"
+      placeholder="Type"
+    >
       <ion-select-option value="apple">Agency</ion-select-option>
     </ion-select>
     <!--  -->
     <ion-button type="submit" id="open-toast" expand="block">
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-button>
-    <ion-toast trigger="open-toast" message="Data Sumbit" [duration]="5000" class="toast"></ion-toast>
+    <ion-toast
+      trigger="open-toast"
+      message="Data Sumbit"
+      [duration]="5000"
+      class="toast"
+    ></ion-toast>
     <!--  -->
-    <ion-button type="reset" id="open-toast-2" expand="block" (click)="closeModal()">
+    <ion-button
+      type="reset"
+      id="open-toast-2"
+      expand="block"
+      (click)="closeModal()"
+    >
       <ion-icon name="close-outline"></ion-icon>
     </ion-button>
-    <ion-toast trigger="open-toast-2" message="Form closed" [duration]="5000" class="toast"></ion-toast>
+    <ion-toast
+      trigger="open-toast-2"
+      message="Form closed"
+      [duration]="5000"
+      class="toast"
+    ></ion-toast>
     <!--  -->
   </form>
 </ion-content>

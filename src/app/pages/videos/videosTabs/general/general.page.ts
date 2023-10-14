@@ -20,6 +20,7 @@ export class GeneralPage implements OnInit {
     public CommonService: CommonServiceService
   ) {
     this.CommonService.userCurrentTab = 'general';
+    this.CommonService.searchText = '';
   }
 
   ngOnInit() {
@@ -32,9 +33,7 @@ export class GeneralPage implements OnInit {
   getAllGeneralData() {
     this.uploadedFiles = [];
     this.CommonService.generalCount = this.uploadedFiles.length;
-    const storageRef = this.afStorage.ref(
-      '/uploads/general/'
-    );
+    const storageRef = this.afStorage.ref('/uploads/general/');
     console.log('storageRef', storageRef);
 
     // List all files in the 'uploads' folder
@@ -53,7 +52,6 @@ export class GeneralPage implements OnInit {
                 const video = document.createElement('video');
                 video.src = url;
                 // console.log(`video${video.duration}`);
-
 
                 // Add an event listener to get the duration when metadata is loaded
                 video.addEventListener('loadedmetadata', () => {
@@ -113,6 +111,4 @@ export class GeneralPage implements OnInit {
       return 'other';
     }
   }
-
-
 }

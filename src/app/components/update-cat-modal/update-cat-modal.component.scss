@@ -1,0 +1,19 @@
+.input-box {
+  display: flex;
+  flex-wrap: wrap;
+  ion-input {
+    flex-basis: 20rem;
+    flex-grow: 1;
+  }
+}
+
+.cls-btn{
+      --box-shadow: none;
+    --background: var(--background-activated);
+    --border-radius: 30px;
+    --padding-bottom: 0.2rem;
+    --padding-end: 0.2rem;
+    --padding-start: 0.2rem;
+    --padding-top: 0.2rem;
+    margin-right: 1rem;
+}

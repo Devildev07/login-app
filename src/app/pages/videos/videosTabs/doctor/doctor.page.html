@@ -26,7 +26,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngFor=" let files of uploadedFiles">
+  <ion-list *ngFor=" let files of uploadedFiles |search:CommonService.searchText">
     <ion-row class="ion-padding-horizontal ion-align-items-center">
       <ion-col class="" sizeMd="0.5">
         <ion-icon size="large" name="play-circle-outline"

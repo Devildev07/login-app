@@ -9,7 +9,8 @@ import { DoctorPageRoutingModule } from './doctor-routing.module';
 import { DoctorPage } from './doctor.page';
 import { RouterModule } from '@angular/router';
 import { VideoPopupModule } from 'src/app/components/video-popup/video-popup.module';
-VideoPopupModule
+import { SharedModule } from 'src/app/shared.module';
+
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ VideoPopupModule
     IonicModule,
     DoctorPageRoutingModule,
     VideoPopupModule,
+    SharedModule,
     RouterModule.forChild([{ path: '', component: DoctorPage }]),
   ],
   declarations: [DoctorPage],

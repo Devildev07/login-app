@@ -66,12 +66,13 @@ export class VideosPage implements OnInit {
 
   setCurrentTab(ev: any) {
     this.common.userCurrentTab = ev.tab;
-    console.log('11current_tab::', this.common.userCurrentTab);
+    console.log('current_tab::', this.common.userCurrentTab);
   }
 
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
     this.common.searchText = query;
+    console.log('searchText::', this.common.searchText);
   }
 
   onClear() {

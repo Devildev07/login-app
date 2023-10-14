@@ -19,11 +19,10 @@ export class AdsPage implements OnInit {
     public CommonService: CommonServiceService
   ) {
     this.CommonService.userCurrentTab = 'ads';
-
+    this.CommonService.searchText = '';
   }
 
   ngOnInit() {
-
     this.CommonService.userCurrentTab = 'ads';
 
     this.actRoute.queryParams.subscribe((params: any) => {
@@ -33,16 +32,19 @@ export class AdsPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log("ionViewDidEnter this.CommonService.userCurrentTab === ", this.CommonService.userCurrentTab);
-
+    console.log(
+      'ionViewDidEnter this.CommonService.userCurrentTab === ',
+      this.CommonService.userCurrentTab
+    );
   }
   getAllAdsData() {
     this.uploadedFiles = [];
-    console.log(" this.CommonService.userCurrentTab === ", this.CommonService.userCurrentTab);
-    this.CommonService.adsCount = this.uploadedFiles.length;
-    const storageRefAds = this.afStorage.ref(
-      '/uploads/ads/'
+    console.log(
+      ' this.CommonService.userCurrentTab === ',
+      this.CommonService.userCurrentTab
     );
+    this.CommonService.adsCount = this.uploadedFiles.length;
+    const storageRefAds = this.afStorage.ref('/uploads/ads/');
     console.log('storageRefAds', storageRefAds);
 
     // List all files in the 'uploads' folder
@@ -99,7 +101,7 @@ export class AdsPage implements OnInit {
     storageRefAds.delete().subscribe(
       () => {
         console.log('File deleted successfully');
-        this.getAllAdsData()
+        this.getAllAdsData();
       },
       (error) => {
         // Handle any errors

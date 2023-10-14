@@ -9,6 +9,8 @@ import { GeneralPageRoutingModule } from './general-routing.module';
 import { GeneralPage } from './general.page';
 import { RouterModule } from '@angular/router';
 import { VideoPopupModule } from 'src/app/components/video-popup/video-popup.module';
+import { SharedModule } from 'src/app/shared.module';
+
 
 @NgModule({
   imports: [
@@ -17,9 +19,10 @@ import { VideoPopupModule } from 'src/app/components/video-popup/video-popup.mod
     IonicModule,
     GeneralPageRoutingModule,
     VideoPopupModule,
-    RouterModule.forChild([{path:'',component:GeneralPage}])
+    SharedModule,
+    RouterModule.forChild([{ path: '', component: GeneralPage }]),
   ],
   declarations: [GeneralPage],
-  exports: [GeneralPage]
+  exports: [GeneralPage],
 })
 export class GeneralPageModule {}

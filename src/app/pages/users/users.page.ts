@@ -107,6 +107,7 @@ export class UsersPage implements OnInit {
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
     this.common.searchText = query;
+    console.log('searchTextUser::', this.common.searchText);
   }
 
   onClear() {
