@@ -41,27 +41,12 @@
       <ion-select-option value="apple">Agency</ion-select-option>
     </ion-select>
     <!--  -->
-    <ion-button type="submit" id="open-toast" expand="block">
+    <ion-button type="submit" id="open-toast" expand="block" (click)="closeModal()">
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-button>
     <ion-toast
       trigger="open-toast"
       message="Data Sumbit"
-      [duration]="5000"
-      class="toast"
-    ></ion-toast>
-    <!--  -->
-    <ion-button
-      type="reset"
-      id="open-toast-2"
-      expand="block"
-      (click)="closeModal()"
-    >
-      <ion-icon name="close-outline"></ion-icon>
-    </ion-button>
-    <ion-toast
-      trigger="open-toast-2"
-      message="Form closed"
       [duration]="5000"
       class="toast"
     ></ion-toast>

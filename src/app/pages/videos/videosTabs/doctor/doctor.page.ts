@@ -99,6 +99,7 @@ export class DoctorPage implements OnInit {
       }
     );
   }
+
   getFileFormat(contentType: any): string {
     if (contentType.startsWith('image')) {
       return 'image';

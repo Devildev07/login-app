@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 import { ModalController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.page.html',
@@ -19,10 +18,13 @@ export class AddCategoryPage implements OnInit {
   getCategoryData$!: Observable<any[] | DocumentData[]>;
   categoryData: any[] = [];
 
-  constructor(private firestore: Firestore, public getData: GetDataService, private modalCtrl: ModalController) { }
+  constructor(
+    private firestore: Firestore,
+    public getData: GetDataService,
+    private modalCtrl: ModalController
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   addCategory(categoryForm: any) {
     console.log('Add Category', categoryForm.value);
@@ -41,5 +43,4 @@ export class AddCategoryPage implements OnInit {
   closeModal() {
     this.modalCtrl.dismiss();
   }
-
 }

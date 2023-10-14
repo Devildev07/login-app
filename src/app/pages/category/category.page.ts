@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { AddCategoryPage } from '../addData/add-category/add-category.page';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
-import { Firestore, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+// import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { UpdateCatModalComponent } from 'src/app/components/update-cat-modal/update-cat-modal.component';
 
 @Component({
@@ -16,7 +16,7 @@ export class CategoryPage implements OnInit {
   getCategoryData: any;
 
   constructor(
-    private firestore: Firestore,
+    // private firestore: Firestore,
     public common: CommonServiceService,
     public getDatas: GetDataService,
     public modalCntrl: ModalController
@@ -52,10 +52,10 @@ export class CategoryPage implements OnInit {
     });
     await modal.present();
   }
-  async openUpdateCategoryModal() {
+  async openUpdateCategoryModal(singleCatData: any) {
     const modal = await this.modalCntrl.create({
       component: UpdateCatModalComponent,
-      componentProps: {},
+      componentProps: { singleCatData: singleCatData },
       backdropDismiss: true, // Set to false if you don't want users to close the modal by clicking outside
       cssClass: 'Category-modal', // You can add a CSS class for custom styling
     });
@@ -64,33 +64,5 @@ export class CategoryPage implements OnInit {
 
   async getCategory() {
     this.getCategoryData = await this.getDatas.getFromFirebase('category');
-  }
-
-  updateCategory(data: any) {
-    console.log('id=', data);
-    const docInstance = doc(this.firestore, 'category', data.id);
-
-    const updateData = {
-      category_name: data.category_name,
-      category_description: data.category_description,
-      type: data.type,
-    };
-    let updatedIndex = -1;
-    this.getCategoryData.forEach((e: any, i: any) => {
-      if (e.id == data.id) {
-        updatedIndex = i;
-      }
-    });
-
-    updateDoc(docInstance, updateData)
-      .then(() => {
-        console.log(`updated`);
-        if (updatedIndex >= 0) {
-          this.getCategoryData[updatedIndex] = updateData;
-        }
-      })
-      .catch((err) => {
-        console.log(`Error updating document: ${err}`);
-      });
   }
 }

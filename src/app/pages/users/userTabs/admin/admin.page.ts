@@ -76,18 +76,18 @@ export class AdminPage implements OnInit {
     // this.authService.deleteUserByEmail(email)
     console.log();
     
-    // const docInstance = doc(this.firestore, 'admins', id);
-    // deleteDoc(docInstance)
-    //   .then(() => {
-    //     console.log('deleted');
+    const docInstance = doc(this.firestore, 'admins', id);
+    deleteDoc(docInstance)
+      .then(() => {
+        console.log('deleted');
 
-    //     this.getAdmin();
+        this.getAdmin();
 
 
-    //   })
-    //   .catch((err) => {
-    //     console.log('not deleted', err);
-    //   });
+      })
+      .catch((err) => {
+        console.log('not deleted', err);
+      });
   }
 
   // openModel
