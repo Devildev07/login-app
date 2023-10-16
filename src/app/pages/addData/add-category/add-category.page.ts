@@ -4,7 +4,6 @@ import {
   collection,
   addDoc,
   DocumentData,
-  collectionGroup,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
@@ -26,7 +25,7 @@ export class AddCategoryPage implements OnInit {
     private firestore: Firestore,
     public getData: GetDataService,
     private modalCtrl: ModalController,
-    private navParams: NavParams
+    private navParams: NavParams,
   ) {
     this.list = this.navParams.get('getCategoryData');
     console.log('catData list', this.list);

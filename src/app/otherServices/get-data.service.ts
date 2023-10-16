@@ -12,7 +12,7 @@ import { ModalPage } from 'src/app/pages/modal/modal.page';
 })
 export class GetDataService {
   public myEventEmitter: EventEmitter<any> = new EventEmitter<any>();
-  adminData: any[] = [];
+  // adminData: any[] = [];
   constructor(
     private firestore: Firestore,
     private modalCntrl: ModalController,) { }

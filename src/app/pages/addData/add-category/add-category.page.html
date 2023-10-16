@@ -15,7 +15,7 @@
     " labelPlacement="floating" placeholder="Category Description
     " ngModel></ion-input>
     <!--  -->
-    <ion-select name="parent_id" ngModel label="Type" label-placement="floating" placeholder="Type">
+    <ion-select name="parent_id" ngModel label="Select Category" label-placement="floating" placeholder="Select Category">
       <ion-select-option [value]="agency.id" *ngFor="let agency of list">{{agency.category_name}}</ion-select-option>
     </ion-select>
     <!--  -->

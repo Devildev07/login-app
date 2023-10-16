@@ -4,8 +4,11 @@ import { CommonServiceService } from 'src/app/common-service.service';
 import { AddCategoryPage } from '../addData/add-category/add-category.page';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 import { Location } from '@angular/common';
-// import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, deleteDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { UpdateCatModalComponent } from 'src/app/components/update-cat-modal/update-cat-modal.component';
+import { AuthService } from 'src/app/auth.service';
+
+
 
 @Component({
   selector: 'app-category',
@@ -13,28 +16,34 @@ import { UpdateCatModalComponent } from 'src/app/components/update-cat-modal/upd
   styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit {
-  test: string = 'test';
+  public results: any;
   getCategoryData: any;
+  totalCatLength: any;
 
   constructor(
-    // private firestore: Firestore,
     private location: Location,
+    private firestore: Firestore,
+    public authService: AuthService,
     public common: CommonServiceService,
     public getDatas: GetDataService,
     public modalCntrl: ModalController
   ) {
     this.common.searchText = '';
-    getDatas.myEventEmitter.subscribe((data) => {
-
-      this.getCategoryData.push(data);
-      console.log('Received event with data:', data);
+    this.getDatas.myEventEmitter.subscribe((cData) => {
+      this.getCategoryData.push(cData);
+      console.log('Received event with cData:', cData);
     });
   }
-  public results: any;
 
   ngOnInit() {
     this.getCategory();
     this.common.searchText = '';
+  }
+
+  async getCategory() {
+    this.getCategoryData = await this.getDatas.getFromFirebase('category');
+    console.log('getCategoryData === ', this.getCategoryData);
+    this.totalCatLength = this.getCategoryData.length;
   }
 
   handleInput(event: any) {
@@ -54,13 +63,13 @@ export class CategoryPage implements OnInit {
       cssClass: 'Category-modal', // You can add a CSS class for custom styling
     });
 
-    modal.onDidDismiss().then((data) => {
-      console.log("data 213123132=== ", data);
-      this.location.go(this.location.path());
+    modal.onDidDismiss().then(() => {
+      this.getCategory();
     });
 
     await modal.present();
   }
+
   async openUpdateCategoryModal(singleCatData: any) {
     const modal = await this.modalCntrl.create({
       component: UpdateCatModalComponent,
@@ -71,9 +80,15 @@ export class CategoryPage implements OnInit {
     await modal.present();
   }
 
-  async getCategory() {
-    this.getCategoryData = await this.getDatas.getFromFirebase('category');
-    console.log('getCategoryData === ', this.getCategoryData);
-
+  deleteClient(id: string) {
+    const docInstance = doc(this.firestore, 'category', id);
+    deleteDoc(docInstance)
+      .then(() => {
+        console.log('deleted');
+        this.getCategory();
+      })
+      .catch((err) => {
+        console.log('not deleted', err);
+      });
   }
 }
