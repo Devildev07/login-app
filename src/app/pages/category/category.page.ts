@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { AddCategoryPage } from '../addData/add-category/add-category.page';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
+import { Location } from '@angular/common';
 // import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { UpdateCatModalComponent } from 'src/app/components/update-cat-modal/update-cat-modal.component';
 
@@ -17,12 +18,14 @@ export class CategoryPage implements OnInit {
 
   constructor(
     // private firestore: Firestore,
+    private location: Location,
     public common: CommonServiceService,
     public getDatas: GetDataService,
     public modalCntrl: ModalController
   ) {
     this.common.searchText = '';
     getDatas.myEventEmitter.subscribe((data) => {
+
       this.getCategoryData.push(data);
       console.log('Received event with data:', data);
     });
@@ -46,10 +49,16 @@ export class CategoryPage implements OnInit {
   async openAddCategoryModal() {
     const modal = await this.modalCntrl.create({
       component: AddCategoryPage,
-      componentProps: {},
+      componentProps: { getCategoryData: this.getCategoryData },
       backdropDismiss: true, // Set to false if you don't want users to close the modal by clicking outside
       cssClass: 'Category-modal', // You can add a CSS class for custom styling
     });
+
+    modal.onDidDismiss().then((data) => {
+      console.log("data 213123132=== ", data);
+      this.location.go(this.location.path());
+    });
+
     await modal.present();
   }
   async openUpdateCategoryModal(singleCatData: any) {
@@ -64,5 +73,7 @@ export class CategoryPage implements OnInit {
 
   async getCategory() {
     this.getCategoryData = await this.getDatas.getFromFirebase('category');
+    console.log('getCategoryData === ', this.getCategoryData);
+
   }
 }

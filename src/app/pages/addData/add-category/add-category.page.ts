@@ -4,10 +4,11 @@ import {
   collection,
   addDoc,
   DocumentData,
+  collectionGroup,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-category',
@@ -17,14 +18,21 @@ import { ModalController } from '@ionic/angular';
 export class AddCategoryPage implements OnInit {
   getCategoryData$!: Observable<any[] | DocumentData[]>;
   categoryData: any[] = [];
+  singleCatData: any;
+  list: any;
+
 
   constructor(
     private firestore: Firestore,
     public getData: GetDataService,
-    private modalCtrl: ModalController
-  ) {}
+    private modalCtrl: ModalController,
+    private navParams: NavParams
+  ) {
+    this.list = this.navParams.get('getCategoryData');
+    console.log('catData list', this.list);
+  }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   addCategory(categoryForm: any) {
     console.log('Add Category', categoryForm.value);
