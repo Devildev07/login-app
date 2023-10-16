@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  menuItems: any;
+  // menuItems: any;
   isMenuClosed = false;
 
   constructor(

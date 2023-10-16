@@ -2,24 +2,43 @@
   <ion-split-pane contentId="main-content" *ngIf="authService.isUserLogin">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-        <ion-list id="inbox-list" >
+        <ion-list id="inbox-list">
           <ion-list-header>
-            
-            <ion-title class="pl-0"> <ion-img src="../assets/icon/MyWan-Logo-2.png" style="width: 3rem;"></ion-img> </ion-title>
+            <ion-title class="pl-0">
+              <ion-img
+                src="../assets/icon/MyWan-Logo-2.png"
+                style="width: 3rem"
+              ></ion-img>
+            </ion-title>
             <div class="theme-tgl">
               <ion-icon name="moon-outline"></ion-icon>
-              <ion-toggle slot="end" (ionChange)="toggleChange($event)"></ion-toggle>
+              <ion-toggle
+                slot="end"
+                (ionChange)="toggleChange($event)"
+              ></ion-toggle>
             </div>
           </ion-list-header>
           <ion-note class="ion-padding-top">
             {{ authService.userEmail }}
           </ion-note>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
-              routerLinkActive="selected">
-              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'"
-                [md]="p.icon + '-outline'"></ion-icon>
+          <ion-menu-toggle
+            auto-hide="false"
+            *ngFor="let p of appPages; let i = index"
+          >
+            <ion-item
+              routerDirection="root"
+              [routerLink]="[p.url]"
+              lines="none"
+              detail="false"
+              routerLinkActive="selected"
+            >
+              <ion-icon
+                aria-hidden="true"
+                slot="start"
+                [ios]="p.icon + '-outline'"
+                [md]="p.icon + '-outline'"
+              ></ion-icon>
               <ion-label> {{ p.heading }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -32,7 +51,11 @@
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
-  <ion-router-outlet id="main-content" class="ion-page" *ngIf="!authService.isUserLogin"></ion-router-outlet>
+  <ion-router-outlet
+    id="main-content"
+    class="ion-page"
+    *ngIf="!authService.isUserLogin"
+  ></ion-router-outlet>
 </ion-app>
 
 <!-- <ion-app>
