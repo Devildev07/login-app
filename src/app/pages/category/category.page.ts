@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
-import { AddCategoryPage } from '../addData/add-category/add-category.page';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
-import { Location } from '@angular/common';
-import { Firestore, deleteDoc, doc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, deleteDoc, doc } from '@angular/fire/firestore';
 import { UpdateCatModalComponent } from 'src/app/components/update-cat-modal/update-cat-modal.component';
 import { AuthService } from 'src/app/auth.service';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,12 +19,12 @@ export class CategoryPage implements OnInit {
   totalCatLength: any;
 
   constructor(
-    private location: Location,
     private firestore: Firestore,
     public authService: AuthService,
     public common: CommonServiceService,
     public getDatas: GetDataService,
-    public modalCntrl: ModalController
+    public modalCntrl: ModalController,
+    public route: Router,
   ) {
     this.common.searchText = '';
     this.getDatas.myEventEmitter.subscribe((cData) => {
@@ -55,20 +53,22 @@ export class CategoryPage implements OnInit {
     this.results = [];
   }
 
-  async openAddCategoryModal() {
-    const modal = await this.modalCntrl.create({
-      component: AddCategoryPage,
-      componentProps: { getCategoryData: this.getCategoryData },
-      backdropDismiss: true, // Set to false if you don't want users to close the modal by clicking outside
-      cssClass: 'Category-modal', // You can add a CSS class for custom styling
-    });
+  // async openAddCategoryModal() {
+  //   const modal = await this.modalCntrl.create({
+  //     component: AddCategoryPage,
+  //     componentProps: { getCategoryData: this.getCategoryData },
+  //     backdropDismiss: true, // Set to false if you don't want users to close the modal by clicking outside
+  //     cssClass: 'Category-modal', // You can add a CSS class for custom styling
+  //   });
 
-    modal.onDidDismiss().then(() => {
-      this.getCategory();
-    });
+  //   modal.onDidDismiss().then(() => {
+  //     console.log("getCategory 123=== ", this.getCategoryData);
+  //     // this.getCategory();
+  //     this.route.navigate(['/locations']);
+  //   });
 
-    await modal.present();
-  }
+  //   await modal.present();
+  // }
 
   async openUpdateCategoryModal(singleCatData: any) {
     const modal = await this.modalCntrl.create({

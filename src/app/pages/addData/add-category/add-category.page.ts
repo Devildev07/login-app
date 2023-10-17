@@ -27,8 +27,8 @@ export class AddCategoryPage implements OnInit {
     private modalCtrl: ModalController,
     private navParams: NavParams,
   ) {
-    this.list = this.navParams.get('getCategoryData');
-    console.log('catData list', this.list);
+    // this.list = this.navParams.get('getCategoryData');
+    // console.log('catData list', this.list);
   }
 
   ngOnInit() { }
@@ -47,7 +47,7 @@ export class AddCategoryPage implements OnInit {
       });
   }
 
-  closeModal() {
-    this.modalCtrl.dismiss();
-  }
+  // closeModal() {
+  //   this.modalCtrl.dismiss();
+  // }
 }

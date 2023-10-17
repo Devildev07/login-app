@@ -15,13 +15,17 @@
     " labelPlacement="floating" placeholder="Category Description
     " ngModel></ion-input>
     <!--  -->
-    <ion-select name="parent_id" ngModel label="Select Category" label-placement="floating" placeholder="Select Category">
+    <ion-select name="parent_id" ngModel label="Select Category" label-placement="floating"
+      placeholder="Select Category">
       <ion-select-option [value]="agency.id" *ngFor="let agency of list">{{agency.category_name}}</ion-select-option>
     </ion-select>
     <!--  -->
-    <ion-button type="submit" id="open-toast" expand="block" (click)="closeModal()">
+    <ion-button type="submit" id="open-toast" expand="block" [routerLink]="['/category']">
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-button>
+    <!-- <ion-button type="submit" id="open-toast" expand="block" (click)="closeModal()">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-button> -->
     <ion-toast trigger="open-toast" message="Data Sumbit" [duration]="5000" class="toast"></ion-toast>
     <!--  -->
   </form>

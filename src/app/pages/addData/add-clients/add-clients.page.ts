@@ -16,9 +16,9 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
 export class AddClientsPage implements OnInit {
   getClientData!: Observable<any[] | DocumentData[]>;
   clientData: any[] = [];
-  constructor(private firestore: Firestore, public getData: GetDataService) {}
+  constructor(private firestore: Firestore, public getData: GetDataService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   addClient(clientsForm: any) {
     console.log('Add Clients', clientsForm.value);

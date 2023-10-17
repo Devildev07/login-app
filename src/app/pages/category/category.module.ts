@@ -24,4 +24,4 @@ import { SharedModule } from 'src/app/shared.module';
   declarations: [CategoryPage],
   exports: [CategoryPage],
 })
-export class CategoryPageModule {}
+export class CategoryPageModule { }
