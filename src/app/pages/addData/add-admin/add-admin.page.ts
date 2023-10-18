@@ -4,7 +4,6 @@ import {
   collection,
   addDoc,
   DocumentData,
-  collectionGroup,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
@@ -27,9 +26,9 @@ export class AddAdminPage implements OnInit {
     public authService: AuthService,
     public getpassService: CommonServiceService,
     public loadingCtrl: LoadingController
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   async addAdmin(adminForm: any) {
     // console.log('Add Admin', adminForm.value);

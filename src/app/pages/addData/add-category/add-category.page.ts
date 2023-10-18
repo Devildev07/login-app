@@ -7,7 +7,13 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
-import { ModalController, NavParams } from '@ionic/angular';
+// import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
+
+
 
 @Component({
   selector: 'app-add-category',
@@ -19,19 +25,29 @@ export class AddCategoryPage implements OnInit {
   categoryData: any[] = [];
   singleCatData: any;
   list: any;
+  getCategoryDataList: any;
 
 
   constructor(
-    private firestore: Firestore,
+    private firestore: Firestore, public route: Router,
     public getData: GetDataService,
     private modalCtrl: ModalController,
-    private navParams: NavParams,
+    private avtRoute: ActivatedRoute,
+    private location: Location
+    // private navParams: NavParams,
   ) {
-    // this.list = this.navParams.get('getCategoryData');
+    // this.list = this.avtRoute.snapshot.paramMap.get('getCategoryDataList');
     // console.log('catData list', this.list);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getCategoryList()
+  }
+
+  async getCategoryList() {
+    this.getCategoryDataList = await this.getData.getFromFirebase('category');
+    console.log('getCategoryDataList === ', this.getCategoryDataList);
+  }
 
   addCategory(categoryForm: any) {
     console.log('Add Category', categoryForm.value);
@@ -39,12 +55,18 @@ export class AddCategoryPage implements OnInit {
     const collectionInstance = collection(this.firestore, 'category');
     addDoc(collectionInstance, categoryForm.value)
       .then(() => {
-        alert('Data Sent Secessfully');
+        // alert('Data Sent Secessfully');
         this.getData.myEventEmitter.emit(categoryForm.value);
       })
       .catch((error) => {
         alert(error);
       });
+  }
+
+  async navigateToCategory() {
+    await this.route.navigateByUrl('/category', { skipLocationChange: true });
+    this.getCategoryList();
+    this.location.replaceState('/category');
   }
 
   // closeModal() {

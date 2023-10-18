@@ -17,6 +17,7 @@ export class CategoryPage implements OnInit {
   public results: any;
   getCategoryData: any;
   totalCatLength: any;
+  catList: any;
 
   constructor(
     private firestore: Firestore,
@@ -27,14 +28,17 @@ export class CategoryPage implements OnInit {
     public route: Router,
   ) {
     this.common.searchText = '';
-    this.getDatas.myEventEmitter.subscribe((cData) => {
-      this.getCategoryData.push(cData);
-      console.log('Received event with cData:', cData);
-    });
+    this.getCategory();
+
+    // this.getDatas.myEventEmitter.subscribe((Data) => {
+    //   this.getCategoryData.push(Data);
+    //   console.log('Received event with Data:', Data);
+    // });
   }
 
   ngOnInit() {
-    this.getCategory();
+    this.catList = this.getCategory();
+    console.log("catList === ", this.catList);
     this.common.searchText = '';
   }
 
