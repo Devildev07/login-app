@@ -17,7 +17,7 @@ export class CategoryPage implements OnInit {
   public results: any;
   getCategoryData: any;
   totalCatLength: any;
-  catList: any;
+  // catList: any;
 
   constructor(
     private firestore: Firestore,
@@ -37,8 +37,7 @@ export class CategoryPage implements OnInit {
   }
 
   ngOnInit() {
-    this.catList = this.getCategory();
-    console.log("catList === ", this.catList);
+    this.getCategory();
     this.common.searchText = '';
   }
 
