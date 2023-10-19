@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
-import { Firestore, deleteDoc, doc } from '@angular/fire/firestore';
+import { Firestore, collectionGroup, deleteDoc, doc, getDocs, } from '@angular/fire/firestore';
 import { UpdateCatModalComponent } from 'src/app/components/update-cat-modal/update-cat-modal.component';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 
 
 @Component({
@@ -29,7 +31,6 @@ export class CategoryPage implements OnInit {
   ) {
     this.common.searchText = '';
     this.getCategory();
-
     this.getDatas.myEventEmitter.subscribe((Data) => {
       // this.getCategory();
       this.getCategoryData.push(Data);
@@ -40,7 +41,6 @@ export class CategoryPage implements OnInit {
   ngOnInit() {
     this.getCategory();
     this.common.searchText = '';
-
   }
 
   async getCategory() {
@@ -96,4 +96,24 @@ export class CategoryPage implements OnInit {
         console.log('not deleted', err);
       });
   }
+
+  getCatdata(): Observable<any[]> {
+    const categoriesCollection: AngularFirestoreCollection<Category> = this.firestore.collection('categories');
+    return categoriesCollection.valueChanges();
+  }
+
+
+  generateHierarchy(data: any[], level: number) {
+    let result: any[] = [];
+    data.forEach(item => {
+      if (item.parent_id === null) {
+        result.push({ ...item, level: level });
+        const children = data.filter(child => child.parent_id === item.id);
+        result = result.concat(this.generateHierarchy(children, level + 1));
+      }
+    });
+    return result;
+  }
+
+
 }
