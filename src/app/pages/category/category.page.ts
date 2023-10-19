@@ -30,15 +30,17 @@ export class CategoryPage implements OnInit {
     this.common.searchText = '';
     this.getCategory();
 
-    // this.getDatas.myEventEmitter.subscribe((Data) => {
-    //   this.getCategoryData.push(Data);
-    //   console.log('Received event with Data:', Data);
-    // });
+    this.getDatas.myEventEmitter.subscribe((Data) => {
+      // this.getCategory();
+      this.getCategoryData.push(Data);
+      console.log('Received event with Data:', Data);
+    });
   }
 
   ngOnInit() {
     this.getCategory();
     this.common.searchText = '';
+
   }
 
   async getCategory() {

@@ -50,13 +50,15 @@ export class AddCategoryPage implements OnInit {
   }
 
   addCategory(categoryForm: any) {
+    const catValue = categoryForm.value;
     console.log('Add Category', categoryForm.value);
 
     const collectionInstance = collection(this.firestore, 'category');
     addDoc(collectionInstance, categoryForm.value)
       .then(() => {
         // alert('Data Sent Secessfully');
-        this.getData.myEventEmitter.emit(categoryForm.value);
+        console.log("categoryForm.value === ", catValue);
+        this.getData.myEventEmitter.emit(catValue);
       })
       .catch((error) => {
         alert(error);
