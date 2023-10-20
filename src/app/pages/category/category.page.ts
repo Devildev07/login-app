@@ -2,13 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
-import { Firestore, collectionGroup, deleteDoc, doc, getDocs, } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  collectionGroup,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+} from '@angular/fire/firestore';
 import { UpdateCatModalComponent } from 'src/app/components/update-cat-modal/update-cat-modal.component';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
-
 
 @Component({
   selector: 'app-category',
@@ -27,7 +33,7 @@ export class CategoryPage implements OnInit {
     public common: CommonServiceService,
     public getDatas: GetDataService,
     public modalCntrl: ModalController,
-    public route: Router,
+    public route: Router
   ) {
     this.common.searchText = '';
     this.getCategory();
@@ -97,23 +103,20 @@ export class CategoryPage implements OnInit {
       });
   }
 
-  getCatdata(): Observable<any[]> {
-    const categoriesCollection: AngularFirestoreCollection<Category> = this.firestore.collection('categories');
-    return categoriesCollection.valueChanges();
+  getIndentationLevel(parent_id: number | null): number {
+    let level = 0;
+    let parentId = parent_id;
+
+    while (parentId !== null) {
+      level++;
+      parentId = this.getParentId(parentId);
+    }
+
+    return level;
   }
 
-
-  generateHierarchy(data: any[], level: number) {
-    let result: any[] = [];
-    data.forEach(item => {
-      if (item.parent_id === null) {
-        result.push({ ...item, level: level });
-        const children = data.filter(child => child.parent_id === item.id);
-        result = result.concat(this.generateHierarchy(children, level + 1));
-      }
-    });
-    return result;
+  getParentId(id: number): number | null {
+    const collection = this.getCategoryData.find((item:any) => item.id === id);
+    return collection ? collection.parent_id : null;
   }
-
-
 }
