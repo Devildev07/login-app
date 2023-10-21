@@ -8,8 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 // import { ModalController, NavParams } from '@ionic/angular';
-import { ModalController, } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 
@@ -31,8 +30,6 @@ export class AddCategoryPage implements OnInit {
   constructor(
     private firestore: Firestore, public route: Router,
     public getData: GetDataService,
-    private modalCtrl: ModalController,
-    private avtRoute: ActivatedRoute,
     private location: Location
     // private navParams: NavParams,
   ) {

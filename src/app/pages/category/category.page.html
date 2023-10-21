@@ -60,8 +60,11 @@
       class="ion-padding-horizontal ion-align-items-center"
       *ngFor=" let catData of getCategoryData   | search:common.searchText"
     >
-      <ion-col class="" sizeMd="0.5">
-        <ion-icon size="default" name="pricetag-outline"></ion-icon>
+      <ion-col class="" sizeMd="1">
+        <!-- Calculate indentation based on indentation level -->
+        <ng-container *ngFor="let _ of getIndentationLevel(catData.parent_id)">
+          <ion-icon size="default" name="pricetag-outline"></ion-icon>
+        </ng-container>
       </ion-col>
       <!-- <ion-col class="ion-text-left text-sm" sizeMd="2.5">
         <ion-label>
@@ -70,28 +73,24 @@
           </ion-title>
         </ion-label>
       </ion-col> -->
-      <ion-col class="ion-text-left text-sm" sizeMd="2.5">
+      <ion-col class="ion-text-left text-sm" sizeMd="2">
         <ion-label>
           <ion-title>
-            <!-- Calculate indentation based on indentation level -->
-            <ng-container *ngFor="let temp of getIndentationLevel(catData.parent_id)">
-              <ion-icon name="arrow-forward-outline"></ion-icon>
-            </ng-container>
-            <ion-card-subtitle>{{catData.name}}</ion-card-subtitle>
+            <ion-card-subtitle>{{catData.category_name}}</ion-card-subtitle>
           </ion-title>
         </ion-label>
-      </ion-col>  
+      </ion-col>
       <ion-col class="ion-text-center" sizeMd="2">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal"
-            >{{catData.parent_id}}</ion-card-subtitle
-          >
+          <ion-card-subtitle class="ion-padding-horizontal">
+            {{catData.category_description}}
+          </ion-card-subtitle>
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="2">
         <ion-label>
           <ion-card-subtitle class="ion-padding-horizontal"
-            >Playlist Count</ion-card-subtitle
+            >{{catData.parent_id}} </ion-card-subtitle
           >
         </ion-label>
       </ion-col>

@@ -2,19 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
-import {
-  Firestore,
-  collection,
-  collectionGroup,
-  deleteDoc,
-  doc,
-  getDocs,
-  query,
-} from '@angular/fire/firestore';
+import { Firestore, deleteDoc, doc } from '@angular/fire/firestore';
 import { UpdateCatModalComponent } from 'src/app/components/update-cat-modal/update-cat-modal.component';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -25,7 +16,6 @@ export class CategoryPage implements OnInit {
   public results: any;
   getCategoryData: any;
   totalCatLength: any;
-  // catList: any;
 
   constructor(
     private firestore: Firestore,
@@ -103,20 +93,20 @@ export class CategoryPage implements OnInit {
       });
   }
 
-  getIndentationLevel(parent_id: number | null): number {
-    let level = 0;
+  getIndentationLevel(parent_id: number | null): any[] {
+    const indentationLevel = [];
     let parentId = parent_id;
 
     while (parentId !== null) {
-      level++;
+      indentationLevel.push({});
       parentId = this.getParentId(parentId);
     }
 
-    return level;
+    return indentationLevel;
   }
 
   getParentId(id: number): number | null {
-    const collection = this.getCategoryData.find((item:any) => item.id === id);
+    const collection = this.getCategoryData.find((item: any) => item.id === id);
     return collection ? collection.parent_id : null;
   }
 }
