@@ -16,6 +16,7 @@ export class CategoryPage implements OnInit {
   public results: any;
   getCategoryData: any;
   totalCatLength: any;
+  organizedData: any;
 
   constructor(
     private firestore: Firestore,
@@ -37,10 +38,21 @@ export class CategoryPage implements OnInit {
   ngOnInit() {
     this.getCategory();
     this.common.searchText = '';
+
+    // const organizedData: any = {};
+
+
   }
 
   async getCategory() {
     this.getCategoryData = await this.getDatas.getFromFirebase('category');
+    this.getCategoryData.forEach((item: { id: any; parent: any; }) => {
+      const { id, parent } = item;
+      if (!this.organizedData[parent]) {
+        this.organizedData[parent] = [];
+      }
+      this.organizedData[parent].push({ id, parent });
+    });
     console.log('getCategoryData === ', this.getCategoryData);
     this.totalCatLength = this.getCategoryData.length;
   }
@@ -109,4 +121,6 @@ export class CategoryPage implements OnInit {
     const collection = this.getCategoryData.find((item: any) => item.id === id);
     return collection ? collection.parent_id : null;
   }
+
+
 }
