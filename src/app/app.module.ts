@@ -32,6 +32,7 @@ import {
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { FirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent],
@@ -53,7 +54,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
     HttpClientModule,
-    AngularFireStorageModule
+    FirestoreModule,
+    AngularFireStorageModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

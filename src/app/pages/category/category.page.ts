@@ -16,6 +16,7 @@ export class CategoryPage implements OnInit {
   public results: any;
   getCategoryData: any;
   totalCatLength: any;
+  hierarchicalCategories: any[] | undefined;
 
   constructor(
     private firestore: Firestore,
@@ -39,10 +40,61 @@ export class CategoryPage implements OnInit {
     this.common.searchText = '';
   }
 
+  // async getCategory() {
+  //   this.getCategoryData = await this.getDatas.getFromFirebase('category');
+  //   console.log('getCategoryData === ', this.getCategoryData);
+
+  //   this.hierarchicalCategories = this.buildCategoryTree(this.getCategoryData);
+  //   console.log('hierarchicalCategories', this.hierarchicalCategories);
+
+  //   this.totalCatLength = this.getCategoryData.length;
+  // }
+
   async getCategory() {
-    this.getCategoryData = await this.getDatas.getFromFirebase('category');
-    console.log('getCategoryData === ', this.getCategoryData);
-    this.totalCatLength = this.getCategoryData.length;
+    try {
+      this.getCategoryData = await this.getDatas.getFromFirebase('category');
+      console.log('Category Data from Firebase:', this.getCategoryData);
+
+      if (this.getCategoryData && this.getCategoryData.length > 0) {
+        this.hierarchicalCategories = this.buildCategoryTree(
+          this.getCategoryData
+        );
+        console.log('Hierarchical Categories:', this.hierarchicalCategories);
+      } else {
+        console.log('No category data found or data is empty.');
+      }
+
+      this.totalCatLength = this.getCategoryData.length;
+    } catch (error) {
+      console.error('Error fetching category data:', error);
+    }
+  }
+
+  buildCategoryTree(getCategoryData: any[]): any[] {
+    const categoryMap = new Map<number, any>();
+    const roots: any[] = [];
+
+    getCategoryData.forEach((category) => {
+      categoryMap.set(category.id, category);
+    });
+
+    getCategoryData.forEach((category) => {
+      if (category.parent_id !== null) {
+        const parent = categoryMap.get(category.parent_id);
+        console.log('parent', parent);
+
+        if (parent) {
+          if (!parent.children) {
+            parent.children = [];
+          }
+          parent.children.push(category);
+        }
+      } else {
+        roots.push(category);
+      }
+    });
+
+    return roots;
   }
 
   handleInput(event: any) {
