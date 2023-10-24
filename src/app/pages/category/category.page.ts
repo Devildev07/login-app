@@ -16,7 +16,7 @@ export class CategoryPage implements OnInit {
   public results: any;
   getCategoryData: any;
   totalCatLength: any;
-  hierarchicalCategories: any[] | undefined;
+  hierarchicalCategories: any = [];
 
   constructor(
     private firestore: Firestore,
@@ -54,7 +54,7 @@ export class CategoryPage implements OnInit {
     try {
       this.getCategoryData = await this.getDatas.getFromFirebase('category');
       console.log('Category Data from Firebase:', this.getCategoryData);
-
+      console.log("this.getCategoryData 111=== ", this.getCategoryData);
       if (this.getCategoryData && this.getCategoryData.length > 0) {
         this.hierarchicalCategories = this.buildCategoryTree(
           this.getCategoryData
@@ -77,23 +77,25 @@ export class CategoryPage implements OnInit {
     getCategoryData.forEach((category) => {
       categoryMap.set(category.id, category);
     });
-
+    console.log("categoryMap === ", getCategoryData)
     getCategoryData.forEach((category) => {
+      // console.log(" itemcategory === ", category);
       if (category.parent_id !== null) {
         const parent = categoryMap.get(category.parent_id);
-        console.log('parent', parent);
+        // console.log('parent', parent);
 
-        if (parent) {
+        if (parent != undefined) {
           if (!parent.children) {
             parent.children = [];
           }
           parent.children.push(category);
+          roots.push(parent);
         }
       } else {
         roots.push(category);
       }
     });
-
+    // console.log("roots === ", roots);
     return roots;
   }
 

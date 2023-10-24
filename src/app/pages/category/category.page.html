@@ -58,7 +58,7 @@
   <!-- <ion-list>
     <ion-row
       class="ion-padding-horizontal ion-align-items-center"
-      *ngFor=" let catData of getCategoryData   | search:common.searchText"
+      *ngFor=" let catData of hierarchicalCategories   | search:common.searchText"
     >
       <ion-col class="" sizeMd="1">
         <ng-container *ngFor="let _ of getIndentationLevel(catData.parent_id)">
@@ -114,33 +114,34 @@
     </ion-row>
   </ion-list> -->
 
+  <!-- <ion-list>
+    <ion-item
+      *ngFor="let catData of hierarchicalCategories | search: common.searchText"
+      >{{catData.category_name}}
+      <ion-list>
+        <ion-item *ngFor="let child of catData.children"
+          >----{{child.category_name}}</ion-item
+        >
+      </ion-list>
+    </ion-item>
+  </ion-list> -->
+
   <ion-list>
     <ng-container
-      *ngTemplateOutlet="categoryTemplate; context:{ categories: hierarchicalCategories }"
-    ></ng-container>
-  </ion-list>
-
-  <ng-template #categoryTemplate let-categories>
-    <ng-container
-      *ngFor="let catData of categories | search: common.searchText"
+      *ngFor="let catData of hierarchicalCategories | search: common.searchText"
     >
+      <!-- Parent Category -->
       <ion-row class="ion-padding-horizontal ion-align-items-center">
         <ion-col class="" sizeMd="1">
-          <ng-container
-            *ngFor="let _ of getIndentationLevel(catData.parent_id)"
-          >
-            <ion-icon size="default" name="pricetag-outline"></ion-icon>
-          </ng-container>
+          <ion-icon size="default" name="pricetag-outline"></ion-icon>
         </ion-col>
         <ion-col class="ion-text-left text-sm" sizeMd="2">
           <ion-label>
             <ion-title>
-              <ion-card-subtitle>{{ catData.category_name }}</ion-card-subtitle>
+              <ion-card-subtitle>{{catData.category_name}}</ion-card-subtitle>
             </ion-title>
           </ion-label>
         </ion-col>
-        <!-- Add other columns as needed -->
-
         <ion-col class="ion-text-center" sizeMd="2">
           <ion-label>
             <ion-card-subtitle class="ion-padding-horizontal">
@@ -150,19 +151,18 @@
         </ion-col>
         <ion-col class="ion-text-center" sizeMd="2">
           <ion-label>
-            <ion-card-subtitle class="ion-padding-horizontal"
-              >{{catData.parent_id}}
+            <ion-card-subtitle class="ion-padding-horizontal">
+              {{catData.parent_id}}
             </ion-card-subtitle>
           </ion-label>
         </ion-col>
         <ion-col class="ion-text-center" sizeMd="2">
           <ion-label>
-            <ion-card-subtitle class="ion-padding-horizontal"
-              >Playlist Count</ion-card-subtitle
-            >
+            <ion-card-subtitle class="ion-padding-horizontal">
+              <!-- Add Playlist Count data here -->
+            </ion-card-subtitle>
           </ion-label>
         </ion-col>
-
         <ion-col class="ion-text-center" sizeMd="3">
           <ion-button
             shape="round"
@@ -171,7 +171,6 @@
           >
             <ion-icon name="create-outline"></ion-icon>
           </ion-button>
-
           <ion-button
             shape="round"
             color="danger"
@@ -182,12 +181,62 @@
           </ion-button>
         </ion-col>
       </ion-row>
-
-      <ng-container
-        *ngTemplateOutlet="categoryTemplate; context:{ categories: catData.children }"
-      ></ng-container>
+      <!-- Child Categories -->
+      <ion-row
+        *ngFor="let child of catData.children"
+        class="ion-padding-horizontal ion-align-items-center"
+      >
+        <ion-col class="" sizeMd="1">
+          <!-- <ion-icon size="default" name="pricetag-outline"></ion-icon> -->
+        </ion-col>
+        <ion-col class="ion-text-left text-sm" sizeMd="2">
+          <ion-label>
+            <ion-title>
+              <ion-card-subtitle>--{{child.category_name}}</ion-card-subtitle>
+            </ion-title>
+          </ion-label>
+        </ion-col>
+        <ion-col class="ion-text-center" sizeMd="2">
+          <ion-label>
+            <ion-card-subtitle class="ion-padding-horizontal">
+              {{child.category_description}}
+            </ion-card-subtitle>
+          </ion-label>
+        </ion-col>
+        <ion-col class="ion-text-center" sizeMd="2">
+          <ion-label>
+            <ion-card-subtitle class="ion-padding-horizontal">
+              {{child.parent_id}}
+            </ion-card-subtitle>
+          </ion-label>
+        </ion-col>
+        <ion-col class="ion-text-center" sizeMd="2">
+          <ion-label>
+            <ion-card-subtitle class="ion-padding-horizontal">
+              <!-- Add Playlist Count data here -->
+            </ion-card-subtitle>
+          </ion-label>
+        </ion-col>
+        <ion-col class="ion-text-center" sizeMd="3">
+          <ion-button
+            shape="round"
+            color="primary"
+            (click)="openUpdateCategoryModal(child)"
+          >
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button
+            shape="round"
+            color="danger"
+            (click)="deleteClient(child.id)"
+            *ngIf="authService.userEmail === 'dewanshusingh21@gmail.com'"
+          >
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
     </ng-container>
-  </ng-template>
+  </ion-list>
 
   <!-- fab-btn -->
   <ion-fab
