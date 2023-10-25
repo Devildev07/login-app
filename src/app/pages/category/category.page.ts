@@ -54,7 +54,6 @@ export class CategoryPage implements OnInit {
     try {
       this.getCategoryData = await this.getDatas.getFromFirebase('category');
       console.log('Category Data from Firebase:', this.getCategoryData);
-      console.log("this.getCategoryData 111=== ", this.getCategoryData);
       if (this.getCategoryData && this.getCategoryData.length > 0) {
         this.hierarchicalCategories = this.buildCategoryTree(
           this.getCategoryData
