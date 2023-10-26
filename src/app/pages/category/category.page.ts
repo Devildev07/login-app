@@ -70,33 +70,31 @@ export class CategoryPage implements OnInit {
   }
 
   buildCategoryTree(getCategoryData: any[]): any[] {
-    const categoryMap = new Map<number, any>();
+    const categoryMap = new Map<string, any>();
     const roots: any[] = [];
 
     getCategoryData.forEach((category) => {
-      categoryMap.set(category.id, category);
-    });
-    console.log("categoryMap === ", getCategoryData)
-    getCategoryData.forEach((category) => {
-      // console.log(" itemcategory === ", category);
-      if (category.parent_id !== null) {
-        const parent = categoryMap.get(category.parent_id);
-        // console.log('parent', parent);
+      // Convert parent_id to string
+      const parentID = category.parent_id || "";
+      categoryMap.set(category.id, { ...category, children: [] });
 
-        if (parent != undefined) {
-          if (!parent.children) {
-            parent.children = [];
-          }
-          parent.children.push(category);
-          roots.push(parent);
-        }
+      if (!parentID) {
+        roots.push(categoryMap.get(category.id));
       } else {
-        roots.push(category);
+        const parent = categoryMap.get(parentID);
+        if (parent) {
+          parent.children.push(categoryMap.get(category.id));
+        } else {
+          // Handle case where parent is not found (optional)
+          console.error(`Parent with ID ${parentID} not found for category with ID ${category.id}`);
+        }
       }
     });
-    // console.log("roots === ", roots);
+
     return roots;
   }
+
+
 
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
