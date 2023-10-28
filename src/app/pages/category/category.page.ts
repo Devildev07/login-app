@@ -169,10 +169,10 @@ export class CategoryPage implements OnInit {
               if (children.length > 0) {
                 this.showUpdateParentPopup(id, children);
               } else {
-                await this.performDelete(id);
+                await this.performDelete(id, '');
               }
             } else {
-              await this.performDelete(id);
+              await this.performDelete(id, '');
             }
           },
         },
@@ -182,54 +182,107 @@ export class CategoryPage implements OnInit {
     await alert.present();
   }
 
-  showUpdateParentPopup(parentId: string, children: any[]) {
-    this.alertController
-      .create({
-        header: 'Select New Parent',
-        inputs: this.hierarchicalCategories
-          .filter((category: any) => category.id !== parentId)
-          .map((category: any) => ({
-            type: 'radio',
-            label: category.category_name,
-            value: category.id,
-          })),
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
+  // showUpdateParentPopup(parentId: string, children: any[]) {
+  //   this.alertController
+  //     .create({
+  //       header: 'Select New Parent',
+  //       inputs: this.hierarchicalCategories
+  //         .filter((category: any) => category.id !== parentId)
+  //         .map((category: any) => ({
+  //           type: 'radio',
+  //           label: category.category_name,
+  //           value: category.id,
+  //         })),
+  //       buttons: [
+  //         {
+  //           text: 'Cancel',
+  //           role: 'cancel',
+  //         },
+  //         {
+  //           text: 'Move',
+  //           handler: async (selectedParentId) => {
+  //             // Get the selected parent
+  //             const selectedParent = this.hierarchicalCategories.find(
+  //               (category: any) => category.id === selectedParentId
+  //             );
+
+  //             // Update the parent_id for all children
+  //             this.updateParentIdForChildren(children, selectedParentId);
+
+  //             // Add the children to the selected parent's children
+  //             selectedParent.children = [
+  //               ...(selectedParent.children || []),
+  //               ...children,
+  //             ];
+
+  //             // Remove the children from the original parent's children
+  //             const originalParent = this.hierarchicalCategories.find(
+  //               (category: any) => category.id === parentId
+  //             );
+  //             originalParent.children = (originalParent.children || []).filter(
+  //               (child: any) => !children.find((c) => c.id === child.id)
+  //             );
+
+  //             // Perform the delete operation
+  //             await this.performDelete(parentId);
+  //           },
+  //         },
+  //       ],
+  //     })
+  //     .then((alert) => alert.present());
+  // }
+
+  async showUpdateParentPopup(parentId: string, children: any[]) {
+    const alert = await this.alertController.create({
+      header: 'Select New Parent',
+      inputs: this.hierarchicalCategories
+        .filter((category: any) => category.id !== parentId)
+        .map((category: any) => ({
+          type: 'radio',
+          label: category.category_name,
+          value: category.id,
+        })),
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Move',
+          handler: async (selectedParentId) => {
+            // Get the selected parent
+            const selectedParent = this.hierarchicalCategories.find(
+              (category: any) => category.id === selectedParentId
+            );
+
+            // Update the parent_id for all children
+            this.updateParentIdForChildren(children, selectedParentId);
+
+            // Add the children to the selected parent's children
+            selectedParent.children = [
+              ...(selectedParent.children || []),
+              ...children,
+            ];
+
+            // Remove the children from the original parent's children
+            const originalParent = this.hierarchicalCategories.find(
+              (category: any) => category.id === parentId
+            );
+            originalParent.children = (originalParent.children || []).filter(
+              (child: any) => !children.find((c) => c.id === child.id)
+            );
+
+            // Set the new parent ID
+            const newParentId = selectedParentId;
+
+            // Perform the delete operation
+            await this.performDelete(parentId, newParentId);
           },
-          {
-            text: 'Move',
-            handler: async (selectedParentId) => {
-              // Get the selected parent
-              const selectedParent = this.hierarchicalCategories.find(
-                (category: any) => category.id === selectedParentId
-              );
+        },
+      ],
+    });
 
-              // Update the parent_id for all children
-              this.updateParentIdForChildren(children, selectedParentId);
-
-              // Add the children to the selected parent's children
-              selectedParent.children = [
-                ...(selectedParent.children || []),
-                ...children,
-              ];
-
-              // Remove the children from the original parent's children
-              const originalParent = this.hierarchicalCategories.find(
-                (category: any) => category.id === parentId
-              );
-              originalParent.children = (originalParent.children || []).filter(
-                (child: any) => !children.find((c) => c.id === child.id)
-              );
-
-              // Perform the delete operation
-              await this.performDelete(parentId);
-            },
-          },
-        ],
-      })
-      .then((alert) => alert.present());
+    await alert.present();
   }
 
   // Function to update parent_id for children
@@ -242,17 +295,17 @@ export class CategoryPage implements OnInit {
   }
 
   // Function to perform category deletion
-  async performDelete(id: string) {
+  async performDelete(id: string, newParentId: string) {
     const docInstance = doc(this.firestore, 'category', id);
 
     // Get the children of the category being deleted
     const children = this.getDescendants(id, this.hierarchicalCategories);
 
-    // Find a new parent for the children (you may need to implement your logic here)
-    const newParentId = ''; // Set the new parent ID here
+    // Find a new parent for the children (use the provided newParentId)
+    const updatedNewParentId = newParentId;
 
     // Update parent_id for children
-    this.updateParentIdForChildren(children, newParentId);
+    this.updateParentIdForChildren(children, updatedNewParentId);
 
     // Delete the category
     try {
