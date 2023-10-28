@@ -105,25 +105,13 @@
         <ion-button
           shape="round"
           color="danger"
-          (click)="deleteClient(catData.id)"
+          (click)="deleteCat(catData.id)"
           *ngIf="authService.userEmail === 'dewanshusingh21@gmail.com'"
         >
           <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
-  </ion-list> -->
-
-  <!-- <ion-list>
-    <ion-item
-      *ngFor="let catData of hierarchicalCategories | search: common.searchText"
-      >{{catData.category_name}}
-      <ion-list>
-        <ion-item *ngFor="let child of catData.children"
-          >----{{child.category_name}}</ion-item
-        >
-      </ion-list>
-    </ion-item>
   </ion-list> -->
 
   <ion-list>
@@ -174,7 +162,7 @@
           <ion-button
             shape="round"
             color="danger"
-            (click)="deleteClient(catData.id)"
+            (click)="deleteCat(catData.id,catData.category_name)"
             *ngIf="authService.userEmail === 'dewanshusingh21@gmail.com'"
           >
             <ion-icon name="trash-outline"></ion-icon>
@@ -228,7 +216,7 @@
           <ion-button
             shape="round"
             color="danger"
-            (click)="deleteClient(child.id)"
+            (click)="deleteCat(child.id,child.category_name)"
             *ngIf="authService.userEmail === 'dewanshusingh21@gmail.com'"
           >
             <ion-icon name="trash-outline"></ion-icon>
