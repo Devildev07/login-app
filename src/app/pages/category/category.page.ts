@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
-import { Firestore, deleteDoc, doc } from '@angular/fire/firestore';
+import { Firestore, collection, deleteDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { UpdateCatModalComponent } from 'src/app/components/update-cat-modal/update-cat-modal.component';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
@@ -96,35 +96,6 @@ export class CategoryPage implements OnInit {
     return roots;
   }
 
-  // buildCategoryTree(getCategoryData: any[]): any[] {
-  //   const categoryMap = new Map<number, any>();
-  //   const roots: any[] = [];
-
-  //   getCategoryData.forEach((category) => {
-  //     categoryMap.set(category.id, category);
-  //   });
-
-  //   getCategoryData.forEach((category) => {
-  //     if (category.parent_id !== null || category.parent_id != '') {
-  //       const parent = categoryMap.get(category.parent_id);
-
-  //       if (parent != undefined) {
-  //         if (!parent.children) {
-  //           parent.children = [];
-  //         }
-  //         parent.children.push(category);
-  //         console.log('enter into child level ', category);
-  //       }
-  //     }
-  //     if (!category.parent_id) {
-  //       roots.push(category);
-  //       console.log('enter into root level ', category);
-  //     }
-  //   });
-
-  //   console.log('roots === ', roots);
-  //   return roots;
-  // }
 
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
@@ -182,55 +153,6 @@ export class CategoryPage implements OnInit {
     await alert.present();
   }
 
-  // showUpdateParentPopup(parentId: string, children: any[]) {
-  //   this.alertController
-  //     .create({
-  //       header: 'Select New Parent',
-  //       inputs: this.hierarchicalCategories
-  //         .filter((category: any) => category.id !== parentId)
-  //         .map((category: any) => ({
-  //           type: 'radio',
-  //           label: category.category_name,
-  //           value: category.id,
-  //         })),
-  //       buttons: [
-  //         {
-  //           text: 'Cancel',
-  //           role: 'cancel',
-  //         },
-  //         {
-  //           text: 'Move',
-  //           handler: async (selectedParentId) => {
-  //             // Get the selected parent
-  //             const selectedParent = this.hierarchicalCategories.find(
-  //               (category: any) => category.id === selectedParentId
-  //             );
-
-  //             // Update the parent_id for all children
-  //             this.updateParentIdForChildren(children, selectedParentId);
-
-  //             // Add the children to the selected parent's children
-  //             selectedParent.children = [
-  //               ...(selectedParent.children || []),
-  //               ...children,
-  //             ];
-
-  //             // Remove the children from the original parent's children
-  //             const originalParent = this.hierarchicalCategories.find(
-  //               (category: any) => category.id === parentId
-  //             );
-  //             originalParent.children = (originalParent.children || []).filter(
-  //               (child: any) => !children.find((c) => c.id === child.id)
-  //             );
-
-  //             // Perform the delete operation
-  //             await this.performDelete(parentId);
-  //           },
-  //         },
-  //       ],
-  //     })
-  //     .then((alert) => alert.present());
-  // }
 
   async showUpdateParentPopup(parentId: string, children: any[]) {
     const alert = await this.alertController.create({
@@ -285,13 +207,18 @@ export class CategoryPage implements OnInit {
     await alert.present();
   }
 
+
   // Function to update parent_id for children
-  updateParentIdForChildren(children: any[], newParentId: string) {
-    children.forEach((child) => {
+  async updateParentIdForChildren(children: any[], newParentId: string) {
+    for (const child of children) {
       child.parent_id = newParentId;
-      // Update the parent_id in your database (implement your logic here)
-      // Example: this.updateParentIdInDatabase(child.id, newParentId);
-    });
+
+      // Update the parent_id in your database
+      const docRef = doc(this.firestore, 'category', child.id);
+      console.log(docRef);
+
+      await updateDoc(docRef, { parent_id: newParentId });
+    }
   }
 
   // Function to perform category deletion
@@ -301,11 +228,11 @@ export class CategoryPage implements OnInit {
     // Get the children of the category being deleted
     const children = this.getDescendants(id, this.hierarchicalCategories);
 
-    // Find a new parent for the children (use the provided newParentId)
+    // Use the provided newParentId
     const updatedNewParentId = newParentId;
 
-    // Update parent_id for children
-    this.updateParentIdForChildren(children, updatedNewParentId);
+    // Update parent_id for children in the database
+    await this.updateParentIdForChildren(children, updatedNewParentId);
 
     // Delete the category
     try {
@@ -314,6 +241,25 @@ export class CategoryPage implements OnInit {
       this.getCategory();
     } catch (err) {
       console.error('Error deleting category:', err);
+    }
+  }
+
+  // Function to update parent_id in database
+  async updateParentIdInDatabase(childId: string, newParentId: string) {
+    try {
+      const categoryRef = doc(
+        collection(this.firestore, 'categories'),
+        childId
+      );
+
+      await updateDoc(categoryRef, {
+        parent_id: newParentId,
+      });
+
+      console.log(`Updated parent_id for category with ID ${childId}`);
+    } catch (error) {
+      console.error('Error updating parent_id:', error);
+      throw error; // Optionally, you can rethrow the error for further handling
     }
   }
 
