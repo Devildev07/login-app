@@ -30,6 +30,61 @@ export class GeneralPage implements OnInit {
     });
   }
 
+  // getAllGeneralData() {
+  //   this.uploadedFiles = [];
+  //   this.CommonService.generalCount = this.uploadedFiles.length;
+  //   const storageRef = this.afStorage.ref('/uploads/general/');
+  //   console.log('storageRef', storageRef);
+
+  //   // List all files in the 'uploads' folder
+  //   storageRef.listAll().subscribe(
+  //     (result) => {
+  //       result.items.forEach((item) => {
+  //         item.getDownloadURL().then((url) => {
+  //           // Get the metadata for the file
+  //           item
+  //             .getMetadata()
+  //             .then((metadata) => {
+  //               // Determine the file format based on the contentType
+  //               const format = this.getFileFormat(metadata.contentType);
+
+  //               // Create an HTML video element to get the duration
+  //               const video = document.createElement('video');
+  //               video.src = url;
+  //               // console.log(`video${video.duration}`);
+
+  //               // Add an event listener to get the duration when metadata is loaded
+  //               video.addEventListener('loadedmetadata', () => {
+  //                 // Get the duration in seconds
+  //                 const duration = Math.round(video.duration);
+
+  //                 // Create an object with file name, download URL, format, and duration
+  //                 const file = {
+  //                   name: item.name,
+  //                   downloadURL: url,
+  //                   fileFormat: format,
+  //                   duration: duration, // Store the duration here
+  //                 };
+
+  //                 this.uploadedFiles.push(file);
+  //                 this.CommonService.generalCount = this.uploadedFiles.length;
+  //               });
+
+  //               // Load the video to trigger the 'loadedmetadata' event
+  //               video.load();
+  //             })
+  //             .catch((error) => {
+  //               console.error('Error getting metadata:', error);
+  //             });
+  //         });
+  //       });
+  //     },
+  //     (error) => {
+  //       console.error('Error listing files:', error);
+  //     }
+  //   );
+  // }
+
   getAllGeneralData() {
     this.uploadedFiles = [];
     this.CommonService.generalCount = this.uploadedFiles.length;
@@ -48,22 +103,27 @@ export class GeneralPage implements OnInit {
                 // Determine the file format based on the contentType
                 const format = this.getFileFormat(metadata.contentType);
 
+                // Extract the custom category metadata
+                const category = metadata.customMetadata
+                  ? metadata.customMetadata['category'] || 'Uncategorized'
+                  : 'Uncategorized';
+
                 // Create an HTML video element to get the duration
                 const video = document.createElement('video');
                 video.src = url;
-                // console.log(`video${video.duration}`);
 
                 // Add an event listener to get the duration when metadata is loaded
                 video.addEventListener('loadedmetadata', () => {
                   // Get the duration in seconds
                   const duration = Math.round(video.duration);
 
-                  // Create an object with file name, download URL, format, and duration
+                  // Create an object with file name, download URL, format, duration, and category
                   const file = {
                     name: item.name,
                     downloadURL: url,
                     fileFormat: format,
-                    duration: duration, // Store the duration here
+                    duration: duration,
+                    category: category,
                   };
 
                   this.uploadedFiles.push(file);

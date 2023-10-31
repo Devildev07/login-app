@@ -20,7 +20,7 @@ export class CommonServiceService {
     private fireStorage: AngularFireStorage,
     private modalCtrl: ModalController,
     public popUps: PopoverController
-  ) { }
+  ) {}
 
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
@@ -34,6 +34,68 @@ export class CommonServiceService {
   removeItem(key: string): void {
     localStorage.removeItem(key);
   }
+
+  //encrypt password
+  encryptPass(getPass: string) {
+    var passA = btoa(getPass);
+    var passB = btoa('devil');
+    var generatedPass = passA + '@$98#%' + passB;
+    console.log('generatedPass', generatedPass);
+  }
+
+  //upload files
+  // uploadFile(file: File, filePath: string): AngularFireUploadTask {
+  //   const storageRef = this.fireStorage.ref(filePath);
+  //   const uploadTask = storageRef.put(file);
+
+  //   // Return the AngularFireUploadTask
+  //   return uploadTask;
+  // }
+
+  uploadFile(
+    file: File,
+    filePath: string,
+    metadata: any
+  ): AngularFireUploadTask {
+    const storageRef = this.fireStorage.ref(filePath);
+    const uploadTask = storageRef.put(file, { customMetadata: metadata });
+
+    // Return the AngularFireUploadTask
+    return uploadTask;
+  }
+
+  getDownloadURL(filePath: string): Promise<string> {
+    const storageRef = this.fireStorage.ref(filePath);
+
+    // Use getDownloadURL to retrieve the download URL
+    return storageRef.getDownloadURL().toPromise();
+  }
+
+  async openVideoModal(videoUrl: string) {
+    const modal = await this.modalCtrl.create({
+      component: VideoPopupComponent,
+      componentProps: {
+        videoUrl: videoUrl,
+      },
+      backdropDismiss: true, // Set to false if you don't want users to close the modal by clicking outside
+      cssClass: 'video-modal', // You can add a CSS class for custom styling
+    });
+
+    await modal.present();
+  }
+
+  //commented code
+
+  // async openVideoPopup(videoUrl: string) {
+  //   const popover = await this.popUps.create({
+  //     component: VideoPopupComponent,
+  //     componentProps: {
+  //       videoUrl: videoUrl,
+  //     },
+  //     translucent: true,
+  //   });
+  //   await popover.present();
+  // }
 
   // menuItem() {
   //   return [
@@ -57,51 +119,5 @@ export class CommonServiceService {
   //     { heading: 'Users', url: '/users', icon: 'people-outline' },
   //     { heading: 'Profile', url: '/profile', icon: 'person-outline' },
   //   ];
-  // }
-
-  encryptPass(getPass: string) {
-    var passA = btoa(getPass);
-    var passB = btoa('devil');
-    var generatedPass = passA + '@$98#%' + passB;
-    console.log('generatedPass', generatedPass);
-  }
-
-  uploadFile(file: File, filePath: string): AngularFireUploadTask {
-    const storageRef = this.fireStorage.ref(filePath);
-    const uploadTask = storageRef.put(file);
-
-    // Return the AngularFireUploadTask
-    return uploadTask;
-  }
-
-  getDownloadURL(filePath: string): Promise<string> {
-    const storageRef = this.fireStorage.ref(filePath);
-
-    // Use getDownloadURL to retrieve the download URL
-    return storageRef.getDownloadURL().toPromise();
-  }
-
-  async openVideoModal(videoUrl: string) {
-    const modal = await this.modalCtrl.create({
-      component: VideoPopupComponent,
-      componentProps: {
-        videoUrl: videoUrl,
-      },
-      backdropDismiss: true, // Set to false if you don't want users to close the modal by clicking outside
-      cssClass: 'video-modal' // You can add a CSS class for custom styling
-    });
-
-    await modal.present();
-  }
-
-  // async openVideoPopup(videoUrl: string) {
-  //   const popover = await this.popUps.create({
-  //     component: VideoPopupComponent,
-  //     componentProps: {
-  //       videoUrl: videoUrl,
-  //     },
-  //     translucent: true,
-  //   });
-  //   await popover.present();
   // }
 }
