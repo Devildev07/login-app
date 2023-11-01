@@ -58,6 +58,11 @@ export class AdsPage implements OnInit {
               .then((metadata) => {
                 // Determine the file format based on the contentType
                 const format = this.getFileFormat(metadata.contentType);
+                
+                // Extract the custom category metadata
+                const category = metadata.customMetadata
+                  ? metadata.customMetadata['category'] || 'Uncategorized'
+                  : 'Uncategorized';
 
                 const video = document.createElement('video');
                 video.src = url;
@@ -73,6 +78,7 @@ export class AdsPage implements OnInit {
                     downloadURL: url,
                     fileFormat: format,
                     duration: duration,
+                    category: category,
                   };
 
                   this.uploadedFiles.push(file);
