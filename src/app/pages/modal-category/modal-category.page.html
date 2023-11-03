@@ -1,15 +1,21 @@
-<ion-header [translucent]="true">
-   <ion-toolbar>
-    <ion-title>Select Category</ion-title>
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Select Category </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-list>
     <ion-radio-group [(ngModel)]="selectedCategory">
+      <ion-list-header> Categories </ion-list-header>
       <ion-item *ngFor="let category of getCategoryDataList">
-        <ion-label>{{ category.name }}</ion-label>
-        <ion-radio [value]="category.id"></ion-radio>
+        <ion-label>{{ category }}</ion-label>
+        <ion-radio [value]="category"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
@@ -18,9 +24,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button (click)="closeModal()">Close</ion-button>
       <ion-button (click)="saveCategory()">Save</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
-

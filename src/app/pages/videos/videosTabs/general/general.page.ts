@@ -5,7 +5,9 @@ import { generate } from 'rxjs';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 import { ModalController } from '@ionic/angular';
-import { CategoryPageModule } from 'src/app/pages/category/category.module';
+import { CategoryPage } from 'src/app/pages/category/category.page';
+import { ModalCategoryPage } from 'src/app/pages/modal-category/modal-category.page';
+
 
 
 @Component({
@@ -19,6 +21,7 @@ export class GeneralPage implements OnInit {
   uploadedFiles: any[] = [];
   files: any[] = [];
   getCategoryDataList: any;
+  selectedVideo: any;
 
   constructor(
     public actRoute: ActivatedRoute,
@@ -38,61 +41,6 @@ export class GeneralPage implements OnInit {
     });
     this.getCategoryList();
   }
-
-  // getAllGeneralData() {
-  //   this.uploadedFiles = [];
-  //   this.CommonService.generalCount = this.uploadedFiles.length;
-  //   const storageRef = this.afStorage.ref('/uploads/general/');
-  //   console.log('storageRef', storageRef);
-
-  //   // List all files in the 'uploads' folder
-  //   storageRef.listAll().subscribe(
-  //     (result) => {
-  //       result.items.forEach((item) => {
-  //         item.getDownloadURL().then((url) => {
-  //           // Get the metadata for the file
-  //           item
-  //             .getMetadata()
-  //             .then((metadata) => {
-  //               // Determine the file format based on the contentType
-  //               const format = this.getFileFormat(metadata.contentType);
-
-  //               // Create an HTML video element to get the duration
-  //               const video = document.createElement('video');
-  //               video.src = url;
-  //               // console.log(`video${video.duration}`);
-
-  //               // Add an event listener to get the duration when metadata is loaded
-  //               video.addEventListener('loadedmetadata', () => {
-  //                 // Get the duration in seconds
-  //                 const duration = Math.round(video.duration);
-
-  //                 // Create an object with file name, download URL, format, and duration
-  //                 const file = {
-  //                   name: item.name,
-  //                   downloadURL: url,
-  //                   fileFormat: format,
-  //                   duration: duration, // Store the duration here
-  //                 };
-
-  //                 this.uploadedFiles.push(file);
-  //                 this.CommonService.generalCount = this.uploadedFiles.length;
-  //               });
-
-  //               // Load the video to trigger the 'loadedmetadata' event
-  //               video.load();
-  //             })
-  //             .catch((error) => {
-  //               console.error('Error getting metadata:', error);
-  //             });
-  //         });
-  //       });
-  //     },
-  //     (error) => {
-  //       console.error('Error listing files:', error);
-  //     }
-  //   );
-  // }
 
   getAllGeneralData() {
     this.uploadedFiles = [];
@@ -186,23 +134,101 @@ export class GeneralPage implements OnInit {
     console.log('getCategoryDataList === ', this.getCategoryDataList);
   }
 
-  async editInfo() {
-    const modal = await this.modalController.create({
-      component: CategoryPageModule,
-      componentProps: {
-        categoryList: this.getCategoryDataList // You can pass any data to the modal here, such as the current category.
-      },
-    });
+  // async editInfo() {
+  //   // const modal = await this.modalController.create({
+  //   //   component: CategoryPageModule,
+  //   //   componentProps: {
+  //   //     categoryList: this.getCategoryDataList // You can pass any data to the modal here, such as the current category.
+  //   //   },
+  //   // });
 
-    modal.onDidDismiss().then((data: any ) => {
-      if (data.role === 'save') {
-        const selectedCategory = data.data; // Get the selected category from the modal
-        // Update the category for the video using selectedCategory
-        console.log('selectedCategory === ', selectedCategory);
-        
+  //   // modal.onDidDismiss().then((data: any) => {
+  //   //   if (data.role === 'save') {
+  //   //     const selectedCategory = data.data;
+  //   //     const selectedVideo = this.getSelectedVideo(); // Replace this with your logic to get the selected video
+
+  //   //     if (selectedVideo) {
+  //   //       selectedVideo.category = selectedCategory;
+  //   //       console.log('selectedCategory === ', selectedCategory);
+  //   //     }
+
+  //   //   }
+  //   // });
+
+  //   // return await modal.present();
+  // }
+
+  async editInfo(video: any) {
+    const modal = await this.modalController.create({
+      component: ModalCategoryPage,
+      componentProps: {
+        callback: this.updateCategory.bind(this) // Pass the callback function
       }
     });
 
-    return await modal.present();
+    modal.present();
   }
+
+  updateCategory(category: any) {
+    // Update the selected video's category here
+    this.selectedVideo.category = category;
+  }
+
+
+
+  // commented code
+  // getAllGeneralData() {
+  //   this.uploadedFiles = [];
+  //   this.CommonService.generalCount = this.uploadedFiles.length;
+  //   const storageRef = this.afStorage.ref('/uploads/general/');
+  //   console.log('storageRef', storageRef);
+
+  //   // List all files in the 'uploads' folder
+  //   storageRef.listAll().subscribe(
+  //     (result) => {
+  //       result.items.forEach((item) => {
+  //         item.getDownloadURL().then((url) => {
+  //           // Get the metadata for the file
+  //           item
+  //             .getMetadata()
+  //             .then((metadata) => {
+  //               // Determine the file format based on the contentType
+  //               const format = this.getFileFormat(metadata.contentType);
+
+  //               // Create an HTML video element to get the duration
+  //               const video = document.createElement('video');
+  //               video.src = url;
+  //               // console.log(`video${video.duration}`);
+
+  //               // Add an event listener to get the duration when metadata is loaded
+  //               video.addEventListener('loadedmetadata', () => {
+  //                 // Get the duration in seconds
+  //                 const duration = Math.round(video.duration);
+
+  //                 // Create an object with file name, download URL, format, and duration
+  //                 const file = {
+  //                   name: item.name,
+  //                   downloadURL: url,
+  //                   fileFormat: format,
+  //                   duration: duration, // Store the duration here
+  //                 };
+
+  //                 this.uploadedFiles.push(file);
+  //                 this.CommonService.generalCount = this.uploadedFiles.length;
+  //               });
+
+  //               // Load the video to trigger the 'loadedmetadata' event
+  //               video.load();
+  //             })
+  //             .catch((error) => {
+  //               console.error('Error getting metadata:', error);
+  //             });
+  //         });
+  //       });
+  //     },
+  //     (error) => {
+  //       console.error('Error listing files:', error);
+  //     }
+  //   );
+  // }
 }

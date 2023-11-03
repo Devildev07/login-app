@@ -8,30 +8,35 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
   styleUrls: ['./modal-category.page.scss'],
 })
 export class ModalCategoryPage implements OnInit {
-  getCategoryDataList: any;
-  selectedCategory: string | undefined;
+  getCategoryDataList: any // Define your categories here
+  selectedCategory?: string;
+
   constructor(
     private modalController: ModalController,
     private navParams: NavParams,
     public getData: GetDataService
   ) {
-    this.getCategoryDataList = [];
+
   }
 
   ngOnInit() {
-    this.getCategoryList();
+
   }
 
   closeModal() {
-    this.modalController.dismiss(null, 'cancel');
+    this.modalController.dismiss();
   }
 
   saveCategory() {
-    this.modalController.dismiss(this.selectedCategory, 'save');
+    if (this.selectedCategory) {
+      this.navParams.get('callback')(this.selectedCategory);
+      this.modalController.dismiss();
+    }
   }
 
   async getCategoryList() {
     this.getCategoryDataList = await this.getData.getFromFirebase('category');
     console.log('getCategoryDataList === ', this.getCategoryDataList);
   }
+
 }
