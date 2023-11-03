@@ -144,6 +144,10 @@ const routes: Routes = [
     path: 'add-category',
     loadChildren: () => import('./pages/addData/add-category/add-category.module').then( m => m.AddCategoryPageModule)
   },
+  {
+    path: 'modal-category',
+    loadChildren: () => import('./pages/modal-category/modal-category.module').then( m => m.ModalCategoryPageModule)
+  },
 
 ];
 

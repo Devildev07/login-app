@@ -43,15 +43,6 @@ export class CommonServiceService {
     console.log('generatedPass', generatedPass);
   }
 
-  //upload files
-  // uploadFile(file: File, filePath: string): AngularFireUploadTask {
-  //   const storageRef = this.fireStorage.ref(filePath);
-  //   const uploadTask = storageRef.put(file);
-
-  //   // Return the AngularFireUploadTask
-  //   return uploadTask;
-  // }
-
   uploadFile(
     file: File,
     filePath: string,

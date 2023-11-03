@@ -3,6 +3,10 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ActivatedRoute } from '@angular/router';
 import { generate } from 'rxjs';
 import { CommonServiceService } from 'src/app/common-service.service';
+import { GetDataService } from 'src/app/otherServices/get-data.service';
+import { ModalController } from '@ionic/angular';
+import { CategoryPageModule } from 'src/app/pages/category/category.module';
+
 
 @Component({
   selector: 'app-general',
@@ -14,10 +18,14 @@ export class GeneralPage implements OnInit {
   fileFormat?: string;
   uploadedFiles: any[] = [];
   files: any[] = [];
+  getCategoryDataList: any;
+
   constructor(
     public actRoute: ActivatedRoute,
+    public getData: GetDataService,
     public afStorage: AngularFireStorage,
-    public CommonService: CommonServiceService
+    public CommonService: CommonServiceService,
+    public modalController: ModalController
   ) {
     this.CommonService.userCurrentTab = 'general';
     this.CommonService.searchText = '';
@@ -28,6 +36,7 @@ export class GeneralPage implements OnInit {
       console.log('params===', params);
       this.getAllGeneralData();
     });
+    this.getCategoryList();
   }
 
   // getAllGeneralData() {
@@ -170,5 +179,30 @@ export class GeneralPage implements OnInit {
     } else {
       return 'other';
     }
+  }
+
+  async getCategoryList() {
+    this.getCategoryDataList = await this.getData.getFromFirebase('category');
+    console.log('getCategoryDataList === ', this.getCategoryDataList);
+  }
+
+  async editInfo() {
+    const modal = await this.modalController.create({
+      component: CategoryPageModule,
+      componentProps: {
+        categoryList: this.getCategoryDataList // You can pass any data to the modal here, such as the current category.
+      },
+    });
+
+    modal.onDidDismiss().then((data: any ) => {
+      if (data.role === 'save') {
+        const selectedCategory = data.data; // Get the selected category from the modal
+        // Update the category for the video using selectedCategory
+        console.log('selectedCategory === ', selectedCategory);
+        
+      }
+    });
+
+    return await modal.present();
   }
 }
