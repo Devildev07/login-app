@@ -20,7 +20,7 @@ export class ModalCategoryPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.getCategoryList()
   }
 
   closeModal() {
@@ -29,8 +29,8 @@ export class ModalCategoryPage implements OnInit {
 
   saveCategory() {
     if (this.selectedCategory) {
-      this.navParams.get('callback')(this.selectedCategory);
-      this.modalController.dismiss();
+      // this.navParams.get('callback')(this.selectedCategory);
+      this.modalController.dismiss(this.selectedCategory, 'save');
     }
   }
 

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ActivatedRoute } from '@angular/router';
-import { generate } from 'rxjs';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 import { ModalController } from '@ionic/angular';
-import { CategoryPage } from 'src/app/pages/category/category.page';
 import { ModalCategoryPage } from 'src/app/pages/modal-category/modal-category.page';
 
 
@@ -21,7 +19,7 @@ export class GeneralPage implements OnInit {
   uploadedFiles: any[] = [];
   files: any[] = [];
   getCategoryDataList: any;
-  selectedVideo: any;
+  selectedVideo: any = {};
 
   constructor(
     public actRoute: ActivatedRoute,
@@ -57,6 +55,7 @@ export class GeneralPage implements OnInit {
             item
               .getMetadata()
               .then((metadata) => {
+                console.log("metadata === ", metadata.customMetadata);
                 // Determine the file format based on the contentType
                 const format = this.getFileFormat(metadata.contentType);
 
@@ -129,52 +128,48 @@ export class GeneralPage implements OnInit {
     }
   }
 
+  updateFileMetadata(filePath: string, categoryId: any): Promise<void> {
+    const storageRef = this.afStorage.ref(filePath);
+    const newMetadata = {
+      customMetadata: {
+        category: categoryId,
+        updateby: 'admin',
+      }
+    };
+    return storageRef.updateMetadata(newMetadata)
+      .toPromise()
+      .then(() => {
+        console.log('Metadata updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating metadata:', error);
+        throw error;
+      });
+  }
   async getCategoryList() {
     this.getCategoryDataList = await this.getData.getFromFirebase('category');
     console.log('getCategoryDataList === ', this.getCategoryDataList);
   }
 
-  // async editInfo() {
-  //   // const modal = await this.modalController.create({
-  //   //   component: CategoryPageModule,
-  //   //   componentProps: {
-  //   //     categoryList: this.getCategoryDataList // You can pass any data to the modal here, such as the current category.
-  //   //   },
-  //   // });
-
-  //   // modal.onDidDismiss().then((data: any) => {
-  //   //   if (data.role === 'save') {
-  //   //     const selectedCategory = data.data;
-  //   //     const selectedVideo = this.getSelectedVideo(); // Replace this with your logic to get the selected video
-
-  //   //     if (selectedVideo) {
-  //   //       selectedVideo.category = selectedCategory;
-  //   //       console.log('selectedCategory === ', selectedCategory);
-  //   //     }
-
-  //   //   }
-  //   // });
-
-  //   // return await modal.present();
-  // }
 
   async editInfo(video: any) {
+    console.log("video === ", video);
     const modal = await this.modalController.create({
       component: ModalCategoryPage,
-      componentProps: {
-        callback: this.updateCategory.bind(this) // Pass the callback function
-      }
+
     });
+    modal.onDidDismiss().then((data: any) => {
+      console.log("data === ", data);
+      if (data.role == 'save') {
+        const selectedCategory = data.data.category_name;
+        const filePath = '/uploads/general/' + video.name;
+        console.log("filePath === ", filePath);
+        this.updateFileMetadata(filePath, selectedCategory);
+      }
+    })
 
     modal.present();
   }
-
-  updateCategory(category: any) {
-    // Update the selected video's category here
-    this.selectedVideo.category = category;
-  }
-
-
 
   // commented code
   // getAllGeneralData() {

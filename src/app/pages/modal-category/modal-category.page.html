@@ -14,7 +14,7 @@
     <ion-radio-group [(ngModel)]="selectedCategory">
       <ion-list-header> Categories </ion-list-header>
       <ion-item *ngFor="let category of getCategoryDataList">
-        <ion-label>{{ category }}</ion-label>
+        <ion-label>{{ category.category_name }}</ion-label>
         <ion-radio [value]="category"></ion-radio>
       </ion-item>
     </ion-radio-group>
