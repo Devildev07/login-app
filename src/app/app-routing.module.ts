@@ -148,6 +148,10 @@ const routes: Routes = [
     path: 'modal-category',
     loadChildren: () => import('./pages/modal-category/modal-category.module').then( m => m.ModalCategoryPageModule)
   },
+  {
+    path: 'add-playlist',
+    loadChildren: () => import('./pages/addData/add-playlist/add-playlist.module').then( m => m.AddPlaylistPageModule)
+  },
 
 ];
 
