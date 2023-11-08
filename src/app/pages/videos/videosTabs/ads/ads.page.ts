@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ActivatedRoute } from '@angular/router';
 import { CommonServiceService } from 'src/app/common-service.service';
+import { GetDataService } from 'src/app/otherServices/get-data.service';
+import { ModalController } from '@ionic/angular';
+import { ModalCategoryPage } from 'src/app/pages/modal-category/modal-category.page';
 
 @Component({
   selector: 'app-ads',
@@ -13,10 +16,15 @@ export class AdsPage implements OnInit {
   fileFormat?: string;
   uploadedFiles: any[] = [];
   files: any[] = [];
+  getCategoryDataList: any;
+  selectedVideo: any = {};
+
   constructor(
     public actRoute: ActivatedRoute,
+    public getData: GetDataService,
     public afStorage: AngularFireStorage,
-    public CommonService: CommonServiceService
+    public CommonService: CommonServiceService,
+    public modalController: ModalController
   ) {
     this.CommonService.userCurrentTab = 'ads';
     this.CommonService.searchText = '';
@@ -58,7 +66,7 @@ export class AdsPage implements OnInit {
               .then((metadata) => {
                 // Determine the file format based on the contentType
                 const format = this.getFileFormat(metadata.contentType);
-                
+
                 // Extract the custom category metadata
                 const category = metadata.customMetadata
                   ? metadata.customMetadata['category'] || 'Uncategorized'
@@ -122,6 +130,48 @@ export class AdsPage implements OnInit {
       return 'video';
     } else {
       return 'other';
+    }
+  }
+
+  async editInfo(video: any) {
+    console.log("video === ", video);
+    const modal = await this.modalController.create({
+      component: ModalCategoryPage,
+
+    });
+    modal.onDidDismiss().then((data: any) => {
+      console.log("data === ", data);
+      if (data.role == 'save') {
+        const selectedCategory = data.data.category_name;
+        const filePath = '/uploads/ads/' + video.name;
+        console.log("filePath === ", filePath);
+        this.updateFileMetadata(filePath, selectedCategory);
+      }
+    })
+
+    modal.present();
+  }
+
+  async getCategoryList() {
+    this.getCategoryDataList = await this.getData.getFromFirebase('category');
+    console.log('getCategoryDataList === ', this.getCategoryDataList);
+  }
+
+  async updateFileMetadata(filePath: string, categoryId: any): Promise<void> {
+    const storageRef = this.afStorage.ref(filePath);
+    const newMetadata = {
+      customMetadata: {
+        category: categoryId,
+        updateby: 'admin',
+      }
+    };
+    try {
+      await storageRef.updateMetadata(newMetadata)
+        .toPromise();
+      console.log('Metadata updated successfully');
+    } catch (error) {
+      console.error('Error updating metadata:', error);
+      throw error;
     }
   }
 }

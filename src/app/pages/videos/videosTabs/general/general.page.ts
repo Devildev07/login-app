@@ -128,7 +128,7 @@ export class GeneralPage implements OnInit {
     }
   }
 
-  updateFileMetadata(filePath: string, categoryId: any): Promise<void> {
+  async updateFileMetadata(filePath: string, categoryId: any): Promise<void> {
     const storageRef = this.afStorage.ref(filePath);
     const newMetadata = {
       customMetadata: {
@@ -136,21 +136,20 @@ export class GeneralPage implements OnInit {
         updateby: 'admin',
       }
     };
-    return storageRef.updateMetadata(newMetadata)
-      .toPromise()
-      .then(() => {
-        console.log('Metadata updated successfully');
-      })
-      .catch((error) => {
-        console.error('Error updating metadata:', error);
-        throw error;
-      });
+    try {
+      await storageRef.updateMetadata(newMetadata)
+        .toPromise();
+      console.log('Metadata updated successfully');
+    } catch (error) {
+      console.error('Error updating metadata:', error);
+      throw error;
+    }
   }
+
   async getCategoryList() {
     this.getCategoryDataList = await this.getData.getFromFirebase('category');
     console.log('getCategoryDataList === ', this.getCategoryDataList);
   }
-
 
   async editInfo(video: any) {
     console.log("video === ", video);

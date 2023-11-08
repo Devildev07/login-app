@@ -3,17 +3,23 @@
     <ion-row class="ion-padding-horizontal">
       <ion-col class="ion-text-left" sizeMd="4">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal">Video Name</ion-card-subtitle>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Video Name</ion-card-subtitle
+          >
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="2">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal">Duration</ion-card-subtitle>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Duration</ion-card-subtitle
+          >
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="3">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal">Playlilst Count</ion-card-subtitle>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Playlilst Count</ion-card-subtitle
+          >
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="3">
@@ -26,11 +32,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngFor=" let files of uploadedFiles |search:CommonService.searchText">
+  <ion-list
+    *ngFor=" let files of uploadedFiles |search:CommonService.searchText"
+  >
     <ion-row class="ion-padding-horizontal ion-align-items-center">
       <ion-col class="" sizeMd="0.5">
-        <ion-icon size="large" name="play-circle-outline"
-          (click)="CommonService.openVideoModal(files.downloadURL)"></ion-icon>
+        <ion-icon
+          size="large"
+          name="play-circle-outline"
+          (click)="CommonService.openVideoModal(files.downloadURL)"
+        ></ion-icon>
       </ion-col>
 
       <ion-col class="ion-text-left text-sm" sizeMd="3.5">
@@ -38,50 +49,32 @@
           <ion-title>
             <ion-card-subtitle>{{files.name}}</ion-card-subtitle>
           </ion-title>
-          <!-- <ion-card *ngIf="files.fileFormat === 'image'">
-            <ion-card-content>
-              <img [src]="files.downloadURL" alt="Uploaded Image" />
-            </ion-card-content>
-          </ion-card> -->
-
-          <!-- <ion-card *ngIf="files.fileFormat === 'video'">
-            <ion-card-content>
-              <video
-                [src]="files.downloadURL"
-                controls
-                style="width: 100%"
-              ></video>
-            </ion-card-content>
-          </ion-card> -->
-
-          <!-- <ion-card *ngIf="files.fileFormat === 'unknown'">
-            <ion-card-content>
-              Please select a file to upload! or Unknown file format. Supported
-              formats: JPG, JPEG, PNG, MP4, AVI, MOV.
-            </ion-card-content>
-          </ion-card> -->
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="2">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal">{{files.duration}} sec /
-            {{files.fileFormat}}</ion-card-subtitle>
-          <!-- <ion-card-subtitle class="ion-padding-horizontal"
-            >{{files.fileFormat}}</ion-card-subtitle
-          > -->
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >{{files.duration}} sec / {{files.fileFormat}}</ion-card-subtitle
+          >
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="3">
         <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal">{{files.category}}</ion-card-subtitle>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >{{files.category}}</ion-card-subtitle
+          >
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center" sizeMd="3">
-        <ion-button shape="round" color="primary">
+        <ion-button shape="round" color="primary" (click)="editInfo(files)">
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
 
-        <ion-button shape="round" color="danger" (click)="deleteFile(files.downloadURL)">
+        <ion-button
+          shape="round"
+          color="danger"
+          (click)="deleteFile(files.downloadURL)"
+        >
           <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
       </ion-col>
@@ -89,7 +82,12 @@
   </ion-list>
 
   <!-- fab-btn -->
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" style="margin: 0 2rem 2rem 0">
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    style="margin: 0 2rem 2rem 0"
+  >
     <ion-fab-button [routerLink]="['/add-videos']">
       <ion-icon name="cloud-upload-outline"></ion-icon>
     </ion-fab-button>
