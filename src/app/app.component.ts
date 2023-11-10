@@ -37,7 +37,7 @@ export class AppComponent {
   public appPages = [
     { heading: 'Videos', url: '/videos/general', icon: 'videocam' },
     { heading: 'Devices', url: '/devices', icon: 'phone-portrait' },
-    { heading: 'Playlist', url: '/playlist', icon: 'play' },
+    { heading: 'Playlist', url: '/playlist/master_playlist', icon: 'play' },
     { heading: 'Category', url: '/category', icon: 'apps' },
     { heading: 'Locations', url: '/locations', icon: 'location' },
     { heading: 'Campaign', url: '/campaign', icon: 'barcode' },

@@ -1,13 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>child-playlist</ion-title>
+    <ion-title>Child Playlist</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">child-playlist</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- fab-btn -->
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    style="margin: 0 2rem 2rem 0"
+  >
+    <ion-fab-button [routerLink]="['/add-playlist']">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
