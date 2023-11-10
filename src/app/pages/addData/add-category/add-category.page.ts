@@ -11,9 +11,6 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-
-
-
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.page.html',
@@ -26,19 +23,19 @@ export class AddCategoryPage implements OnInit {
   list: any;
   getCategoryDataList: any;
 
-
   constructor(
-    private firestore: Firestore, public route: Router,
+    private firestore: Firestore,
+    public route: Router,
     public getData: GetDataService,
     private location: Location
-    // private navParams: NavParams,
-  ) {
+  ) // private navParams: NavParams,
+  {
     // this.list = this.avtRoute.snapshot.paramMap.get('getCategoryDataList');
     // console.log('catData list', this.list);
   }
 
   ngOnInit() {
-    this.getCategoryList()
+    this.getCategoryList();
   }
 
   async getCategoryList() {
@@ -54,7 +51,7 @@ export class AddCategoryPage implements OnInit {
     addDoc(collectionInstance, categoryForm.value)
       .then(() => {
         // alert('Data Sent Secessfully');
-        console.log("categoryForm.value === ", catValue);
+        console.log('categoryForm.value === ', catValue);
         this.getData.myEventEmitter.emit(catValue);
       })
       .catch((error) => {
