@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './otherServices/search.pipe';
+import { GeneralVideoModalComponent } from './components/general-video-modal/general-video-modal.component';
+
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule
     ],
-    declarations: [SearchPipe],
-    exports: [SearchPipe],
+    declarations: [SearchPipe, GeneralVideoModalComponent],
+    exports: [SearchPipe, GeneralVideoModalComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule { }

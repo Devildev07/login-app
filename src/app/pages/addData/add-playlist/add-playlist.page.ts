@@ -8,6 +8,11 @@ import {
   addDoc,
   DocumentData,
 } from '@angular/fire/firestore';
+import { CommonServiceService } from 'src/app/common-service.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { ModalController } from '@ionic/angular';
+import { GeneralVideoModalComponent } from 'src/app/components/general-video-modal/general-video-modal.component';
+
 
 @Component({
   selector: 'app-add-playlist',
@@ -16,13 +21,19 @@ import {
 })
 export class AddPlaylistPage implements OnInit {
   getCategoryDataList: any; // Define your categories here
+  uploadedFiles: any[] = [];
+  getSelectedVideo: any[] = [];
 
   constructor(
     private firestore: Firestore,
-    public getData: GetDataService,
     public route: Router,
-    private location: Location
-  ) {}
+    private location: Location,
+    public getData: GetDataService,
+    public CommonService: CommonServiceService,
+    public afStorage: AngularFireStorage,
+    public modalController: ModalController
+
+  ) { }
 
   ngOnInit() {
     this.getCategoryList();
@@ -47,7 +58,7 @@ export class AddPlaylistPage implements OnInit {
   async addPlaylist(playListForm: any) {
     // Get the form data
     const formData = playListForm.value;
-console.log('Add Playlist from add page', playListForm.value);
+    console.log('Add Playlist from add page', playListForm.value);
 
     // Add the playlist to Firebase
 
@@ -56,4 +67,29 @@ console.log('Add Playlist from add page', playListForm.value);
     // Reset the form
     playListForm.reset();
   }
+
+  // open general modal
+  async openGeneralVideoModal() {
+    const modal = await this.modalController.create({
+      component: GeneralVideoModalComponent,
+      componentProps: {
+        videos: this.uploadedFiles,
+      },
+    });
+
+    modal.onDidDismiss().then((data) => {
+      console.log('Modal data', data);
+      if (data.data !== undefined) {
+        const selectedVideos = data.data;
+        console.log('Selected Videos:', selectedVideos);
+        this.getSelectedVideo = selectedVideos;
+      }
+    });
+
+
+    return await modal.present();
+  }
+
+  // get general data
+
 }

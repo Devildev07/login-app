@@ -60,4 +60,22 @@
     ></ion-toast>
     <!--  -->
   </form>
+  <!-- selected video list -->
+  <ion-list>
+    <ion-item *ngFor="let video of getSelectedVideo">
+      <ion-label>{{ video.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- fab-btn -->
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    style="margin: 0 2rem 2rem 0"
+  >
+    <ion-fab-button (click)="openGeneralVideoModal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
