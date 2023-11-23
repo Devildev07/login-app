@@ -11,7 +11,8 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
   styleUrls: ['./general-video-modal.component.scss'],
 })
 export class GeneralVideoModalComponent implements OnInit {
-  @Input() uploadedFiles: any[] = [];
+  uploadedFiles: any[] = [];
+  @Input() videos: any[] = [];
   // uploadedFiles: any[] = [];
 
   constructor(private modalController: ModalController,
@@ -21,6 +22,7 @@ export class GeneralVideoModalComponent implements OnInit {
 
   ngOnInit() {
     this.getAllGeneralData();
+    console.log("videos === ", this.videos);
   }
 
   closeModal() {
@@ -72,8 +74,15 @@ export class GeneralVideoModalComponent implements OnInit {
                     duration: duration,
                     category: category,
                   };
-
-                  this.uploadedFiles.push(file);
+                  let isNew: boolean = true;
+                  this.videos.forEach((video: any) => {
+                    if (video.downloadURL === file.downloadURL) {
+                      isNew = false;
+                    }
+                  })
+                  if (isNew) {
+                    this.uploadedFiles.push(file);
+                  }
                   this.CommonService.generalCount = this.uploadedFiles.length;
                 });
 

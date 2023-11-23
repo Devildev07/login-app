@@ -70,10 +70,12 @@ export class AddPlaylistPage implements OnInit {
 
   // open general modal
   async openGeneralVideoModal() {
+    console.log("getSelectedVideo === ", this.getSelectedVideo);
+    console.log("this.uploadedFiles === ", this.uploadedFiles);
     const modal = await this.modalController.create({
       component: GeneralVideoModalComponent,
       componentProps: {
-        videos: this.uploadedFiles,
+        videos: this.getSelectedVideo,
       },
     });
 
@@ -82,7 +84,8 @@ export class AddPlaylistPage implements OnInit {
       if (data.data !== undefined) {
         const selectedVideos = data.data;
         console.log('Selected Videos:', selectedVideos);
-        this.getSelectedVideo = selectedVideos;
+        this.getSelectedVideo.push(...selectedVideos);
+
       }
     });
 

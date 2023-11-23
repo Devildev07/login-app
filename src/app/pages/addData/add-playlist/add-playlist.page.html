@@ -27,7 +27,6 @@
       ngModel
     >
     </ion-input>
-
     <!--  -->
     <ion-select
       name="category"
@@ -42,6 +41,14 @@
         >{{catList.category_name}}</ion-select-option
       >
     </ion-select>
+    <!--  -->
+    <!-- selected video list -->
+    <ion-list>
+      <ion-item *ngFor="let video of getSelectedVideo">
+        <ion-label>{{ video.name }}</ion-label>
+      </ion-item>
+    </ion-list>
+
     <!--  -->
     <ion-button
       type="submit"
@@ -60,12 +67,6 @@
     ></ion-toast>
     <!--  -->
   </form>
-  <!-- selected video list -->
-  <ion-list>
-    <ion-item *ngFor="let video of getSelectedVideo">
-      <ion-label>{{ video.name }}</ion-label>
-    </ion-item>
-  </ion-list>
 
   <!-- fab-btn -->
   <ion-fab
