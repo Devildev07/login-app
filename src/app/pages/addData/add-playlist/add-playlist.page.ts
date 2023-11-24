@@ -32,8 +32,7 @@ export class AddPlaylistPage implements OnInit {
     public CommonService: CommonServiceService,
     public afStorage: AngularFireStorage,
     public modalController: ModalController
-
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getCategoryList();
@@ -54,15 +53,35 @@ export class AddPlaylistPage implements OnInit {
     this.location.replaceState('/playlist/master_playlist');
   }
 
-  //adding playlist to firebase
+  // //adding playlist to firebase
+  // async addPlaylist(playListForm: any) {
+  //   // Get the form data
+  //   const formData = playListForm.value;
+  //   console.log('Add Playlist from add page', playListForm.value);
+
+  //   // Add the playlist to Firebase
+
+  //   await this.getData.addDataToFireBase('playlist', formData);
+
+  //   // Reset the form
+  //   playListForm.reset();
+  // }
+  // Adding playlist to Firebase
   async addPlaylist(playListForm: any) {
     // Get the form data
     const formData = playListForm.value;
     console.log('Add Playlist from add page', playListForm.value);
 
-    // Add the playlist to Firebase
+    // Get the selected video list
+    const selectedVideoList = this.getSelectedVideo.map((video) => ({
+      name: video.name, downloadURL: video.downloadURL,
+    }));
 
-    await this.getData.addDataToFireBase('playlist', formData);
+    // Combine form data and selected video list
+    const dataToSave = { ...formData, selectedVideoList };
+
+    // Add the playlist to Firebase
+    await this.getData.addDataToFireBase('playlist', dataToSave);
 
     // Reset the form
     playListForm.reset();
@@ -70,8 +89,8 @@ export class AddPlaylistPage implements OnInit {
 
   // open general modal
   async openGeneralVideoModal() {
-    console.log("getSelectedVideo === ", this.getSelectedVideo);
-    console.log("this.uploadedFiles === ", this.uploadedFiles);
+    console.log('getSelectedVideo === ', this.getSelectedVideo);
+    console.log('this.uploadedFiles === ', this.uploadedFiles);
     const modal = await this.modalController.create({
       component: GeneralVideoModalComponent,
       componentProps: {
@@ -85,14 +104,11 @@ export class AddPlaylistPage implements OnInit {
         const selectedVideos = data.data;
         console.log('Selected Videos:', selectedVideos);
         this.getSelectedVideo.push(...selectedVideos);
-
       }
     });
-
 
     return await modal.present();
   }
 
   // get general data
-
 }

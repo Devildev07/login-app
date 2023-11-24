@@ -43,7 +43,12 @@
     </ion-select>
     <!--  -->
     <!-- selected video list -->
-    <ion-list>
+    <ion-item>
+      <ion-badge slot="end">{{getSelectedVideo.length}}</ion-badge>
+      <ion-label>Videos</ion-label>
+    </ion-item>
+    <!--  -->
+    <ion-list name="selected_video">
       <ion-item *ngFor="let video of getSelectedVideo">
         <ion-label>{{ video.name }}</ion-label>
       </ion-item>
@@ -53,9 +58,11 @@
     <ion-button
       type="submit"
       id="open-toast"
-      expand="block"
+      expand="full"
+      shape="round"
       (click)="navigateToCategory()"
     >
+      Create Playlist
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-button>
 
