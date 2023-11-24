@@ -22,7 +22,7 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
-    "@capacitor/android": "^5.2.2",
+    "@capacitor/android": "5.4.2",
     "@capacitor/app": "5.0.6",
     "@capacitor/core": "^5.4.2",
     "@capacitor/haptics": "5.0.6",
@@ -46,7 +46,7 @@
     "@angular/compiler": "^16.0.0",
     "@angular/compiler-cli": "^16.0.0",
     "@angular/language-service": "^16.0.0",
-    "@capacitor/cli": "5.2.2",
+    "@capacitor/cli": "5.4.2",
     "@ionic/angular-toolkit": "^9.0.0",
     "@types/jasmine": "~4.3.0",
     "@types/node": "^12.11.1",
@@ -66,5 +66,13 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "ts-node": "^8.3.0",
     "typescript": "~5.0.2"
-  }
+  },
+  "browserslist": [
+    "Chrome >=79",
+    "ChromeAndroid >=79",
+    "Firefox >=70",
+    "Edge >=79",
+    "Safari >=14",
+    "iOS >=14"
+  ]
 }
