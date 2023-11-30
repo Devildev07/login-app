@@ -17,7 +17,7 @@ export class GetDataService {
   constructor(
     private firestore: Firestore,
     private modalCntrl: ModalController
-  ) {}
+  ) { }
 
   async getFromFirebase(key: any) {
     const collectionInstance = collection(this.firestore, key);
@@ -49,6 +49,7 @@ export class GetDataService {
       .then(() => {
         // alert('Data Sent Secessfully');
         console.log('myForm.value === ', formValue);
+        this.myEventEmitter.emit(formValue);
         return true;
       })
       .catch((error) => {

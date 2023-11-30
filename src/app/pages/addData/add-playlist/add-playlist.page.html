@@ -42,6 +42,21 @@
       >
     </ion-select>
     <!--  -->
+    <ion-select
+      name="type"
+      ngModel
+      label="Select Type"
+      label-placement="floating"
+      placeholder="Select Type"
+    >
+      <ion-select-option value="master_playlist"
+        >Master Playlist</ion-select-option
+      >
+      <ion-select-option value="child_playlist"
+        >Child Playlist</ion-select-option
+      >
+    </ion-select>
+    <!--  -->
     <!-- selected video list -->
     <ion-item>
       <ion-badge slot="end">{{getSelectedVideo.length}}</ion-badge>
@@ -83,7 +98,7 @@
     style="margin: 0 2rem 2rem 0"
   >
     <ion-fab-button (click)="openGeneralVideoModal()">
-      <ion-icon name="add-outline"></ion-icon>
+      <ion-icon name="add-outline"> </ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 
@@ -13,16 +13,41 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
 export class MasterPlaylistPage implements OnInit {
   getMasterPlaylistData: any;
 
-  constructor(public CommonService: CommonServiceService, public getDatas: GetDataService, public firestore: Firestore) { }
+  constructor(public CommonService: CommonServiceService, public getDatas: GetDataService, public firestore: Firestore) {
+    getDatas.myEventEmitter.subscribe((data) => {
+      this.getMasterPlaylistData.push(data);
+      console.log('Received event with data:', data);
+    })
+  }
 
   ngOnInit() {
-    this.getMasterPlaylist()
+    this.getMasterPlaylist();
     this.CommonService.searchText = '';
   }
 
+  // get-query
   async getMasterPlaylist() {
-    this.getMasterPlaylistData = await this.getDatas.getFromFirebase('playlist');
+    const getPlaylistData: any = await this.getDatas.getFromFirebase('playlist');
+    const filterData = getPlaylistData.filter((data: any) => {
+      return data.type == 'master_playlist';
+    })
+    console.log("filterData", filterData);
+    this.getMasterPlaylistData = filterData;
     console.log("getMasterPlaylistData", this.getMasterPlaylistData);
+  }
+
+  // delete-query
+  deleteMasterPlaylist(id: string) {
+    const docInstance = doc(this.firestore, 'playlist', id);
+    deleteDoc(docInstance)
+      .then(() => {
+        console.log('deleted');
+        this.getMasterPlaylist();
+      })
+      .catch((err) => {
+        console.log('not deleted', err);
+      });
+
   }
 
 }

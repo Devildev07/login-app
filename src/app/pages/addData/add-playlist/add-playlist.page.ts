@@ -32,7 +32,7 @@ export class AddPlaylistPage implements OnInit {
     public CommonService: CommonServiceService,
     public afStorage: AngularFireStorage,
     public modalController: ModalController
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getCategoryList();
@@ -53,19 +53,6 @@ export class AddPlaylistPage implements OnInit {
     this.location.replaceState('/playlist/master_playlist');
   }
 
-  // //adding playlist to firebase
-  // async addPlaylist(playListForm: any) {
-  //   // Get the form data
-  //   const formData = playListForm.value;
-  //   console.log('Add Playlist from add page', playListForm.value);
-
-  //   // Add the playlist to Firebase
-
-  //   await this.getData.addDataToFireBase('playlist', formData);
-
-  //   // Reset the form
-  //   playListForm.reset();
-  // }
   // Adding playlist to Firebase
   async addPlaylist(playListForm: any) {
     // Get the form data

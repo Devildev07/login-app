@@ -70,7 +70,11 @@
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
 
-        <ion-button shape="round" color="danger">
+        <ion-button
+          shape="round"
+          color="danger"
+          (click)="deleteMasterPlaylist(masterPlaylist.id)"
+        >
           <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
       </ion-col>
