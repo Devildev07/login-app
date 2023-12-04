@@ -3,8 +3,6 @@ import { Firestore, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 
-
-
 @Component({
   selector: 'app-master-playlist',
   templateUrl: './master-playlist.page.html',
@@ -13,11 +11,15 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
 export class MasterPlaylistPage implements OnInit {
   getMasterPlaylistData: any;
 
-  constructor(public CommonService: CommonServiceService, public getDatas: GetDataService, public firestore: Firestore) {
+  constructor(
+    public CommonService: CommonServiceService,
+    public getDatas: GetDataService,
+    public firestore: Firestore
+  ) {
     getDatas.myEventEmitter.subscribe((data) => {
       this.getMasterPlaylistData.push(data);
       console.log('Received event with data:', data);
-    })
+    });
   }
 
   ngOnInit() {
@@ -27,13 +29,15 @@ export class MasterPlaylistPage implements OnInit {
 
   // get-query
   async getMasterPlaylist() {
-    const getPlaylistData: any = await this.getDatas.getFromFirebase('playlist');
+    const getPlaylistData: any = await this.getDatas.getFromFirebase(
+      'playlist'
+    );
     const filterData = getPlaylistData.filter((data: any) => {
       return data.type == 'master_playlist';
-    })
-    console.log("filterData", filterData);
+    });
+    console.log('filterData', filterData);
     this.getMasterPlaylistData = filterData;
-    console.log("getMasterPlaylistData", this.getMasterPlaylistData);
+    console.log('getMasterPlaylistData', this.getMasterPlaylistData);
   }
 
   // delete-query
@@ -47,7 +51,5 @@ export class MasterPlaylistPage implements OnInit {
       .catch((err) => {
         console.log('not deleted', err);
       });
-
   }
-
 }

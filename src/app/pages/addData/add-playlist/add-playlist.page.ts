@@ -13,7 +13,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ModalController } from '@ionic/angular';
 import { GeneralVideoModalComponent } from 'src/app/components/general-video-modal/general-video-modal.component';
 
-
 @Component({
   selector: 'app-add-playlist',
   templateUrl: './add-playlist.page.html',
@@ -32,7 +31,7 @@ export class AddPlaylistPage implements OnInit {
     public CommonService: CommonServiceService,
     public afStorage: AngularFireStorage,
     public modalController: ModalController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getCategoryList();
@@ -46,11 +45,16 @@ export class AddPlaylistPage implements OnInit {
 
   // navigate to playlist page
   async navigateToCategory() {
-    await this.route.navigateByUrl('/playlist/master_playlist', {
-      skipLocationChange: true,
-    });
+    await this.route.navigateByUrl(
+      '/playlist/' + this.CommonService.userCurrentTab,
+      {
+        skipLocationChange: true,
+      }
+    );
     this.getCategoryList();
-    this.location.replaceState('/playlist/master_playlist');
+    this.location.replaceState(
+      '/playlist/' + this.CommonService.userCurrentTab
+    );
   }
 
   // Adding playlist to Firebase
@@ -61,7 +65,8 @@ export class AddPlaylistPage implements OnInit {
 
     // Get the selected video list
     const selectedVideoList = this.getSelectedVideo.map((video) => ({
-      name: video.name, downloadURL: video.downloadURL,
+      name: video.name,
+      downloadURL: video.downloadURL,
     }));
 
     // Combine form data and selected video list
