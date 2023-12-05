@@ -17,4 +17,4 @@ import { AddPlaylistPage } from './add-playlist.page';
   ],
   declarations: [AddPlaylistPage]
 })
-export class AddPlaylistPageModule {}
+export class AddPlaylistPageModule { }
