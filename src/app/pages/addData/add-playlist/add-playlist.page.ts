@@ -37,7 +37,7 @@ export class AddPlaylistPage implements OnInit {
   ngOnInit() {
     this.getCategoryList();
     // this.getPlaylistData();
-    console.log("'/playlist/' + this.CommonService.userCurrentTab, === ", '/playlist/' + this.CommonService.userCurrentTab,);
+    // console.log("'/playlist/' + this.CommonService.playlistCurrentTab, === ", '/playlist/' + this.CommonService.playlistCurrentTab,);
   }
 
   // Get category
@@ -48,17 +48,17 @@ export class AddPlaylistPage implements OnInit {
 
   // navigate to playlist page
   async navigateToCategory() {
-    console.log("'/playlist/' + this.CommonService.userCurrentTab, === ", '/playlist/' + this.CommonService.userCurrentTab,);
+    console.log("'/playlist/' + this.CommonService.playlistCurrentTab, === ", '/playlist/' + this.CommonService.playlistCurrentTab,);
 
     await this.route.navigateByUrl(
-      '/playlist/' + this.CommonService.userCurrentTab,
+      '/playlist/' + this.CommonService.playlistCurrentTab,
       {
         skipLocationChange: true,
       }
     );
     this.getCategoryList();
     // this.location.replaceState(
-    //   '/playlist/' + this.CommonService.userCurrentTab
+    //   '/playlist/' + this.CommonService.playlistCurrentTab
     // );
   }
 

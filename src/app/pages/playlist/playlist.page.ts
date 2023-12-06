@@ -21,8 +21,8 @@ export class PlaylistPage implements OnInit {
   }
 
   setCurrentTab(ev: any) {
-    this.common.userCurrentTab = ev.tab;
-    console.log('current_tab::', this.common.userCurrentTab);
+    this.common.playlistCurrentTab = ev.tab;
+    console.log('current_tab::', this.common.playlistCurrentTab);
   }
 
   handleInput(event: any) {
