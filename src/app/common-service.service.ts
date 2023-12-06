@@ -13,6 +13,7 @@ import { VideoPopupComponent } from 'src/app/components/video-popup/video-popup.
 export class CommonServiceService {
   searchText: any = '';
   userCurrentTab = '';
+  playlistCurrentTab = '';
   doctorCount = 0;
   generalCount = 0;
   adsCount = 0;
@@ -20,7 +21,7 @@ export class CommonServiceService {
     private fireStorage: AngularFireStorage,
     private modalCtrl: ModalController,
     public popUps: PopoverController
-  ) {}
+  ) { }
 
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));

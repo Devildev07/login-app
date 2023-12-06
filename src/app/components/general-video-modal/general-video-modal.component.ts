@@ -13,7 +13,7 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
 export class GeneralVideoModalComponent implements OnInit {
   uploadedFiles: any[] = [];
   @Input() videos: any[] = [];
-  // uploadedFiles: any[] = [];
+  type: any = 'general';
 
   constructor(private modalController: ModalController,
     public getData: GetDataService,
@@ -21,8 +21,15 @@ export class GeneralVideoModalComponent implements OnInit {
     public afStorage: AngularFireStorage,) { }
 
   ngOnInit() {
-    this.getAllGeneralData();
+    if (this.type == 'master_playlist') {
+
+      this.getAllVideoData('/uploads/general/');
+    } else {
+      this.getAllVideoData('/uploads/doctor/');
+      this.getAllVideoData('/uploads/ads/');
+    }
     console.log("videos === ", this.videos);
+    console.log("type === ", this.type);
   }
 
   closeModal() {
@@ -35,10 +42,11 @@ export class GeneralVideoModalComponent implements OnInit {
     console.log('selectedVideos === ', selectedVideos);
   }
 
-  getAllGeneralData() {
+  //getAllVideoData
+  getAllVideoData(url: any) {
     this.uploadedFiles = [];
     this.CommonService.generalCount = this.uploadedFiles.length;
-    const storageRef = this.afStorage.ref('/uploads/general/');
+    const storageRef = this.afStorage.ref(url);
     console.log('storageRef', storageRef);
 
     // List all files in the 'uploads' folder

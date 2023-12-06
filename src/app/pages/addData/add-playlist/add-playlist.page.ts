@@ -19,10 +19,11 @@ import { GeneralVideoModalComponent } from 'src/app/components/general-video-mod
   styleUrls: ['./add-playlist.page.scss'],
 })
 export class AddPlaylistPage implements OnInit {
-  getCategoryDataList: any; // Define your categories here
+  getCategoryDataList: any;
+  getPlaylistDataList: any;
   uploadedFiles: any[] = [];
   getSelectedVideo: any[] = [];
-
+  type: any = 'master_playlist';
   constructor(
     private firestore: Firestore,
     public route: Router,
@@ -31,10 +32,12 @@ export class AddPlaylistPage implements OnInit {
     public CommonService: CommonServiceService,
     public afStorage: AngularFireStorage,
     public modalController: ModalController
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getCategoryList();
+    // this.getPlaylistData();
+    console.log("'/playlist/' + this.CommonService.userCurrentTab, === ", '/playlist/' + this.CommonService.userCurrentTab,);
   }
 
   // Get category
@@ -45,6 +48,8 @@ export class AddPlaylistPage implements OnInit {
 
   // navigate to playlist page
   async navigateToCategory() {
+    console.log("'/playlist/' + this.CommonService.userCurrentTab, === ", '/playlist/' + this.CommonService.userCurrentTab,);
+
     await this.route.navigateByUrl(
       '/playlist/' + this.CommonService.userCurrentTab,
       {
@@ -52,9 +57,9 @@ export class AddPlaylistPage implements OnInit {
       }
     );
     this.getCategoryList();
-    this.location.replaceState(
-      '/playlist/' + this.CommonService.userCurrentTab
-    );
+    // this.location.replaceState(
+    //   '/playlist/' + this.CommonService.userCurrentTab
+    // );
   }
 
   // Adding playlist to Firebase
@@ -87,6 +92,7 @@ export class AddPlaylistPage implements OnInit {
       component: GeneralVideoModalComponent,
       componentProps: {
         videos: this.getSelectedVideo,
+        type: this.type,
       },
     });
 
@@ -102,5 +108,15 @@ export class AddPlaylistPage implements OnInit {
     return await modal.present();
   }
 
-  // get general data
+  // // get playlist data
+  // async getPlaylistData() {
+  //   this.getPlaylistDataList = await this.getData.getFromFirebase('playlist');
+  //   const filterData = this.getPlaylistDataList.filter((data: any) => {
+  //     return data.type == 'master_playlist';
+  //   })
+
+  //   this.getPlaylistDataList = filterData;
+  //   console.log('getPlaylistDataList === ', this.getPlaylistDataList);
+  // }
+
 }
