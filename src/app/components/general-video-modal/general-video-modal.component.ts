@@ -4,7 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
 
-
 @Component({
   selector: 'app-general-video-modal',
   templateUrl: './general-video-modal.component.html',
@@ -15,21 +14,22 @@ export class GeneralVideoModalComponent implements OnInit {
   @Input() videos: any[] = [];
   type: any = 'general';
 
-  constructor(private modalController: ModalController,
+  constructor(
+    private modalController: ModalController,
     public getData: GetDataService,
     public CommonService: CommonServiceService,
-    public afStorage: AngularFireStorage,) { }
+    public afStorage: AngularFireStorage
+  ) {}
 
   ngOnInit() {
     if (this.type == 'master_playlist') {
-
       this.getAllVideoData('/uploads/general/');
     } else {
       this.getAllVideoData('/uploads/doctor/');
       this.getAllVideoData('/uploads/ads/');
     }
-    console.log("videos === ", this.videos);
-    console.log("type === ", this.type);
+    console.log('videos === ', this.videos);
+    console.log('type === ', this.type);
   }
 
   closeModal() {
@@ -37,7 +37,9 @@ export class GeneralVideoModalComponent implements OnInit {
   }
 
   selectVideos() {
-    const selectedVideos = this.uploadedFiles.filter((video: any) => video.selected);
+    const selectedVideos = this.uploadedFiles.filter(
+      (video: any) => video.selected
+    );
     this.modalController.dismiss(selectedVideos);
     console.log('selectedVideos === ', selectedVideos);
   }
@@ -58,8 +60,7 @@ export class GeneralVideoModalComponent implements OnInit {
             item
               .getMetadata()
               .then((metadata) => {
-                console.log("metadata === ", metadata.customMetadata);
-
+                console.log('metadata === ', metadata.customMetadata);
 
                 // Extract the custom category metadata
                 const category = metadata.customMetadata
@@ -87,7 +88,7 @@ export class GeneralVideoModalComponent implements OnInit {
                     if (video.downloadURL === file.downloadURL) {
                       isNew = false;
                     }
-                  })
+                  });
                   if (isNew) {
                     this.uploadedFiles.push(file);
                   }
@@ -108,5 +109,4 @@ export class GeneralVideoModalComponent implements OnInit {
       }
     );
   }
-
 }

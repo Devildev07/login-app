@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Master Playlist</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!--  -->
+<ion-content>
+  <ion-list>
+    <ion-item >
+      <ion-label>{{0 }}</ion-label>
+      <!-- <ion-checkbox [(ngModel)]="video.selected"></ion-checkbox> -->
+      <ion-checkbox ></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<!--  -->
+<ion-footer>
+  <ion-button expand="full" shape="round" (click)="selectMasterPlaylist()"
+    >Select</ion-button
+  >
+</ion-footer>

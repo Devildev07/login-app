@@ -12,6 +12,7 @@ import { CommonServiceService } from 'src/app/common-service.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ModalController } from '@ionic/angular';
 import { GeneralVideoModalComponent } from 'src/app/components/general-video-modal/general-video-modal.component';
+import { PlaylistModalComponent } from 'src/app/components/playlist-modal/playlist-modal.component';
 
 @Component({
   selector: 'app-add-playlist',
@@ -20,10 +21,10 @@ import { GeneralVideoModalComponent } from 'src/app/components/general-video-mod
 })
 export class AddPlaylistPage implements OnInit {
   getCategoryDataList: any;
-  getPlaylistDataList: any;
   uploadedFiles: any[] = [];
   getSelectedVideo: any[] = [];
   type: any = 'master_playlist';
+
   constructor(
     private firestore: Firestore,
     public route: Router,
@@ -36,7 +37,6 @@ export class AddPlaylistPage implements OnInit {
 
   ngOnInit() {
     this.getCategoryList();
-    // this.getPlaylistData();
   }
 
   // Get category
@@ -102,14 +102,19 @@ export class AddPlaylistPage implements OnInit {
     return await modal.present();
   }
 
-  // // get playlist data
-  // async getPlaylistData() {
-  //   this.getPlaylistDataList = await this.getData.getFromFirebase('playlist');
-  //   const filterData = this.getPlaylistDataList.filter((data: any) => {
-  //     return data.type == 'master_playlist';
-  //   })
+  // open masterplaylist modal
+  async openVideoModal() {
+    console.log('clicked');
+    const modal = await this.modalController.create({
+      component: PlaylistModalComponent,
+      componentProps: {
+        type: this.type,
+      },
+    });
 
-  //   this.getPlaylistDataList = filterData;
-  //   console.log('getPlaylistDataList === ', this.getPlaylistDataList);
-  // }
+    modal.onDidDismiss().then((data) => {
+      console.log('Modal data', data);
+    });
+    return await modal.present();
+  }
 }
