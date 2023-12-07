@@ -36,7 +36,11 @@ export class MasterPlaylistPage implements OnInit {
       return data.type == 'master_playlist';
     });
 
-    filterData.sort((a: any, b: any) => (a.playList_name && b.playList_name ? a.playList_name.localeCompare(b.playList_name) : 0));
+    filterData.sort((a: any, b: any) =>
+      a.playList_name && b.playList_name
+        ? a.playList_name.localeCompare(b.playList_name)
+        : 0
+    );
 
     console.log('filterData', filterData);
     this.getMasterPlaylistData = filterData;

@@ -32,7 +32,7 @@ export class AddPlaylistPage implements OnInit {
     public CommonService: CommonServiceService,
     public afStorage: AngularFireStorage,
     public modalController: ModalController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getCategoryList();
@@ -54,9 +54,6 @@ export class AddPlaylistPage implements OnInit {
       }
     );
     this.getCategoryList();
-    // this.location.replaceState(
-    //   '/playlist/' + this.CommonService.playlistCurrentTab
-    // );
   }
 
   // Adding playlist to Firebase
@@ -115,5 +112,4 @@ export class AddPlaylistPage implements OnInit {
   //   this.getPlaylistDataList = filterData;
   //   console.log('getPlaylistDataList === ', this.getPlaylistDataList);
   // }
-
 }
