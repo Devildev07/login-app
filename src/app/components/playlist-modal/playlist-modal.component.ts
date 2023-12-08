@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CommonServiceService } from 'src/app/common-service.service';
 import { GetDataService } from 'src/app/otherServices/get-data.service';
@@ -9,7 +9,9 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
   styleUrls: ['./playlist-modal.component.scss'],
 })
 export class PlaylistModalComponent implements OnInit {
-  getMasterPlaylistData: any;
+  getMasterPlaylistData: any[] = [];
+  selectedPlaylist: any[] = [];
+  @Input() playList: any[] = [];
 
   constructor(
     private modalController: ModalController,
@@ -39,7 +41,13 @@ export class PlaylistModalComponent implements OnInit {
     console.log('getMasterPlaylistData', this.getMasterPlaylistData);
   }
 
-  selectMasterPlaylist() {}
+  selectMasterPlaylist() {
+    const selectedPlaylist = this.getMasterPlaylistData.filter(
+      (playlist: any) => playlist.selected
+    );
+    this.modalController.dismiss(selectedPlaylist);
+    console.log('selectedPlaylist', selectedPlaylist);
+  }
 
   closeModal() {
     this.modalController.dismiss();

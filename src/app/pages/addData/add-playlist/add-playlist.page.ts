@@ -23,6 +23,7 @@ export class AddPlaylistPage implements OnInit {
   getCategoryDataList: any;
   uploadedFiles: any[] = [];
   getSelectedVideo: any[] = [];
+  getSelectedPlaylist: any[] = [];
   type: any = 'master_playlist';
 
   constructor(
@@ -105,15 +106,23 @@ export class AddPlaylistPage implements OnInit {
   // open masterplaylist modal
   async openVideoModal() {
     console.log('clicked');
+    console.log('getSelectedVideo === ', this.getSelectedVideo);
+    
     const modal = await this.modalController.create({
       component: PlaylistModalComponent,
       componentProps: {
+        playlist:this.getSelectedPlaylist,
         type: this.type,
       },
     });
 
     modal.onDidDismiss().then((data) => {
       console.log('Modal data', data);
+      if (data.data !== undefined) {
+        const selectedPlaylist = data.data;
+        console.log('Selected Playlist:', selectedPlaylist);
+        this.getSelectedPlaylist.push(...selectedPlaylist);
+      }
     });
     return await modal.present();
   }
