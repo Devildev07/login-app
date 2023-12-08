@@ -68,6 +68,12 @@
         <ion-label>{{ video.name }}</ion-label>
       </ion-item>
     </ion-list>
+    <!--  -->
+    <ion-list name="selected_playlist">
+      <ion-item *ngFor="let masterPlaylist of getSelectedPlaylist">
+        <ion-label>{{masterPlaylist.playList_name}}</ion-label>
+      </ion-item>
+    </ion-list>
 
     <!--  -->
     <ion-button

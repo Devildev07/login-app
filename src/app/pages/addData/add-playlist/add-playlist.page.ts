@@ -29,7 +29,6 @@ export class AddPlaylistPage implements OnInit {
   constructor(
     private firestore: Firestore,
     public route: Router,
-    private location: Location,
     public getData: GetDataService,
     public CommonService: CommonServiceService,
     public afStorage: AngularFireStorage,
@@ -106,7 +105,7 @@ export class AddPlaylistPage implements OnInit {
   // open masterplaylist modal
   async openVideoModal() {
     console.log('clicked');
-    console.log('getSelectedVideo === ', this.getSelectedVideo);
+    console.log('getSelectedPlaylist === ', this.getSelectedPlaylist);
     
     const modal = await this.modalController.create({
       component: PlaylistModalComponent,
