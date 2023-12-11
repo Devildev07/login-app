@@ -23,8 +23,11 @@ export class AddPlaylistPage implements OnInit {
   getCategoryDataList: any;
   uploadedFiles: any[] = [];
   getSelectedVideo: any[] = [];
-  getSelectedPlaylist: any[] = [];
+  getSelectedPlaylist: any = [];
+  getPlayListData: any;
   type: any = 'master_playlist';
+
+  seletedItemLength = 0;
 
   constructor(
     private firestore: Firestore,
@@ -33,10 +36,13 @@ export class AddPlaylistPage implements OnInit {
     public CommonService: CommonServiceService,
     public afStorage: AngularFireStorage,
     public modalController: ModalController
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getCategoryList();
+    // this.getPlayList();
+    // this.seletedItemLength = this.getSelectedVideo.length + this.getSelectedPlaylist.selectedVideoList.length
+    // console.log('seletedItemLength === ', this.seletedItemLength);
   }
 
   // Get category
@@ -44,6 +50,11 @@ export class AddPlaylistPage implements OnInit {
     this.getCategoryDataList = await this.getData.getFromFirebase('category');
     console.log('getCategoryDataList === ', this.getCategoryDataList);
   }
+
+  // async getPlayList() {
+  //   this.getPlayListData = await this.getData.getFromFirebase('playlist');
+  //   console.log('getPlayListData === ', this.getPlayListData);
+  // }
 
   // navigate to playlist page
   async navigateToCategory() {
@@ -67,9 +78,22 @@ export class AddPlaylistPage implements OnInit {
       name: video.name,
       downloadURL: video.downloadURL,
     }));
+    console.log('selectedVideoList length === ', selectedVideoList.length);
+
+
+    const selectedPlayList = this.getSelectedPlaylist.map((playlist: any) => ({
+      id: playlist.id,
+      name: playlist.playList_name,
+    }))
+    console.log('selectedPlayList length === ', selectedPlayList.length);
+
 
     // Combine form data and selected video list
-    const dataToSave = { ...formData, selectedVideoList };
+    const dataToSave = { ...formData, selectedVideoList, selectedPlayList };
+    console.log('dataToSave === ', dataToSave);
+
+
+
 
     // Add the playlist to Firebase
     await this.getData.addDataToFireBase('playlist', dataToSave);
@@ -80,8 +104,8 @@ export class AddPlaylistPage implements OnInit {
 
   // open general modal
   async openGeneralVideoModal() {
-    console.log('getSelectedVideo === ', this.getSelectedVideo);
-    console.log('this.uploadedFiles === ', this.uploadedFiles);
+    // console.log('getSelectedVideo === ', this.getSelectedVideo);
+    // console.log('this.uploadedFiles === ', this.uploadedFiles);
     const modal = await this.modalController.create({
       component: GeneralVideoModalComponent,
       componentProps: {
@@ -106,11 +130,11 @@ export class AddPlaylistPage implements OnInit {
   async openVideoModal() {
     console.log('clicked');
     console.log('getSelectedPlaylist === ', this.getSelectedPlaylist);
-    
+
     const modal = await this.modalController.create({
       component: PlaylistModalComponent,
       componentProps: {
-        playlist:this.getSelectedPlaylist,
+        playlist: this.getSelectedPlaylist,
         type: this.type,
       },
     });

@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/eqeqeq -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
@@ -59,7 +60,9 @@
     <!--  -->
     <!-- selected video list -->
     <ion-item>
-      <ion-badge slot="end">{{getSelectedVideo.length}}</ion-badge>
+      <ion-badge slot="end" *ngIf="getSelectedVideo "
+        >{{getSelectedVideo.length }}</ion-badge
+      >
       <ion-label>Videos</ion-label>
     </ion-item>
     <!--  -->
@@ -71,10 +74,12 @@
     <!--  -->
     <ion-list name="selected_playlist">
       <ion-item *ngFor="let masterPlaylist of getSelectedPlaylist">
-        <ion-label>{{masterPlaylist.playList_name}}</ion-label>
+        <ion-badge slot="end"
+          >{{masterPlaylist.selectedVideoList.length}}</ion-badge
+        >
+        <ion-label>{{masterPlaylist.playList_name}} </ion-label>
       </ion-item>
     </ion-list>
-
     <!--  -->
     <ion-button
       type="submit"
