@@ -36,10 +36,11 @@ export class AddPlaylistPage implements OnInit {
     public CommonService: CommonServiceService,
     public afStorage: AngularFireStorage,
     public modalController: ModalController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getCategoryList();
+    this.showCount();
     // this.getPlayList();
     // this.seletedItemLength = this.getSelectedVideo.length + this.getSelectedPlaylist.selectedVideoList.length
     // console.log('seletedItemLength === ', this.seletedItemLength);
@@ -66,6 +67,18 @@ export class AddPlaylistPage implements OnInit {
     );
     this.getCategoryList();
   }
+  showCount() {
+    console.log(
+      'this.getSelectedPlaylist',
+      this.getSelectedPlaylist,
+      this.getSelectedPlaylist[0]?.selectedVideoList?.length
+    );
+    console.log(' this.getSelectedVideo;', this.getSelectedVideo?.length);
+
+    this.seletedItemLength =
+      this.getSelectedPlaylist[0]?.selectedVideoList?.length +
+      this.getSelectedVideo?.length;
+  }
 
   // Adding playlist to Firebase
   async addPlaylist(playListForm: any) {
@@ -80,20 +93,15 @@ export class AddPlaylistPage implements OnInit {
     }));
     console.log('selectedVideoList length === ', selectedVideoList.length);
 
-
     const selectedPlayList = this.getSelectedPlaylist.map((playlist: any) => ({
       id: playlist.id,
       name: playlist.playList_name,
-    }))
+    }));
     console.log('selectedPlayList length === ', selectedPlayList.length);
-
 
     // Combine form data and selected video list
     const dataToSave = { ...formData, selectedVideoList, selectedPlayList };
     console.log('dataToSave === ', dataToSave);
-
-
-
 
     // Add the playlist to Firebase
     await this.getData.addDataToFireBase('playlist', dataToSave);
@@ -120,6 +128,7 @@ export class AddPlaylistPage implements OnInit {
         const selectedVideos = data.data;
         console.log('Selected Videos:', selectedVideos);
         this.getSelectedVideo.push(...selectedVideos);
+        this.showCount();
       }
     });
 
@@ -144,7 +153,8 @@ export class AddPlaylistPage implements OnInit {
       if (data.data !== undefined) {
         const selectedPlaylist = data.data;
         console.log('Selected Playlist:', selectedPlaylist);
-        this.getSelectedPlaylist.push(...selectedPlaylist);
+        this.getSelectedPlaylist = [...selectedPlaylist];
+        this.showCount();
       }
     });
     return await modal.present();

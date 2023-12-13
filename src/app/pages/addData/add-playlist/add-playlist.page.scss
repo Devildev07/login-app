@@ -39,6 +39,23 @@
     // flex-basis: 25rem;
     // flex-grow: 1;
   }
+  .badge {
+    float: right;
+    margin-right: 1rem;
+  }
+  .selected_items {
+    border-radius: 10px;
+    background: var(--ion-color-light-shade);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    ion-list {
+      margin: 0;
+      max-width: -webkit-fill-available;
+      border-radius: 7px;
+    }
+  }
 }
 
 .input-label-placement-floating.sc-ion-input-md-h input.sc-ion-input-md {
