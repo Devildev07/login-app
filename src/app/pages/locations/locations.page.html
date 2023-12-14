@@ -3,14 +3,118 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>locations</ion-title>
+    <div class="badge">
+      <p>Location</p>
+      <div class="badge-num">{{0}}</div>
+    </div>
+    <!--  -->
+    <ion-searchbar
+      slot="end"
+      [debounce]="1000"
+      (ionInput)="handleInput($event)"
+      (ionClear)="onClear()"
+    ></ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar class="sm-header-none">
+    <ion-row class="ion-padding-horizontal">
+      <ion-col class="ion-text-left" sizeMd="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Location Name</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="2">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >Contract</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="2">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >On Device</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="2">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal"
+            >City,PinCode</ion-card-subtitle
+          >
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="3">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-end">Actions</ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">locations</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list>
+    <ion-row class="ion-padding-horizontal ion-align-items-center">
+      <ion-col class="" sizeMd="1">
+        <ion-icon size="default" name="location-outline"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-text-left text-sm" sizeMd="2">
+        <ion-label>
+          <ion-title>
+            <ion-card-subtitle>{{0}}</ion-card-subtitle>
+          </ion-title>
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="2">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal">
+            {{0}}
+          </ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="2">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal">
+            {{0}}
+          </ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="2">
+        <ion-label>
+          <ion-card-subtitle class="ion-padding-horizontal">
+            <!-- Add Playlist Count data here -->
+          </ion-card-subtitle>
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" sizeMd="3">
+        <ion-button shape="round" color="primary">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          shape="round"
+          color="danger"
+          *ngIf="authService.userEmail === 'dewanshusingh21@gmail.com'"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <!-- fab-btn -->
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    style="margin: 0 2rem 2rem 0"
+  >
+    <!-- <ion-fab-button (click)="openAddCategoryModal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button> -->
+    <ion-fab-button [routerLink]="['/add-category']">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

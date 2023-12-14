@@ -55,65 +55,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-list>
-    <ion-row
-      class="ion-padding-horizontal ion-align-items-center"
-      *ngFor=" let catData of hierarchicalCategories   | search:common.searchText"
-    >
-      <ion-col class="" sizeMd="1">
-        <ng-container *ngFor="let _ of getIndentationLevel(catData.parent_id)">
-          <ion-icon size="default" name="pricetag-outline"></ion-icon>
-        </ng-container>
-      </ion-col>
-      <ion-col class="ion-text-left text-sm" sizeMd="2">
-        <ion-label>
-          <ion-title>
-            <ion-card-subtitle>{{catData.category_name}}</ion-card-subtitle>
-          </ion-title>
-        </ion-label>
-      </ion-col>
-      <ion-col class="ion-text-center" sizeMd="2">
-        <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal">
-            {{catData.category_description}}
-          </ion-card-subtitle>
-        </ion-label>
-      </ion-col>
-      <ion-col class="ion-text-center" sizeMd="2">
-        <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal"
-            >{{catData.parent_id}}
-          </ion-card-subtitle>
-        </ion-label>
-      </ion-col>
-      <ion-col class="ion-text-center" sizeMd="2">
-        <ion-label>
-          <ion-card-subtitle class="ion-padding-horizontal"
-            >Playlist Count</ion-card-subtitle
-          >
-        </ion-label>
-      </ion-col>
-      <ion-col class="ion-text-center" sizeMd="3">
-        <ion-button
-          shape="round"
-          color="primary"
-          (click)="openUpdateCategoryModal(catData)"
-        >
-          <ion-icon name="create-outline"></ion-icon>
-        </ion-button>
-
-        <ion-button
-          shape="round"
-          color="danger"
-          (click)="deleteCat(catData.id)"
-          *ngIf="authService.userEmail === 'dewanshusingh21@gmail.com'"
-        >
-          <ion-icon name="trash-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-list> -->
-
   <ion-list>
     <ng-container
       *ngFor="let catData of hierarchicalCategories | search: common.searchText"
