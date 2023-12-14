@@ -41,9 +41,6 @@ export class AddPlaylistPage implements OnInit {
   ngOnInit() {
     this.getCategoryList();
     this.showCount();
-    // this.getPlayList();
-    // this.seletedItemLength = this.getSelectedVideo.length + this.getSelectedPlaylist.selectedVideoList.length
-    // console.log('seletedItemLength === ', this.seletedItemLength);
   }
 
   // Get category
@@ -51,11 +48,6 @@ export class AddPlaylistPage implements OnInit {
     this.getCategoryDataList = await this.getData.getFromFirebase('category');
     console.log('getCategoryDataList === ', this.getCategoryDataList);
   }
-
-  // async getPlayList() {
-  //   this.getPlayListData = await this.getData.getFromFirebase('playlist');
-  //   console.log('getPlayListData === ', this.getPlayListData);
-  // }
 
   // navigate to playlist page
   async navigateToCategory() {
