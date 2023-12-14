@@ -28,6 +28,7 @@ export class AddPlaylistPage implements OnInit {
   type: any = 'master_playlist';
 
   seletedItemLength = 0;
+  isMasterPlaylist: boolean = false;
 
   constructor(
     private firestore: Firestore,
@@ -70,6 +71,8 @@ export class AddPlaylistPage implements OnInit {
     this.seletedItemLength =
       this.getSelectedPlaylist[0]?.selectedVideoList?.length +
       this.getSelectedVideo?.length;
+
+       this.isMasterPlaylist = this.type === 'master_playlist';
   }
 
   // Adding playlist to Firebase
@@ -77,6 +80,8 @@ export class AddPlaylistPage implements OnInit {
     // Get the form data
     const formData = playListForm.value;
     console.log('Add Playlist from add page', playListForm.value);
+
+   
 
     // Get the selected video list
     const selectedVideoList = this.getSelectedVideo.map((video) => ({
