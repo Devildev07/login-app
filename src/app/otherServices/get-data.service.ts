@@ -64,6 +64,7 @@ export class GetDataService {
         .create({
           component: ModalPage,
           componentProps: dataKey,
+          cssClass: 'updateData-modal',
         })
         .then((modalRes) => {
           modalRes.present();

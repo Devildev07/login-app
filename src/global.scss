@@ -33,7 +33,6 @@ ion-app {
 }
 
 ion-content {
-
   // position: relative;
   // padding: 0 2rem 2rem 2rem !important;
   .container {
@@ -134,14 +133,18 @@ ion-item .item-inner {
   padding-right: 1rem;
 }
 
-ion-modal{
+ion-modal {
   --width: 450px;
-  --height:400px;
-  --border-radius:15px;
+  --height: 400px;
+  --border-radius: 15px;
 }
-ion-modal >.ion-page {
+ion-modal.updateData-modal {
+  --width: 750px;
+  --height: 500px;
+}
+ion-modal > .ion-page {
   position: relative;
-    justify-content: start;
+  justify-content: start;
 }
 
 .video-modal {
@@ -167,7 +170,6 @@ ion-modal >.ion-page {
   .sm-header-none {
     display: none;
   }
-
 
   .action-btns {
     // flex-direction: column;
