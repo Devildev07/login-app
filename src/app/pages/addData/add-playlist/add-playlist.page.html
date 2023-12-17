@@ -61,19 +61,19 @@
     <!-- selected video list -->
     <ion-input
       name="total_videos"
-      label="Total Videos
-    "
+      label="Total Videos"
       labelPlacement="floating"
-      placeholder="Total Videos
-    "
-    [(ngModel)]="isMasterPlaylist ? getSelectedVideo.length : seletedItemLength"
+      placeholder="Total Videos"
+      [(ngModel)]="isMasterPlaylist ? getSelectedVideo.length : seletedItemLength"
     >
     </ion-input>
     <!--  -->
     <div class="selected_items">
       <ion-list name="selected_video">
         <div *ngIf="getSelectedVideo">
-          <ion-badge class="badge" slot="end"> {{getSelectedVideo.length}} </ion-badge>
+          <ion-badge class="badge" slot="end">
+            {{getSelectedVideo.length}}
+          </ion-badge>
           <ion-title> Selected Videos </ion-title>
         </div>
         <ion-item *ngFor="let video of getSelectedVideo">

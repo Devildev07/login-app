@@ -65,31 +65,81 @@
       placeholder="On Device"
       ngModel
     ></ion-input>
-    <ion-input
-      name="location_count"
-      label="Location Count"
-      labelPlacement="floating"
-      placeholder="Location Count"
-      ngModel
-    ></ion-input>
+    <!--  -->
+    <ion-label class="ion-padding-horizontal"
+      ><strong>Add Locations</strong></ion-label
+    >
+    <div class="location">
+      <div class="location-sec">
+        <ion-input
+          name="location_count"
+          label="Location Count"
+          labelPlacement="floating"
+          placeholder="Location Count"
+          ngModel
+        ></ion-input>
+        <ion-button (click)="addLocation()">Add Locations</ion-button>
+      </div>
+    </div>
+    <!--  -->
+    <ion-label class="ion-padding-horizontal"
+      ><strong>Contract Period</strong></ion-label
+    >
+    <div class="contract-sec">
+      <div class="contract-start">
+        <!-- <ion-label> Start Date</ion-label> -->
+        <ion-input
+          label="Start Date"
+          labelPlacement="floating"
+          placeholder="Start Datet"
+          name="contractStart"
+          [(ngModel)]="startDate"
+        ></ion-input>
+        <ion-datetime-button
+          class="ion-padding-top ion-justify-content-start"
+          datetime="contract_start"
+        ></ion-datetime-button>
 
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="contract_start"
+              (ionChange)="dateSelectionChange($event, 'start')"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+      <div class="contract-end">
+        <!-- <ion-label> End Date</ion-label> -->
+        <ion-input
+          label="End Date"
+          labelPlacement="floating"
+          placeholder="End Date"
+          name="contractEnd"
+          [(ngModel)]="endDate"
+        ></ion-input>
+        <ion-datetime-button
+          class="ion-padding-top ion-justify-content-start"
+          datetime="contract_end"
+        ></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="contract_end"
+              (ionChange)="dateSelectionChange($event, 'end')"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+    </div>
+    <!--  -->
     <ion-button type="submit" id="open-toast" expand="block">
-      <ion-icon name="checkmark-outline"></ion-icon>
+      <ion-icon name="checkmark-outline"></ion-icon> &nbsp; Add Client
     </ion-button>
     <ion-toast
       trigger="open-toast"
       message="Data Sumbit"
-      [duration]="5000"
-      class="toast"
-    ></ion-toast>
-    <!--  -->
-
-    <ion-button type="reset" id="open-toast-2" expand="block">
-      <ion-icon name="close-outline"></ion-icon>
-    </ion-button>
-    <ion-toast
-      trigger="open-toast-2"
-      message="Form Reset"
       [duration]="5000"
       class="toast"
     ></ion-toast>

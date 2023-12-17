@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './otherServices/search.pipe';
 import { GeneralVideoModalComponent } from './components/general-video-modal/general-video-modal.component';
 import { PlaylistModalComponent } from './components/playlist-modal/playlist-modal.component';
+import { AddLocationModalComponent } from './components/add-location-modal/add-location-modal.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule],
@@ -12,8 +13,14 @@ import { PlaylistModalComponent } from './components/playlist-modal/playlist-mod
     SearchPipe,
     GeneralVideoModalComponent,
     PlaylistModalComponent,
+    AddLocationModalComponent,
   ],
-  exports: [SearchPipe, GeneralVideoModalComponent, PlaylistModalComponent],
+  exports: [
+    SearchPipe,
+    GeneralVideoModalComponent,
+    PlaylistModalComponent,
+    AddLocationModalComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {}
