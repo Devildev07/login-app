@@ -4,7 +4,7 @@
       (click)="closeModal()"
       name="close-circle-outline"
       size="large"
-      class=" ion-padding-horizontal"
+      class="ion-padding-horizontal"
       slot="end"
     ></ion-icon>
     <ion-title> Add Location </ion-title>
@@ -13,12 +13,67 @@
 
 <ion-content [fullscreen]="true">
   <!--  -->
+  <form
+    #addLocationForm="ngForm"
+    class="location-form"
+    (ngSubmit)="addLocation(addLocationForm)"
+  >
+    <ion-input
+      name="hospital_name"
+      label="Hospital Name"
+      labelPlacement="floating"
+      placeholder="Hospital Name"
+      ngModel
+    ></ion-input>
+    <ion-input
+      name="hospital_region"
+      label="Region"
+      labelPlacement="floating"
+      [(ngModel)]="selectedPlace"
+      (ionInput)="onInput($event)"
+    ></ion-input>
 
+    <ion-list *ngIf="predictions.length > 0">
+      <ion-item
+        *ngFor="let prediction of predictions"
+        (click)="selectPlace(prediction)"
+      >
+        {{ prediction.description }}
+      </ion-item>
+    </ion-list>
+
+    <ion-input
+      name="hospital_address"
+      label="Address"
+      labelPlacement="floating"
+      placeholder="Address"
+      ngModel
+    ></ion-input>
+
+    <ion-select
+      name="category"
+      ngModel
+      label="Select Category"
+      label-placement="floating"
+      placeholder="Select Category"
+    >
+      <ion-select-option
+        *ngFor="let category of getCategoryDataList"
+        [value]="category.category_name"
+        >{{ category.category_name }}
+      </ion-select-option>
+    </ion-select>
+
+    <ion-button type="submit" id="open-toast" expand="full" shape="round">
+      <ion-icon name="location-outline"></ion-icon>
+      Add Location
+    </ion-button>
+    <ion-toast
+      trigger="open-toast"
+      message="Location Added"
+      [duration]="5000"
+      class="toast"
+    ></ion-toast>
+  </form>
   <!--  -->
 </ion-content>
-
-<ion-footer>
-  <ion-button expand="full" shape="round" (click)="addLocation()"
-    >Add</ion-button
-  >
-</ion-footer>

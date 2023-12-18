@@ -62,7 +62,7 @@ export class AddClientsPage implements OnInit {
   }
 
   // location modal
- async addLocation() {
+ async addLocationModal() {
   const modal = await this.modalController.create({
     component: AddLocationModalComponent,
     componentProps: {},
