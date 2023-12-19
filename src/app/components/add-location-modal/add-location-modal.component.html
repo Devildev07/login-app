@@ -25,6 +25,7 @@
       placeholder="Hospital Name"
       ngModel
     ></ion-input>
+
     <ion-input
       name="hospital_region"
       label="Region"
@@ -54,6 +55,56 @@
         >{{ category.category_name }}
       </ion-select-option>
     </ion-select>
+
+    <div class="slot-box">
+      <div class="days">
+        <ion-select
+          name="days"
+          ngModel
+          label="Select Days"
+          label-placement="floating"
+          placeholder="Select Days"
+        >
+          <ion-select-option value="Sunday">Sunday </ion-select-option>
+          <ion-select-option value="Monday">Monday </ion-select-option>
+          <ion-select-option value="Tuesday">Tuesday </ion-select-option>
+          <ion-select-option value="Wednesday">Wednesday </ion-select-option>
+          <ion-select-option value="Thursday">Thursday </ion-select-option>
+          <ion-select-option value="Friday">Friday </ion-select-option>
+          <ion-select-option value="Saturday">Saturday </ion-select-option>
+        </ion-select>
+      </div>
+      <div class="time">
+        <div class="start_time">
+          <ion-label> Start time</ion-label>
+
+          <ion-datetime-button
+            class="ion-padding-top ion-justify-content-start"
+            datetime="start_time"
+          ></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime presentation="time" id="start_time"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>
+        <div class="end_time">
+          <ion-label> End time</ion-label>
+
+          <ion-datetime-button
+            class="ion-padding-top ion-justify-content-start"
+            datetime="end_time"
+          ></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime presentation="time" id="end_time"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>
+      </div>
+    </div>
 
     <ion-button type="submit" id="open-toast" expand="full" shape="round">
       <ion-icon name="location-outline"></ion-icon>
