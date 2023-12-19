@@ -29,18 +29,9 @@
       name="hospital_region"
       label="Region"
       labelPlacement="floating"
-      [(ngModel)]="selectedPlace"
-      (ionInput)="onInput($event)"
+      placeholder="Region"
+      ngModel
     ></ion-input>
-
-    <ion-list *ngIf="predictions.length > 0">
-      <ion-item
-        *ngFor="let prediction of predictions"
-        (click)="selectPlace(prediction)"
-      >
-        {{ prediction.description }}
-      </ion-item>
-    </ion-list>
 
     <ion-input
       name="hospital_address"

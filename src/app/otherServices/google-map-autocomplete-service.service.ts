@@ -11,7 +11,7 @@ export class GoogleMapAutocompleteServiceService {
   autocompleteService = new google.maps.places.AutocompleteService();
 
   getPlacePredictions(query: string): Promise<any[]> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.autocompleteService.getPlacePredictions(
         { input: query },
         (predictions: any[], status: any) => {

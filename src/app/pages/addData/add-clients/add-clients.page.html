@@ -103,6 +103,7 @@
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
             <ion-datetime
+              presentation="time"
               id="contract_start"
               (ionChange)="dateSelectionChange($event, 'start')"
             ></ion-datetime>

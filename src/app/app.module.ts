@@ -33,6 +33,7 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { FirestoreModule } from '@angular/fire/firestore';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [AppComponent],
@@ -56,6 +57,7 @@ import { FirestoreModule } from '@angular/fire/firestore';
     HttpClientModule,
     FirestoreModule,
     AngularFireStorageModule,
+    GoogleMapsModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
