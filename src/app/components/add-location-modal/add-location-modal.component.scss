@@ -26,6 +26,32 @@
     --border-radius: 8px;
     margin: 0 1rem 0.5rem 1rem;
   }
+
+  .slot-box {
+    .time {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .time-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 0.5rem;
+        flex-basis: auto;
+        flex-grow: 1;
+
+        ion-datetime-button {
+          margin: 0 1rem 0.5rem 1rem;
+        }
+      }
+
+      ion-button {
+        flex-basis: auto;
+        flex-grow: 1;
+      }
+    }
+  }
 }
 
 .toast {
@@ -34,8 +60,15 @@
 }
 
 @media only screen and (max-width: 576px) {
-  .clients-form {
+  .location-form {
     margin: 1.8rem auto;
+
+    .slot-box .time {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
   }
 
   .toast {
