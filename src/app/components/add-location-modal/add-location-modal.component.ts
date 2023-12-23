@@ -12,6 +12,7 @@ import { GetDataService } from 'src/app/otherServices/get-data.service';
 export class AddLocationModalComponent implements OnInit {
   getCategoryDataList: any;
   predictions: any[] = [];
+
   startTime: any;
   endTime: any;
   selectedDays: string[] = [];
@@ -52,32 +53,30 @@ export class AddLocationModalComponent implements OnInit {
 
     // Determine whether it's for the start or end date and update accordingly
     if (dateType === 'start') {
-      this.startTime = selectedDate;
-      
+      this.startTime = selectedDate.slice(selectedDate.indexOf('T') + 1);
       console.log('Start Date:', this.startTime);
     } else if (dateType === 'end') {
-      this.endTime = selectedDate;
+      this.endTime = selectedDate.slice(selectedDate.indexOf('T') + 1);
       console.log('End Date:', this.endTime);
     }
   }
 
-  onDaysChange() {
-    // Update slots based on selected days
-    if (this.selectedDays.length > 0) {
-      // Create a slot for each selected day
-      this.slots = this.selectedDays.map((day) => ({
-        day,
-        startTime: '',
-        endTime: '',
-      }));
-    } else {
-      // Clear slots if no days are selected
-      this.slots = [];
-    }
-  }
+  // onDaysChange() {
+  //   // Update slots based on selected days
+  //   if (this.selectedDays.length > 0) {
+  //     // Create a slot for each selected day
+  //     this.slots = this.selectedDays.map((day) => ({
+  //       day,
+  //       startTime: '',
+  //       endTime: '',
+  //     }));
+  //   } else {
+  //     // Clear slots if no days are selected
+  //     this.slots = [];
+  //   }
+  // }
 
   addSlot() {
-    // Add a new slot with default start and end times
     this.slots.push({
       day: '',
       startTime: '',
@@ -85,7 +84,6 @@ export class AddLocationModalComponent implements OnInit {
     });
   }
   removeSlot(index: number) {
-    // Remove a slot by index
     this.slots.splice(index, 1);
   }
 

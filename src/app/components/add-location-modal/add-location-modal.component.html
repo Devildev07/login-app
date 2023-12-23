@@ -65,7 +65,6 @@
           label-placement="floating"
           placeholder="Select Days"
           multiple
-          (ionChange)="onDaysChange()"
         >
           <ion-select-option value="Sunday">Sunday </ion-select-option>
           <ion-select-option value="Monday">Monday </ion-select-option>
@@ -76,8 +75,15 @@
           <ion-select-option value="Saturday">Saturday </ion-select-option>
         </ion-select>
       </div>
-      <div class="time" *ngIf="selectedDays.length > 0">
-        <div *ngFor="let slot of slots; let i = index">
+      <div class="time">
+        <div
+          *ngFor="let slot of slots; let i = index"
+          style="
+            display: flex;
+            align-items: center;
+            width: -webkit-fill-available;
+          "
+        >
           <div class="time-box">
             <div class="start_time">
               <!-- <ion-label> Start time</ion-label> -->
@@ -86,7 +92,7 @@
                 labelPlacement="floating"
                 placeholder="Start Time"
                 name="startTime"
-                [(ngModel)]="slot.startTime"
+                [(ngModel)]="startTime"
               ></ion-input>
               <ion-datetime-button
                 class="ion-justify-content-start"
@@ -110,7 +116,7 @@
                 labelPlacement="floating"
                 placeholder="End Time"
                 name="endTime"
-                [(ngModel)]="slot.endTime"
+                [(ngModel)]="endTime"
               ></ion-input>
 
               <ion-datetime-button
@@ -129,17 +135,19 @@
               </ion-modal>
             </div>
           </div>
-          <ion-button (click)="removeSlot(i)"
+          <ion-button class="clr-btn" color="danger" (click)="removeSlot(i)"
             ><ion-icon name="remove-outline"></ion-icon
           ></ion-button>
         </div>
-        <ion-button (click)="addSlot()"
-          ><ion-icon name="add-outline"></ion-icon
-        ></ion-button>
+
+        <ion-button (click)="addSlot()" expand="block">
+          <ion-icon name="time-outline"></ion-icon> 
+          Add Time Slots
+        </ion-button>
       </div>
     </div>
 
-    <ion-button type="submit" id="open-toast" expand="full" shape="round">
+    <ion-button type="submit" id="open-toast"  shape="round">
       <ion-icon name="location-outline"></ion-icon>
       Add Location
     </ion-button>
