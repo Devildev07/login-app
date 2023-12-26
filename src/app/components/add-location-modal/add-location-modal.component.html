@@ -84,6 +84,7 @@
             width: -webkit-fill-available;
           "
         >
+          {{ slot | json }}
           <div class="time-box">
             <div class="start_time">
               <!-- <ion-label> Start time</ion-label> -->
@@ -92,7 +93,7 @@
                 labelPlacement="floating"
                 placeholder="Start Time"
                 name="startTime"
-                [(ngModel)]="startTime"
+                [(ngModel)]="slot.startTime"
               ></ion-input>
               <ion-datetime-button
                 class="ion-justify-content-start"
@@ -104,7 +105,7 @@
                   <ion-datetime
                     presentation="time"
                     id="start_time"
-                    (ionChange)="timeSelectionChange($event, 'start')"
+                    (ionChange)="timeSelectionChange($event, 'start', slot)"
                   ></ion-datetime>
                 </ng-template>
               </ion-modal>
@@ -141,13 +142,13 @@
         </div>
 
         <ion-button (click)="addSlot()" expand="block">
-          <ion-icon name="time-outline"></ion-icon> 
+          <ion-icon name="time-outline"></ion-icon>
           Add Time Slots
         </ion-button>
       </div>
     </div>
 
-    <ion-button type="submit" id="open-toast"  shape="round">
+    <ion-button type="submit" id="open-toast" shape="round">
       <ion-icon name="location-outline"></ion-icon>
       Add Location
     </ion-button>

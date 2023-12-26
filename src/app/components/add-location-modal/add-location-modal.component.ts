@@ -16,7 +16,13 @@ export class AddLocationModalComponent implements OnInit {
   startTime: any;
   endTime: any;
   selectedDays: string[] = [];
-  slots: any[] = [];
+  slots: any[] = [
+    {
+      day: '',
+      startTime: '',
+      endTime: '',
+    },
+  ];
 
   // selectedPlace: any;
   // Address: any = '';
@@ -47,16 +53,16 @@ export class AddLocationModalComponent implements OnInit {
     this.closeModal();
   }
 
-  timeSelectionChange(event: CustomEvent | any, dateType: 'start' | 'end') {
+  timeSelectionChange(event: CustomEvent | any, dateType: 'start' | 'end', slot?: any) {
     // Access the selected date from the event
     const selectedDate = event.detail.value;
 
     // Determine whether it's for the start or end date and update accordingly
     if (dateType === 'start') {
-      this.startTime = selectedDate.slice(selectedDate.indexOf('T') + 1);
+      slot.startTime = selectedDate.slice(selectedDate.indexOf('T') + 1);
       console.log('Start Date:', this.startTime);
     } else if (dateType === 'end') {
-      this.endTime = selectedDate.slice(selectedDate.indexOf('T') + 1);
+      slot.endTime = selectedDate.slice(selectedDate.indexOf('T') + 1);
       console.log('End Date:', this.endTime);
     }
   }
